@@ -17,6 +17,9 @@ public class MenuController : MonoBehaviour
     [SerializeField]
     private float defaultVolume = 0.5f;
 
+    [SerializeField]
+    private Button noSaveFoundOk = null;
+
     [Header("Gameplay Settings")]
     [SerializeField]
     private TMP_Text controllerSensTextValue = null;
@@ -128,6 +131,7 @@ public class MenuController : MonoBehaviour
         else
         {
             noSavedGameDialog.SetActive(true);
+            noSaveFoundOk.Select();
         }
     }
 
