@@ -1,37 +1,44 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class MenuController : MonoBehaviour
 {
-    public GameObject MainMenuItems;
-    public GameObject OptionsMenuItems;
-    public GameObject Model;
-    public Animator anim;
-    // Start is called before the first frame update
-    void Start()
+    [Header("Levels to load")]
+    public string _newGameScene;
+
+    private string levelToLoad;
+
+    [SerializeField]
+    private GameObject noSavedGameDialog = null;
+
+    public void NewGameYes()
     {
-        
+        SceneManager.LoadScene (_newGameScene);
     }
 
-    // Update is called once per frame
-    void Update()
+    public void LoadGameYes()
     {
-        
+        if (PlayerPrefs.HasKey("SavedLevel"))
+        {
+            levelToLoad = PlayerPrefs.GetString("SavedLevel");
+            SceneManager.LoadScene (levelToLoad);
+        }
+        else
+        {
+            noSavedGameDialog.SetActive(true);
+        }
     }
 
-    public void Test(){
+    public void ExitGame()
+    {
+        Application.Quit();
+    }
+
+    public void Test()
+    {
         Debug.Log("test");
-    }
-
-    public void GoToOptions(){
-        MainMenuItems.GetComponent<Animator>().Play("MainOut");
-        OptionsMenuItems.GetComponent<Animator>().Play("OptionsIn");
-        Model.GetComponent<Animator>().Play("ModelOut");
-    }
-
-    public void GoToMain(){
-        MainMenuItems.GetComponent<Animator>().Play("MainIn");
-        OptionsMenuItems.GetComponent<Animator>().Play("OptionsOut");
     }
 }
