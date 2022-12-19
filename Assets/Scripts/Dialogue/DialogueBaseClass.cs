@@ -2,28 +2,34 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class DialogueBaseClass : MonoBehaviour
+namespace DialogueSystem
 {
-    protected IEnumerator
-    WriteText(
-        string input,
-        Text textHolder,
-        Color textColor,
-        Font textFont,
-        float delay,
-        AudioClip sound
-    )
+    public class DialogueBaseClass : MonoBehaviour
     {
-        textHolder.color = textColor;
-        textHolder.font = textFont;
-        textHolder.text = "";
+        public bool finished;
 
-        for (int i = 0; i < input.Length; i++)
+        protected IEnumerator
+        WriteText(
+            string input,
+            Text textHolder,
+            Color textColor,
+            Font textFont,
+            float delay,
+            AudioClip sound
+        )
         {
-            textHolder.text += input[i];
-            AudioManager.instance.Play(sound);
-            yield return new WaitForSeconds(delay);
+            textHolder.color = textColor;
+            textHolder.font = textFont;
+            textHolder.text = "";
+
+            for (int i = 0; i < input.Length; i++)
+            {
+                textHolder.text += input[i];
+                AudioManager.instance.Play (sound);
+                yield return new WaitForSeconds(delay);
+            }
+            yield return new WaitUntil(() => Input.GetMouseButton(0));
+            finished = true;
         }
     }
-
 }
