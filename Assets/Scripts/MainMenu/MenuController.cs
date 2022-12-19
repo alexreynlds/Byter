@@ -107,6 +107,11 @@ public class MenuController : MonoBehaviour
         volumeSlider.value = PlayerPrefs.GetFloat("masterVolume");
     }
 
+    void FixedUpdate()
+    {
+        Debug.Log(Input.GetJoystickNames());
+    }
+
     public void SetResolution(int resolutionIndex)
     {
         Resolution resolution = resolutions[resolutionIndex];
