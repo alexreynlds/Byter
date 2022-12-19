@@ -6,7 +6,7 @@
 ## 🔧 Unity
 | Propery | Value Header |
 | ------------- | ------------- |
-| Unity Version  | [2021.3.15f1](https://unity.com/releases/editor/whats-new/2021.3.15)  |
+| Unity Version  | [2021.3.16f1](https://unity.com/releases/editor/whats-new/2021.3.16)  |
 | LFS  | Yes  |
 
 ## 📝 Commit Messages
