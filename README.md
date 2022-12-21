@@ -9,6 +9,9 @@
 | Unity Version  | [2021.3.16f1](https://unity.com/releases/editor/whats-new/2021.3.16)  |
 | LFS  | Yes  |
 
+## 📝 Trello Boards
+> [Initial To-Do List](https://trello.com/b/o3jMG7UI/initial-to-do)
+
 ## 📝 Commit Messages
 **Minus the several first commits, all commits with follow the following commit message template:**
 ```
