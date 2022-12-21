@@ -19,13 +19,11 @@ public class PlayerController : MonoBehaviour
     [SerializeField]
     public bool canInteract;
 
-    [Header("Player Stats")]
-    [SerializeField]
-    public float moveSpeed = 1.5f;
+    public bool canTalk;
 
-    private Vector2 movement;
+    public GameObject talkObjective;
 
-    private void Awake()
+    private void Start()
     {
         playerInput = GetComponent<PlayerInput>();
 
@@ -36,20 +34,17 @@ public class PlayerController : MonoBehaviour
         canInteract = true;
     }
 
-    private void Update()
+    void Update()
     {
-        movement = moveAction.ReadValue<Vector2>();
-        if (canMove)
-        {
-            transform.Translate(movement * moveSpeed * Time.deltaTime);
-        }
+        // Debug.Log (test);
     }
 
-    void OnTriggerEnter2D(Collider2D other)
+    private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.gameObject.CompareTag("DialogueTrigger"))
+        if (other.tag == "DialogueTrigger")
         {
-            // If the conversation isnt triggerable i.e cutscene, required convo then just play it.
+            other.gameObject.GetComponent<DialogueTrigger>().enabled = true;
+
             if (!other.gameObject.GetComponent<DialogueTrigger>().Triggerable)
             {
                 other
@@ -57,15 +52,56 @@ public class PlayerController : MonoBehaviour
                     .GetComponent<DialogueTrigger>()
                     .TriggerDialogue(canInteract);
             }
-            else
-            // Otherwise, only trigger the conversation upon user input.
-            {
-                interactAction.performed += ctx =>
-                    other
-                        .gameObject
-                        .GetComponent<DialogueTrigger>()
-                        .TriggerDialogue(canInteract);
-            }
+
+            // If the conversation isnt triggerable i.e cutscene, required convo then just play it.
+            // if (
+            //     !other
+            //         .gameObject
+            //         .GetComponent<DialogueTrigger>()
+            //         .Triggerable
+            // )
+            // {
+            //     other
+            //         .gameObject
+            //         .GetComponent<DialogueTrigger>()
+            //         .TriggerDialogue(canInteract);
+            // }
+            // else
+            // // Otherwise, only trigger the conversation upon user input.
+            // {
+            //     interactAction.performed += ctx =>
+            //         other
+            //             .gameObject
+            //             .GetComponent<DialogueTrigger>()
+            //             .TriggerDialogue(canInteract);
+            // }
+            canTalk = true;
+            talkObjective = other.gameObject;
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D other)
+    {
+        if (other.tag == "DialogueTrigger")
+        {
+            canTalk = false;
+            talkObjective = null;
+        }
+    }
+
+    // This seems like an inefficient way to handle interactions, come back to it later
+    void OnInteract()
+    {
+        if (canTalk)
+        {
+            if (
+                talkObjective.GetComponent<DialogueTrigger>().Triggerable ||
+                talkObjective.GetComponent<DialogueTrigger>().IsOneTime &&
+                !talkObjective.GetComponent<DialogueTrigger>().hasBeenTriggered
+            )
+                talkObjective
+                    .GetComponent<DialogueTrigger>()
+                    .TriggerDialogue(canInteract);
         }
     }
 

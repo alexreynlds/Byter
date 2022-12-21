@@ -24,7 +24,7 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
     ""name"": ""playerControls"",
     ""maps"": [
         {
-            ""name"": ""Game"",
+            ""name"": ""Player"",
             ""id"": ""04309020-ab2a-40c2-b88e-f26461fda017"",
             ""actions"": [
                 {
@@ -179,10 +179,10 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
     ],
     ""controlSchemes"": []
 }");
-        // Game
-        m_Game = asset.FindActionMap("Game", throwIfNotFound: true);
-        m_Game_Move = m_Game.FindAction("Move", throwIfNotFound: true);
-        m_Game_Interact = m_Game.FindAction("Interact", throwIfNotFound: true);
+        // Player
+        m_Player = asset.FindActionMap("Player", throwIfNotFound: true);
+        m_Player_Move = m_Player.FindAction("Move", throwIfNotFound: true);
+        m_Player_Interact = m_Player.FindAction("Interact", throwIfNotFound: true);
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
         m_UI_Newaction = m_UI.FindAction("New action", throwIfNotFound: true);
@@ -242,34 +242,34 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
         return asset.FindBinding(bindingMask, out action);
     }
 
-    // Game
-    private readonly InputActionMap m_Game;
-    private IGameActions m_GameActionsCallbackInterface;
-    private readonly InputAction m_Game_Move;
-    private readonly InputAction m_Game_Interact;
-    public struct GameActions
+    // Player
+    private readonly InputActionMap m_Player;
+    private IPlayerActions m_PlayerActionsCallbackInterface;
+    private readonly InputAction m_Player_Move;
+    private readonly InputAction m_Player_Interact;
+    public struct PlayerActions
     {
         private @PlayerControls m_Wrapper;
-        public GameActions(@PlayerControls wrapper) { m_Wrapper = wrapper; }
-        public InputAction @Move => m_Wrapper.m_Game_Move;
-        public InputAction @Interact => m_Wrapper.m_Game_Interact;
-        public InputActionMap Get() { return m_Wrapper.m_Game; }
+        public PlayerActions(@PlayerControls wrapper) { m_Wrapper = wrapper; }
+        public InputAction @Move => m_Wrapper.m_Player_Move;
+        public InputAction @Interact => m_Wrapper.m_Player_Interact;
+        public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
         public bool enabled => Get().enabled;
-        public static implicit operator InputActionMap(GameActions set) { return set.Get(); }
-        public void SetCallbacks(IGameActions instance)
+        public static implicit operator InputActionMap(PlayerActions set) { return set.Get(); }
+        public void SetCallbacks(IPlayerActions instance)
         {
-            if (m_Wrapper.m_GameActionsCallbackInterface != null)
+            if (m_Wrapper.m_PlayerActionsCallbackInterface != null)
             {
-                @Move.started -= m_Wrapper.m_GameActionsCallbackInterface.OnMove;
-                @Move.performed -= m_Wrapper.m_GameActionsCallbackInterface.OnMove;
-                @Move.canceled -= m_Wrapper.m_GameActionsCallbackInterface.OnMove;
-                @Interact.started -= m_Wrapper.m_GameActionsCallbackInterface.OnInteract;
-                @Interact.performed -= m_Wrapper.m_GameActionsCallbackInterface.OnInteract;
-                @Interact.canceled -= m_Wrapper.m_GameActionsCallbackInterface.OnInteract;
+                @Move.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnMove;
+                @Move.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnMove;
+                @Move.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnMove;
+                @Interact.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnInteract;
+                @Interact.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnInteract;
+                @Interact.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnInteract;
             }
-            m_Wrapper.m_GameActionsCallbackInterface = instance;
+            m_Wrapper.m_PlayerActionsCallbackInterface = instance;
             if (instance != null)
             {
                 @Move.started += instance.OnMove;
@@ -281,7 +281,7 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
             }
         }
     }
-    public GameActions @Game => new GameActions(this);
+    public PlayerActions @Player => new PlayerActions(this);
 
     // UI
     private readonly InputActionMap m_UI;
@@ -315,7 +315,7 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
         }
     }
     public UIActions @UI => new UIActions(this);
-    public interface IGameActions
+    public interface IPlayerActions
     {
         void OnMove(InputAction.CallbackContext context);
         void OnInteract(InputAction.CallbackContext context);

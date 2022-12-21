@@ -16,6 +16,11 @@ public class DialogueTrigger : MonoBehaviour
 
     public bool hasBeenTriggered;
 
+    void awake()
+    {
+        this.enabled = false;
+    }
+
     public void TriggerDialogue(bool canInteract)
     {
         if (
