@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 namespace DialogueSystem
 {
@@ -8,13 +9,17 @@ namespace DialogueSystem
         [SerializeField]
         private GameObject lineHolder;
 
+        private GameObject player;
+
         private void Awake()
         {
+            player = GameObject.Find("Player");
             StartCoroutine(dialogueSequence());
         }
 
         private IEnumerator dialogueSequence()
         {
+            player.GetComponent<PlayerController>().EnterDialogue();
             for (int i = 0; i < lineHolder.transform.childCount; i++)
             {
                 Deactivate();
@@ -27,6 +32,8 @@ namespace DialogueSystem
                                 .finished);
             }
             gameObject.SetActive(false);
+            player.GetComponent<PlayerController>().ExitDialogue();
+            Object.Destroy (gameObject);
         }
 
         private void Deactivate()

@@ -1,11 +1,18 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.UI;
 
 namespace DialogueSystem
 {
-    public class DialogueLine : DialogueBaseClass
+    public class DialogueLine : MonoBehaviour
     {
+        private GameObject player;
+
+        private PlayerInput playerInput;
+
+        private InputAction continueAction;
+
         private Text textHolder;
 
         [Header("Text Options")]
@@ -45,6 +52,10 @@ namespace DialogueSystem
 
         private Color notTalkingColor = new Color32(90, 90, 90, 255);
 
+        public bool finished;
+
+        public bool continued;
+
         private void Awake()
         {
             textHolder = GetComponent<Text>();
@@ -54,6 +65,11 @@ namespace DialogueSystem
             rightImageHolder.sprite = rightCharacterSprite;
             leftImageHolder.preserveAspect = true;
             rightImageHolder.preserveAspect = true;
+
+            player = GameObject.Find("Player");
+            playerInput = player.GetComponent<PlayerInput>();
+
+            continueAction = playerInput.actions["Interact"];
         }
 
         private void Start()
@@ -77,6 +93,33 @@ namespace DialogueSystem
             sound));
 
             // rightImageHolder.GetComponent<Image>().color = notTalkingColor;
+        }
+
+        protected IEnumerator
+        WriteText(
+            string input,
+            Text textHolder,
+            Color textColor,
+            Font textFont,
+            float delay,
+            AudioClip sound
+        )
+        {
+            textHolder.color = textColor;
+            textHolder.font = textFont;
+            textHolder.text = "";
+            continued = false;
+
+            for (int i = 0; i < input.Length; i++)
+            {
+                textHolder.text += input[i];
+                AudioManager.instance.Play (sound);
+                yield return new WaitForSeconds(delay);
+            }
+
+            yield return new WaitUntil(() =>
+                        playerInput.actions["Interact"].triggered);
+            finished = true;
         }
     }
 }
