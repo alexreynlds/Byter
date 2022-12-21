@@ -78,6 +78,13 @@ public class PlayerController : MonoBehaviour
             canTalk = true;
             talkObjective = other.gameObject;
         }
+        if (other.tag == "CutsceneTrigger")
+        {
+            other
+                .gameObject
+                .GetComponent<CutsceneTrigger>()
+                .TriggerCutscene(canInteract);
+        }
     }
 
     private void OnTriggerExit2D(Collider2D other)

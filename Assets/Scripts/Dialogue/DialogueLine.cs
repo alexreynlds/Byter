@@ -56,8 +56,11 @@ namespace DialogueSystem
 
         public bool continued;
 
+        public GameObject ContinueText;
+
         private void Awake()
         {
+            ContinueText.SetActive(false);
             textHolder = GetComponent<Text>();
             textHolder.text = "";
 
@@ -113,10 +116,10 @@ namespace DialogueSystem
             for (int i = 0; i < input.Length; i++)
             {
                 textHolder.text += input[i];
-                AudioManager.instance.Play (sound);
+                AudioManager.instance.Play(sound, 0.1f);
                 yield return new WaitForSeconds(delay);
             }
-
+            ContinueText.SetActive(true);
             yield return new WaitUntil(() =>
                         playerInput.actions["Interact"].triggered);
             finished = true;

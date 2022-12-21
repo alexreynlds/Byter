@@ -11,6 +11,8 @@ namespace DialogueSystem
 
         private GameObject player;
 
+        public AudioClip convoMusic;
+
         private void Awake()
         {
             player = GameObject.Find("Player");
@@ -20,6 +22,10 @@ namespace DialogueSystem
         private IEnumerator dialogueSequence()
         {
             player.GetComponent<PlayerController>().EnterDialogue();
+            if (convoMusic != null)
+            {
+                AudioManager.instance.PlayMusic (convoMusic);
+            }
             for (int i = 0; i < lineHolder.transform.childCount; i++)
             {
                 Deactivate();
@@ -33,7 +39,19 @@ namespace DialogueSystem
             }
             gameObject.SetActive(false);
             player.GetComponent<PlayerController>().ExitDialogue();
-            Object.Destroy (gameObject);
+            if (convoMusic != null)
+            {
+                AudioManager.instance.StopMusic();
+            }
+            if (transform.parent.tag == "Cutscene")
+            {
+                AudioManager.instance.StopMusic();
+                Object.Destroy(transform.parent.gameObject);
+            }
+            else
+            {
+                Object.Destroy (gameObject);
+            }
         }
 
         private void Deactivate()

@@ -21,6 +21,22 @@ public class DialogueTrigger : MonoBehaviour
         this.enabled = false;
     }
 
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.tag == "Player")
+        {
+            this.GetComponent<SpriteRenderer>().enabled = true;
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D other)
+    {
+        if (other.tag == "Player")
+        {
+            this.GetComponent<SpriteRenderer>().enabled = false;
+        }
+    }
+
     public void TriggerDialogue(bool canInteract)
     {
         if (
