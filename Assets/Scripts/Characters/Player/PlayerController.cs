@@ -23,6 +23,10 @@ public class PlayerController : MonoBehaviour
 
     public GameObject talkObjective;
 
+    public GameObject menu;
+
+    public Vector2 position;
+
     private void Start()
     {
         playerInput = GetComponent<PlayerInput>();
@@ -32,11 +36,6 @@ public class PlayerController : MonoBehaviour
 
         canMove = true;
         canInteract = true;
-    }
-
-    void Update()
-    {
-        // Debug.Log (test);
     }
 
     private void OnTriggerEnter2D(Collider2D other)
@@ -52,29 +51,6 @@ public class PlayerController : MonoBehaviour
                     .GetComponent<DialogueTrigger>()
                     .TriggerDialogue(canInteract);
             }
-
-            // If the conversation isnt triggerable i.e cutscene, required convo then just play it.
-            // if (
-            //     !other
-            //         .gameObject
-            //         .GetComponent<DialogueTrigger>()
-            //         .Triggerable
-            // )
-            // {
-            //     other
-            //         .gameObject
-            //         .GetComponent<DialogueTrigger>()
-            //         .TriggerDialogue(canInteract);
-            // }
-            // else
-            // // Otherwise, only trigger the conversation upon user input.
-            // {
-            //     interactAction.performed += ctx =>
-            //         other
-            //             .gameObject
-            //             .GetComponent<DialogueTrigger>()
-            //             .TriggerDialogue(canInteract);
-            // }
             canTalk = true;
             talkObjective = other.gameObject;
         }
@@ -122,5 +98,18 @@ public class PlayerController : MonoBehaviour
     {
         canMove = true;
         canInteract = true;
+    }
+
+    public void OnPause()
+    {
+        menu.GetComponent<pauseMenu>().PauseGameAnim();
+    }
+
+    public void OnSave()
+    {
+    }
+
+    public void OnLoad()
+    {
     }
 }
