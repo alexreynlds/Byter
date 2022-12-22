@@ -25,9 +25,6 @@ public class AudioManager : MonoBehaviour
         }
     }
 
-    // void Start(){
-    //     AudioManager.instance.PlayMusic(musicClip);
-    // }
     public void Play(AudioClip sound, float vol = 1.0f)
     {
         EffectsSource.clip = sound;

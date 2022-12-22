@@ -1,8 +1,7 @@
 using System.Collections;
 using UnityEngine;
 
-[System.Serializable]
-public class PlayerProfile : MonoBehaviour
+public class PlayerProfile : MonoBehaviour, IDataPersistence
 {
     public string playerName;
 
@@ -10,8 +9,9 @@ public class PlayerProfile : MonoBehaviour
 
     public int experience;
 
-    private void Update()
+    private void Start()
     {
+        currency = 0;
     }
 
     public void OnTest()
@@ -19,11 +19,13 @@ public class PlayerProfile : MonoBehaviour
         currency += 100;
     }
 
-    public void OnSave()
+    public void SaveData(ref GameData data)
     {
+        data.currency = currency;
     }
 
-    public void OnLoad()
+    public void LoadData(GameData data)
     {
+        currency = data.currency;
     }
 }

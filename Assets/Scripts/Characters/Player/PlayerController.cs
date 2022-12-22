@@ -3,8 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class PlayerController : MonoBehaviour
+public class PlayerController : MonoBehaviour, IDataPersistence
 {
+    public static PlayerController instance { get; private set; }
+
     [Header("Player Input")]
     private PlayerInput playerInput;
 
@@ -26,6 +28,19 @@ public class PlayerController : MonoBehaviour
     public GameObject menu;
 
     public Vector2 position;
+
+    public void Awake()
+    {
+        if (instance == null)
+        {
+            instance = this;
+            DontDestroyOnLoad (gameObject);
+        }
+        else if (instance != this)
+        {
+            Destroy (gameObject);
+        }
+    }
 
     private void Start()
     {
@@ -102,14 +117,18 @@ public class PlayerController : MonoBehaviour
 
     public void OnPause()
     {
-        menu.GetComponent<pauseMenu>().PauseGameAnim();
+        // menu.GetComponent<pauseMenu>().PauseGameAnim();
+        // GameObject.Find("PauseMenu").GetComponent<pauseMenu>().PauseGameAnim();
+        Resources.FindObjectsOfTypeAll<pauseMenu>()[0].PauseGameAnim();
     }
 
-    public void OnSave()
+    public void SaveData(ref GameData data)
     {
+        data.playerPosition = this.transform.position;
     }
 
-    public void OnLoad()
+    public void LoadData(GameData data)
     {
+        this.transform.position = data.playerPosition;
     }
 }

@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -76,6 +77,12 @@ public class MenuController : MonoBehaviour
     [SerializeField]
     private GameObject noSavedGameDialog = null;
 
+    public GameObject LoadMarker;
+
+    [Header("Menu Music")]
+    [SerializeField]
+    private AudioClip menuMusic;
+
     void Start()
     {
         resolutions = Screen.resolutions;
@@ -105,6 +112,11 @@ public class MenuController : MonoBehaviour
         qualityDropdown.value = PlayerPrefs.GetInt("qualityIndex");
         fullscreenToggle.isOn = PlayerPrefs.GetInt("isFullscreen") == 1;
         volumeSlider.value = PlayerPrefs.GetFloat("masterVolume");
+
+        if (menuMusic != null)
+        {
+            AudioManager.instance.PlayMusic (menuMusic);
+        }
     }
 
     public void SetResolution(int resolutionIndex)
@@ -118,15 +130,35 @@ public class MenuController : MonoBehaviour
 
     public void NewGameYes()
     {
+        if (
+            System
+                .IO
+                .File
+                .Exists(Application.persistentDataPath + "/savedGame.gd")
+        )
+        {
+            File.Delete(Application.persistentDataPath + "/savedGame.gd");
+        }
+        GameObject.Find("GameManager").GetComponent<GameManager>().gameLevel =
+            1;
+        AudioManager.instance.StopMusic();
         SceneManager.LoadScene (_newGameScene);
     }
 
     public void LoadGameYes()
     {
-        if (PlayerPrefs.HasKey("SavedLevel"))
+        if (
+            System
+                .IO
+                .File
+                .Exists(Application.persistentDataPath + "/savedGame.gd")
+        )
         {
+            GameObject.Find("GameManager").GetComponent<GameManager>().Loaded =
+                true;
+            AudioManager.instance.StopMusic();
             levelToLoad = PlayerPrefs.GetString("SavedLevel");
-            SceneManager.LoadScene (levelToLoad);
+            SceneManager.LoadScene(1);
         }
         else
         {
