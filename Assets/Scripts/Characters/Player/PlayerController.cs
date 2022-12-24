@@ -5,8 +5,6 @@ using UnityEngine.InputSystem;
 
 public class PlayerController : MonoBehaviour, IDataPersistence
 {
-    public static PlayerController instance { get; private set; }
-
     [Header("Player Input")]
     private PlayerInput playerInput;
 
@@ -28,19 +26,6 @@ public class PlayerController : MonoBehaviour, IDataPersistence
     public GameObject menu;
 
     public Vector2 position;
-
-    public void Awake()
-    {
-        if (instance == null)
-        {
-            instance = this;
-            DontDestroyOnLoad (gameObject);
-        }
-        else if (instance != this)
-        {
-            Destroy (gameObject);
-        }
-    }
 
     private void Start()
     {

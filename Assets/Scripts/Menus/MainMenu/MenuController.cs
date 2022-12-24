@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using TMPro;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
@@ -69,11 +70,6 @@ public class MenuController : MonoBehaviour
 
     private Resolution[] resolutions;
 
-    [Header("Levels to load")]
-    public string _newGameScene;
-
-    private string levelToLoad;
-
     [SerializeField]
     private GameObject noSavedGameDialog = null;
 
@@ -139,10 +135,9 @@ public class MenuController : MonoBehaviour
         {
             File.Delete(Application.persistentDataPath + "/savedGame.gd");
         }
-        GameObject.Find("GameManager").GetComponent<GameManager>().gameLevel =
-            1;
+
         AudioManager.instance.StopMusic();
-        SceneManager.LoadScene (_newGameScene);
+        SceneManager.LoadScene(1);
     }
 
     public void LoadGameYes()
@@ -154,10 +149,7 @@ public class MenuController : MonoBehaviour
                 .Exists(Application.persistentDataPath + "/savedGame.gd")
         )
         {
-            GameObject.Find("GameManager").GetComponent<GameManager>().Loaded =
-                true;
             AudioManager.instance.StopMusic();
-            levelToLoad = PlayerPrefs.GetString("SavedLevel");
             SceneManager.LoadScene(1);
         }
         else
@@ -285,5 +277,9 @@ public class MenuController : MonoBehaviour
         confirmationPrompt.SetActive(true);
         yield return new WaitForSeconds(2);
         confirmationPrompt.SetActive(false);
+    }
+
+    public void playerReset()
+    {
     }
 }

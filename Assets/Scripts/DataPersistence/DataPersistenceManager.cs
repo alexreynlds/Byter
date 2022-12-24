@@ -12,8 +12,7 @@ public class DataPersistenceManager : MonoBehaviour
     [SerializeField]
     private bool useEncryption;
 
-    public static DataPersistenceManager instance { get; private set; }
-
+    // public static DataPersistenceManager instance { get; private set; }
     private GameData gameData;
 
     private List<IDataPersistence> dataPersistenceObjects;
@@ -23,15 +22,6 @@ public class DataPersistenceManager : MonoBehaviour
     private void Awake()
     {
         {
-            if (instance == null)
-            {
-                instance = this;
-                DontDestroyOnLoad (gameObject);
-            }
-            else
-            {
-                Destroy (gameObject);
-            }
         }
     }
 
@@ -43,30 +33,8 @@ public class DataPersistenceManager : MonoBehaviour
                 useEncryption);
 
         dataPersistenceObjects = FindAllDataPersistenceObjects();
-
-        if (GameObject.Find("GameManager") != null)
-        {
-            if (
-                GameObject
-                    .Find("GameManager")
-                    .GetComponent<GameManager>()
-                    .Loaded ==
-                false
-            )
-            {
-                NewGame();
-            }
-            else
-            {
-                LoadGame();
-            }
-        }
-        else
-        {
-            NewGame();
-        }
+        LoadGame();
         // NewGame();
-        // LoadGame();
     }
 
     public void NewGame()
@@ -90,6 +58,7 @@ public class DataPersistenceManager : MonoBehaviour
 
     public void SaveGame()
     {
+        // Debug.Log (dataPersistenceObjects);
         foreach (IDataPersistence dataPersistence in dataPersistenceObjects)
         {
             dataPersistence.SaveData(ref this.gameData);
@@ -99,40 +68,14 @@ public class DataPersistenceManager : MonoBehaviour
 
     private List<IDataPersistence> FindAllDataPersistenceObjects()
     {
-        IEnumerable<IDataPersistence> dataPersistenceList =
+        IEnumerable<IDataPersistence> dataPersistenceObjects =
             FindObjectsOfType<MonoBehaviour>().OfType<IDataPersistence>();
-        return new List<IDataPersistence>(dataPersistenceList);
+
+        foreach (IDataPersistence dataPersistence in dataPersistenceObjects)
+        {
+            Debug.Log(dataPersistence.ToString());
+        }
+
+        return new List<IDataPersistence>(dataPersistenceObjects);
     }
-
-    // private void OnApplicationQuit()
-    // {
-    //     SaveGame();
-    // }
-
-    // void OnLevelWasLoaded(int level)
-    // {
-    //     Debug.Log("swag");
-    //     if (instance == null)
-    //     {
-    //         instance = this;
-    //         DontDestroyOnLoad (gameObject);
-    //     }
-    //     else
-    //     {
-    //         Destroy (gameObject);
-    //     }
-
-    //     this.dataHandler =
-    //         new FileDataHandler(Application.persistentDataPath,
-    //             fileName,
-    //             useEncryption);
-
-    //     dataPersistenceObjects = FindAllDataPersistenceObjects();
-
-    //     this.gameData = this.dataHandler.Load();
-    //     if (this.gameData == null)
-    //     {
-    //         NewGame();
-    //     }
-    // }
 }
