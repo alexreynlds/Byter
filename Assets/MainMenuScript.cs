@@ -5,21 +5,59 @@ using UnityEngine.SceneManagement;
 
 public class MainMenuScript : MonoBehaviour
 {
-    public void StartGame()
+    [Header("Levels To Load")]
+    public int newGameLevel;
+
+    private string levelToLoad;
+
+    [Header("Screens")]
+    public GameObject mainMenuScreen;
+
+    public GameObject optionsScreen;
+
+    public GameObject newGameDialogueScreen;
+
+    public GameObject loadGameDialogueScreen;
+
+    public GameObject noSaveDataDialogueScreen;
+
+    private GameObject currentMainScreen;
+
+    public void ReturnToMain()
     {
-        SceneManager.LoadScene(1);
+        currentMainScreen.SetActive(false);
+        mainMenuScreen.SetActive(true);
+        currentMainScreen = null;
     }
 
-    public void LoadGame()
+    public void NewGameDialogue()
     {
+        newGameDialogueScreen.SetActive(true);
+        currentMainScreen = newGameDialogueScreen;
+    }
+
+    public void NewGameDialogueYes()
+    {
+        SceneManager.LoadScene (newGameLevel);
+    }
+
+    public void LoadGameDialogue()
+    {
+        if (PlayerPrefs.HasKey("SavedLevel"))
+        {
+            // Load Saved Game
+        }
+        else
+        {
+            noSaveDataDialogueScreen.SetActive(true);
+            currentMainScreen = noSaveDataDialogueScreen;
+        }
     }
 
     public void OpenOptions()
     {
-    }
-
-    public void CloseOptions()
-    {
+        optionsScreen.SetActive(true);
+        currentMainScreen = optionsScreen;
     }
 
     public void QuitGame()
