@@ -263,6 +263,27 @@ TextureImporter:
       indices: 
       edges: []
       weights: []
+    - serializedVersion: 2
+      name: DoubleSpriteTest_7
+      rect:
+        serializedVersion: 2
+        x: 71
+        y: 125
+        width: 2
+        height: 3
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 66f258ca0c9014514bac07839fc03f27
+      internalID: -1259798845
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []
@@ -278,6 +299,7 @@ TextureImporter:
       DoubleSpriteTest_3: -1630433707
       DoubleSpriteTest_1: 179662379
       DoubleSpriteTest_6: 90621964
+      DoubleSpriteTest_7: -1259798845
       DoubleSpriteTest_4: 286696230
       DoubleSpriteTest_5: 272620241
       DoubleSpriteTest_2: 1242873885

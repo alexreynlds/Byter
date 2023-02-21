@@ -16,12 +16,43 @@ public class PlayerShooting : MonoBehaviour
 
     private string shootDir;
 
+    public GameObject bulletPrefab;
+
+    public GameObject bulletSpawn;
+
+    private bool isFiring;
+
+    private bool canFire;
+
+    private float fireSpeed;
+
+    private float fireTimer;
+
+    public PlayerInputActions controls;
+
+    private void Awake()
+    {
+        controls = new PlayerInputActions();
+    }
+
     void Start()
     {
         playerHeadObject = GameObject.Find("PlayerHead");
 
         playerHeadSpriteRenderer =
             playerHeadObject.GetComponent<SpriteRenderer>();
+
+        bulletSpawn = GameObject.Find("BulletSpawn");
+
+        isFiring = false;
+        fireTimer = fireSpeed;
+        canFire = true;
+        fireSpeed = GetComponent<PlayerStats>().fireSpeed;
+
+        controls.Player.Shoot.performed += ctx =>
+            doShoot(ctx.ReadValue<Vector2>());
+        controls.Player.Shoot.canceled += ctx =>
+            doShoot(ctx.ReadValue<Vector2>());
     }
 
     void FixedUpdate()
@@ -55,29 +86,70 @@ public class PlayerShooting : MonoBehaviour
         if (shootDir == "right")
         {
             playerHeadSpriteRenderer.sprite = headSprites[3];
+            bulletSpawn.transform.rotation = Quaternion.Euler(0, 0, -90);
         }
         else if (shootDir == "left")
         {
             playerHeadSpriteRenderer.sprite = headSprites[2];
+            bulletSpawn.transform.rotation = Quaternion.Euler(0, 0, 90);
         }
         else if (shootDir == "up")
         {
             playerHeadSpriteRenderer.sprite = headSprites[1];
+            bulletSpawn.transform.rotation = Quaternion.Euler(0, 0, 0);
         }
         else if (shootDir == "down")
         {
             playerHeadSpriteRenderer.sprite = headSprites[0];
+            bulletSpawn.transform.rotation = Quaternion.Euler(0, 0, 180);
         }
         else if (shootDir == "none")
         {
             playerHeadSpriteRenderer.sprite = headSprites[0];
+            bulletSpawn.transform.rotation = Quaternion.Euler(0, 0, 0);
         }
 
-        Debug.Log (shootDir);
+        // Shooting
+        if (isFiring && canFire)
+        {
+            canFire = false;
+            GameObject bullet =
+                Instantiate(bulletPrefab,
+                transform.position,
+                Quaternion.Euler(45, 0, 0));
+            Rigidbody2D rb = bullet.GetComponent<Rigidbody2D>();
+            rb.AddForce(bulletSpawn.transform.up * 1f, ForceMode2D.Impulse);
+            fireTimer = fireSpeed;
+        }
+        if (fireTimer >= 0)
+        {
+            fireTimer -= 0.05f;
+        }
+        else
+        {
+            canFire = true;
+            fireTimer = fireSpeed;
+        }
     }
 
-    void OnShoot(InputValue shootVal)
+    void doShoot(Vector2 shootVal)
     {
-        shootInput = shootVal.Get<Vector2>();
+        shootInput = shootVal;
+        isFiring = !isFiring;
+    }
+
+    void OnTest(Vector2 shootVal)
+    {
+        Debug.Log("epic");
+    }
+
+    private void OnEnable()
+    {
+        controls.Enable();
+    }
+
+    private void OnDisable()
+    {
+        controls.Disable();
     }
 }

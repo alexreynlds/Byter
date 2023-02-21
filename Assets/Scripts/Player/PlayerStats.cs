@@ -4,17 +4,9 @@ using UnityEngine;
 
 public class PlayerStats : MonoBehaviour
 {
-    [Header("Basic Player Stats")]
-    [SerializeField]
-    public float moveSpeed = 5f;
+    public float moveSpeed;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-    }
+    public float fireSpeed;
 
-    // Update is called once per frame
-    void Update()
-    {
-    }
+    public float shootingRange;
 }
