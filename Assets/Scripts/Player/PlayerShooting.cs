@@ -12,6 +12,10 @@ public class PlayerShooting : MonoBehaviour
 
     public Sprite[] headSprites;
 
+    private Vector2 shootInput;
+
+    private string shootDir;
+
     void Start()
     {
         playerHeadObject = GameObject.Find("PlayerHead");
@@ -20,9 +24,60 @@ public class PlayerShooting : MonoBehaviour
             playerHeadObject.GetComponent<SpriteRenderer>();
     }
 
+    void FixedUpdate()
+    {
+        // Updating Shooting direction
+        if (shootInput != Vector2.zero)
+        {
+            if (shootInput.x > 0)
+            {
+                shootDir = "right";
+            }
+            else if (shootInput.x < 0)
+            {
+                shootDir = "left";
+            }
+            else if (shootInput.y > 0)
+            {
+                shootDir = "up";
+            }
+            else if (shootInput.y < 0)
+            {
+                shootDir = "down";
+            }
+        }
+        if (shootInput == null)
+        {
+            shootDir = "none";
+        }
+
+        // Updating Player Head Sprite based on shooting direction
+        if (shootDir == "right")
+        {
+            playerHeadSpriteRenderer.sprite = headSprites[3];
+        }
+        else if (shootDir == "left")
+        {
+            playerHeadSpriteRenderer.sprite = headSprites[2];
+        }
+        else if (shootDir == "up")
+        {
+            playerHeadSpriteRenderer.sprite = headSprites[1];
+        }
+        else if (shootDir == "down")
+        {
+            playerHeadSpriteRenderer.sprite = headSprites[0];
+        }
+        else if (shootDir == "none")
+        {
+            playerHeadSpriteRenderer.sprite = headSprites[0];
+        }
+
+        Debug.Log (shootDir);
+    }
+
     void OnShoot(InputValue shootVal)
     {
-        Vector2 shootValue = shootVal.Get<Vector2>();
-        Debug.Log (shootValue);
+        shootInput = shootVal.Get<Vector2>();
     }
 }
