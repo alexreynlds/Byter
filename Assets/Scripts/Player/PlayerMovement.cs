@@ -9,7 +9,13 @@ public class PlayerMovement : MonoBehaviour
 
     public float collisionOffset = 0.01f;
 
-    public Sprite[] sprites;
+    public Sprite[] bodySprites;
+
+    public Sprite[] headSprites;
+
+    private GameObject playerBodyObject;
+
+    private SpriteRenderer playerBodySpriteRenderer;
 
     Vector2 movementInput;
 
@@ -25,6 +31,10 @@ public class PlayerMovement : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
         spriteRenderer = GetComponent<SpriteRenderer>();
+        playerBodyObject = GameObject.Find("PlayerBody");
+
+        playerBodySpriteRenderer =
+            playerBodyObject.GetComponent<SpriteRenderer>();
     }
 
     void Update()
@@ -49,25 +59,25 @@ public class PlayerMovement : MonoBehaviour
 
         if (movementInput.x > 0)
         {
-            spriteRenderer.sprite = sprites[1];
-            spriteRenderer.flipX = false;
+            playerBodySpriteRenderer.sprite = bodySprites[2];
+            playerBodySpriteRenderer.flipX = false;
         }
         else if (movementInput.x < 0)
         {
-            spriteRenderer.sprite = sprites[1];
-            spriteRenderer.flipX = true;
+            playerBodySpriteRenderer.sprite = bodySprites[2];
+            playerBodySpriteRenderer.flipX = true;
         }
         else if (movementInput.y > 0)
         {
-            spriteRenderer.sprite = sprites[2];
+            playerBodySpriteRenderer.sprite = bodySprites[1];
         }
         else if (movementInput.y < 0)
         {
-            spriteRenderer.sprite = sprites[0];
+            playerBodySpriteRenderer.sprite = bodySprites[0];
         }
         else
         {
-            spriteRenderer.sprite = sprites[0];
+            playerBodySpriteRenderer.sprite = bodySprites[0];
         }
     }
 

@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 841343be7e8eb48388da5725e8a4eb7b
+guid: ef3dd908cf02d49a8ac92475dcf54cc5
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -102,31 +102,7 @@ TextureImporter:
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
-    buildTarget: Android
-    maxTextureSize: 2048
-    resizeAlgorithm: 0
-    textureFormat: -1
-    textureCompression: 1
-    compressionQuality: 50
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    overridden: 0
-    androidETC2FallbackOverride: 0
-    forceMaximumCompressionQuality_BC6H_BC7: 0
-  - serializedVersion: 3
     buildTarget: iPhone
-    maxTextureSize: 2048
-    resizeAlgorithm: 0
-    textureFormat: -1
-    textureCompression: 1
-    compressionQuality: 50
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    overridden: 0
-    androidETC2FallbackOverride: 0
-    forceMaximumCompressionQuality_BC6H_BC7: 0
-  - serializedVersion: 3
-    buildTarget: WebGL
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
@@ -141,64 +117,148 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: TestSpriteSheet_0
+      name: DoubleSpriteTest_0
       rect:
         serializedVersion: 2
-        x: 0
-        y: 112
-        width: 16
-        height: 16
+        x: 4
+        y: 120
+        width: 8
+        height: 8
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: a60968e566b0b40dc95fbe884597ae62
-      internalID: -1267836452
+      spriteID: 3c157bb8d12c3476ab0ae15abfa46e7f
+      internalID: -1514867181
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: TestSpriteSheet_1
+      name: DoubleSpriteTest_1
       rect:
         serializedVersion: 2
-        x: 16
-        y: 112
-        width: 16
-        height: 16
+        x: 20
+        y: 120
+        width: 8
+        height: 8
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 15d52a5356cbf4cdbae498a0c9081bf8
-      internalID: 933538699
+      spriteID: 6db778065721543128e1b8232613af63
+      internalID: 179662379
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: TestSpriteSheet_2
+      name: DoubleSpriteTest_2
       rect:
         serializedVersion: 2
-        x: 32
-        y: 112
-        width: 16
-        height: 16
+        x: 36
+        y: 120
+        width: 8
+        height: 8
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: d4ebd2a56df384e20b0326603cb7a5ff
-      internalID: 330501860
+      spriteID: fb37ddd6a52ac454b86e53ccbda6beac
+      internalID: 1242873885
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DoubleSpriteTest_3
+      rect:
+        serializedVersion: 2
+        x: 52
+        y: 120
+        width: 8
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 783c77eb8dc674fb89f28c0066647e97
+      internalID: -1630433707
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DoubleSpriteTest_4
+      rect:
+        serializedVersion: 2
+        x: 3
+        y: 96
+        width: 10
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7a833ef8c660a45f6ba644b3f5c9151a
+      internalID: 286696230
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DoubleSpriteTest_5
+      rect:
+        serializedVersion: 2
+        x: 19
+        y: 96
+        width: 10
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a8c2d86afa036446f97e70d4f02a9995
+      internalID: 272620241
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DoubleSpriteTest_6
+      rect:
+        serializedVersion: 2
+        x: 37
+        y: 96
+        width: 6
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ae7788d0d4bdd48db9d8ca5d49087519
+      internalID: 90621964
       vertices: []
       indices: 
       edges: []
@@ -214,9 +274,13 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      TestSpriteSheet_2: 330501860
-      TestSpriteSheet_1: 933538699
-      TestSpriteSheet_0: -1267836452
+      DoubleSpriteTest_0: -1514867181
+      DoubleSpriteTest_3: -1630433707
+      DoubleSpriteTest_1: 179662379
+      DoubleSpriteTest_6: 90621964
+      DoubleSpriteTest_4: 286696230
+      DoubleSpriteTest_5: 272620241
+      DoubleSpriteTest_2: 1242873885
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0
