@@ -85,27 +85,32 @@ public class PlayerShooting : MonoBehaviour
         // Updating Player Head Sprite based on shooting direction
         if (shootDir == "right")
         {
-            playerHeadSpriteRenderer.sprite = headSprites[3];
+            playerHeadSpriteRenderer.sprite = headSprites[2];
+            playerHeadSpriteRenderer.flipX = true;
             bulletSpawn.transform.rotation = Quaternion.Euler(0, 0, -90);
         }
         else if (shootDir == "left")
         {
             playerHeadSpriteRenderer.sprite = headSprites[2];
+            playerHeadSpriteRenderer.flipX = false;
             bulletSpawn.transform.rotation = Quaternion.Euler(0, 0, 90);
         }
         else if (shootDir == "up")
         {
             playerHeadSpriteRenderer.sprite = headSprites[1];
+            playerHeadSpriteRenderer.flipX = false;
             bulletSpawn.transform.rotation = Quaternion.Euler(0, 0, 0);
         }
         else if (shootDir == "down")
         {
             playerHeadSpriteRenderer.sprite = headSprites[0];
+            playerHeadSpriteRenderer.flipX = false;
             bulletSpawn.transform.rotation = Quaternion.Euler(0, 0, 180);
         }
         else if (shootDir == "none")
         {
             playerHeadSpriteRenderer.sprite = headSprites[0];
+            playerHeadSpriteRenderer.flipX = false;
             bulletSpawn.transform.rotation = Quaternion.Euler(0, 0, 0);
         }
 
@@ -113,13 +118,13 @@ public class PlayerShooting : MonoBehaviour
         if (isFiring && canFire)
         {
             canFire = false;
+            fireTimer = fireSpeed;
             GameObject bullet =
                 Instantiate(bulletPrefab,
                 transform.position,
                 Quaternion.Euler(45, 0, 0));
             Rigidbody2D rb = bullet.GetComponent<Rigidbody2D>();
             rb.AddForce(bulletSpawn.transform.up * 1f, ForceMode2D.Impulse);
-            fireTimer = fireSpeed;
         }
         if (fireTimer >= 0)
         {

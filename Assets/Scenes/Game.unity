@@ -4524,7 +4524,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 0.75
+  orthographic size: 1
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -4562,12 +4562,12 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 519420028}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6a160d838ff8b4b4693ac20007e008c7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_AssetsPPU: 100
+  m_AssetsPPU: 64
   m_RefResolutionX: 320
   m_RefResolutionY: 180
   m_UpscaleRT: 1
@@ -7231,8 +7231,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1137080058}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 0, y: 0.027, z: 0}
+  m_LocalScale: {x: 0.4, y: 0.4, z: 0.4}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1731593394}
@@ -7279,7 +7279,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 286696230, guid: ef3dd908cf02d49a8ac92475dcf54cc5, type: 3}
+  m_Sprite: {fileID: -793780026, guid: d40a372a76e5147d481783eee0af9899, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -7581,8 +7581,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1721528445}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.12, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 0, y: 0.3, z: 0}
+  m_LocalScale: {x: 0.4, y: 0.4, z: 0.4}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1731593394}
@@ -7629,7 +7629,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: -1514867181, guid: ef3dd908cf02d49a8ac92475dcf54cc5, type: 3}
+  m_Sprite: {fileID: -1005504564, guid: d40a372a76e5147d481783eee0af9899, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -7686,7 +7686,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.1027824, y: 0.030981272}
+  m_Size: {x: 0.21439582, y: 0.08469019}
   m_EdgeRadius: 0
 --- !u!114 &1731593393
 MonoBehaviour:
@@ -7716,14 +7716,10 @@ MonoBehaviour:
     maxNormalAngle: 0
   collisionOffset: 0.01
   bodySprites:
-  - {fileID: 286696230, guid: ef3dd908cf02d49a8ac92475dcf54cc5, type: 3}
-  - {fileID: 272620241, guid: ef3dd908cf02d49a8ac92475dcf54cc5, type: 3}
-  - {fileID: 90621964, guid: ef3dd908cf02d49a8ac92475dcf54cc5, type: 3}
-  headSprites:
-  - {fileID: -1514867181, guid: ef3dd908cf02d49a8ac92475dcf54cc5, type: 3}
-  - {fileID: 179662379, guid: ef3dd908cf02d49a8ac92475dcf54cc5, type: 3}
-  - {fileID: 1242873885, guid: ef3dd908cf02d49a8ac92475dcf54cc5, type: 3}
-  - {fileID: -1630433707, guid: ef3dd908cf02d49a8ac92475dcf54cc5, type: 3}
+  - {fileID: -793780026, guid: d40a372a76e5147d481783eee0af9899, type: 3}
+  - {fileID: -1846773661, guid: d40a372a76e5147d481783eee0af9899, type: 3}
+  - {fileID: -879246854, guid: d40a372a76e5147d481783eee0af9899, type: 3}
+  - {fileID: -287016437, guid: d40a372a76e5147d481783eee0af9899, type: 3}
 --- !u!4 &1731593394
 Transform:
   m_ObjectHideFlags: 0
@@ -7732,7 +7728,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1731593391}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.428293, y: 0.016430886, z: 0.00090263796}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -7821,9 +7817,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   headSprites:
-  - {fileID: -1514867181, guid: ef3dd908cf02d49a8ac92475dcf54cc5, type: 3}
-  - {fileID: 179662379, guid: ef3dd908cf02d49a8ac92475dcf54cc5, type: 3}
-  - {fileID: 1242873885, guid: ef3dd908cf02d49a8ac92475dcf54cc5, type: 3}
-  - {fileID: -1630433707, guid: ef3dd908cf02d49a8ac92475dcf54cc5, type: 3}
+  - {fileID: -1005504564, guid: d40a372a76e5147d481783eee0af9899, type: 3}
+  - {fileID: -739279006, guid: d40a372a76e5147d481783eee0af9899, type: 3}
+  - {fileID: 1192335366, guid: d40a372a76e5147d481783eee0af9899, type: 3}
   bulletPrefab: {fileID: 8631597017393710532, guid: a03a9cb33e8bf47d6ae9bb0f80e5fede, type: 3}
   bulletSpawn: {fileID: 0}

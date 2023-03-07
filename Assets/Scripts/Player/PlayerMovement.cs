@@ -11,8 +11,6 @@ public class PlayerMovement : MonoBehaviour
 
     public Sprite[] bodySprites;
 
-    public Sprite[] headSprites;
-
     private GameObject playerBodyObject;
 
     private SpriteRenderer playerBodySpriteRenderer;
@@ -27,6 +25,10 @@ public class PlayerMovement : MonoBehaviour
 
     private SpriteRenderer spriteRenderer;
 
+    private int bodySpriteCounter = 0;
+
+    private int bodySpriteInt = 0;
+
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -35,14 +37,10 @@ public class PlayerMovement : MonoBehaviour
 
         playerBodySpriteRenderer =
             playerBodyObject.GetComponent<SpriteRenderer>();
+        playerBodySpriteRenderer.sprite = bodySprites[bodySpriteInt];
     }
 
     void Update()
-    {
-        moveSpeed = GetComponent<PlayerStats>().moveSpeed;
-    }
-
-    void FixedUpdate()
     {
         if (movementInput != Vector2.zero)
         {
@@ -56,28 +54,28 @@ public class PlayerMovement : MonoBehaviour
                     success = TryMove(new Vector2(0, movementInput.y));
             }
         }
+    }
 
-        if (movementInput.x > 0)
+    void FixedUpdate()
+    {
+        moveSpeed = GetComponent<PlayerStats>().moveSpeed;
+
+        if (bodySpriteCounter == 10)
         {
-            playerBodySpriteRenderer.sprite = bodySprites[2];
-            playerBodySpriteRenderer.flipX = false;
-        }
-        else if (movementInput.x < 0)
-        {
-            playerBodySpriteRenderer.sprite = bodySprites[2];
-            playerBodySpriteRenderer.flipX = true;
-        }
-        else if (movementInput.y > 0)
-        {
-            playerBodySpriteRenderer.sprite = bodySprites[1];
-        }
-        else if (movementInput.y < 0)
-        {
-            playerBodySpriteRenderer.sprite = bodySprites[0];
+            if (bodySpriteInt == 3)
+            {
+                bodySpriteInt = 0;
+            }
+            else
+            {
+                bodySpriteInt++;
+            }
+            bodySpriteCounter = 0;
+            playerBodySpriteRenderer.sprite = bodySprites[bodySpriteInt];
         }
         else
         {
-            playerBodySpriteRenderer.sprite = bodySprites[0];
+            bodySpriteCounter++;
         }
     }
 
