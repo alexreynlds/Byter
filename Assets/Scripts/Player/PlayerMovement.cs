@@ -60,6 +60,7 @@ public class PlayerMovement : MonoBehaviour
     {
         moveSpeed = GetComponent<PlayerStats>().moveSpeed;
 
+        // Every 10 frames cycle through the body sprite
         if (bodySpriteCounter == 10)
         {
             if (bodySpriteInt == 3)
