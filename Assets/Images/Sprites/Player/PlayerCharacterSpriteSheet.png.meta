@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: ef3dd908cf02d49a8ac92475dcf54cc5
+guid: 39e05b09f0e0c4c6798dadaca9f76cac
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -47,7 +47,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 100
+  spritePixelsToUnits: 32
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -117,13 +117,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: DoubleSpriteTest_0
+      name: Untitled_Artwork 4_0
       rect:
         serializedVersion: 2
-        x: 4
-        y: 120
-        width: 8
-        height: 8
+        x: 0
+        y: 64
+        width: 32
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -131,20 +131,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 3c157bb8d12c3476ab0ae15abfa46e7f
-      internalID: -1514867181
+      spriteID: c8fe3479ad26b404b84e07eb4ae7113a
+      internalID: -1001621019
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: DoubleSpriteTest_1
+      name: Untitled_Artwork 4_1
       rect:
         serializedVersion: 2
-        x: 20
-        y: 120
-        width: 8
-        height: 8
+        x: 32
+        y: 64
+        width: 32
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -152,20 +152,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 6db778065721543128e1b8232613af63
-      internalID: 179662379
+      spriteID: 083830ceb98744ef2b6ab71fba2e9352
+      internalID: 838956962
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: DoubleSpriteTest_2
+      name: Untitled_Artwork 4_2
       rect:
         serializedVersion: 2
-        x: 36
-        y: 120
-        width: 8
-        height: 8
+        x: 64
+        y: 64
+        width: 32
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -173,20 +173,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: fb37ddd6a52ac454b86e53ccbda6beac
-      internalID: 1242873885
+      spriteID: af202c56b96de4170a041f6c383ff4d4
+      internalID: -784385102
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: DoubleSpriteTest_3
+      name: Untitled_Artwork 4_3
       rect:
         serializedVersion: 2
-        x: 52
-        y: 120
-        width: 8
-        height: 8
+        x: 0
+        y: 32
+        width: 32
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -194,20 +194,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 783c77eb8dc674fb89f28c0066647e97
-      internalID: -1630433707
+      spriteID: 99bb6de6f6eeb4c1ea0c4bd29fd13f9f
+      internalID: 1584145893
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: DoubleSpriteTest_4
+      name: Untitled_Artwork 4_4
       rect:
         serializedVersion: 2
-        x: 3
-        y: 96
-        width: 10
-        height: 16
+        x: 32
+        y: 32
+        width: 32
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -215,20 +215,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 7a833ef8c660a45f6ba644b3f5c9151a
-      internalID: 286696230
+      spriteID: d6f9cd5ab881e4877a8e1692569793fd
+      internalID: 745322236
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: DoubleSpriteTest_5
+      name: Untitled_Artwork 4_5
       rect:
         serializedVersion: 2
-        x: 19
-        y: 96
-        width: 10
-        height: 16
+        x: 64
+        y: 32
+        width: 32
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -236,20 +236,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: a8c2d86afa036446f97e70d4f02a9995
-      internalID: 272620241
+      spriteID: abf5ff4eb0ba04c2e953f888e128ee2a
+      internalID: 673164129
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: DoubleSpriteTest_6
+      name: Untitled_Artwork 4_6
       rect:
         serializedVersion: 2
-        x: 37
-        y: 96
-        width: 6
-        height: 16
+        x: 0
+        y: 0
+        width: 32
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -257,20 +257,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: ae7788d0d4bdd48db9d8ca5d49087519
-      internalID: 90621964
+      spriteID: 5b581155310a24031b921bb675c0828d
+      internalID: 1136574680
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: DoubleSpriteTest_7
+      name: Untitled_Artwork 4_7
       rect:
         serializedVersion: 2
-        x: 71
-        y: 125
-        width: 2
-        height: 3
+        x: 32
+        y: 0
+        width: 32
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -278,8 +278,29 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 66f258ca0c9014514bac07839fc03f27
-      internalID: -1259798845
+      spriteID: 34e3faa52684c45b3b98fc31a9566451
+      internalID: 224452816
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Untitled_Artwork 4_8
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d529f802ad6eb456a894d3fccfa4c8ca
+      internalID: -196193963
       vertices: []
       indices: 
       edges: []
@@ -295,14 +316,15 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      DoubleSpriteTest_0: -1514867181
-      DoubleSpriteTest_3: -1630433707
-      DoubleSpriteTest_1: 179662379
-      DoubleSpriteTest_6: 90621964
-      DoubleSpriteTest_7: -1259798845
-      DoubleSpriteTest_4: 286696230
-      DoubleSpriteTest_5: 272620241
-      DoubleSpriteTest_2: 1242873885
+      Untitled_Artwork 4_6: 1136574680
+      Untitled_Artwork 4_0: -1001621019
+      Untitled_Artwork 4_8: -196193963
+      Untitled_Artwork 4_5: 673164129
+      Untitled_Artwork 4_2: -784385102
+      Untitled_Artwork 4_3: 1584145893
+      Untitled_Artwork 4_7: 224452816
+      Untitled_Artwork 4_1: 838956962
+      Untitled_Artwork 4_4: 745322236
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

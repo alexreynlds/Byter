@@ -30,6 +30,8 @@ public class PlayerShooting : MonoBehaviour
 
     public PlayerInputActions controls;
 
+    public float bulletForce;
+
     private void Awake()
     {
         controls = new PlayerInputActions();
@@ -122,9 +124,9 @@ public class PlayerShooting : MonoBehaviour
             GameObject bullet =
                 Instantiate(bulletPrefab,
                 transform.position,
-                Quaternion.Euler(45, 0, 0));
+                Quaternion.Euler(0, 0, 0));
             Rigidbody2D rb = bullet.GetComponent<Rigidbody2D>();
-            rb.AddForce(bulletSpawn.transform.up * 1f, ForceMode2D.Impulse);
+            rb.AddForce(bulletSpawn.transform.up * bulletForce, ForceMode2D.Impulse);
         }
         if (fireTimer >= 0)
         {

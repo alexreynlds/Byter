@@ -5,6 +5,9 @@ TagManager:
   serializedVersion: 2
   tags:
   - PlayerBullet
+  - SpawnPoint
+  - Rooms
+  - Room
   layers:
   - Default
   - TransparentFX

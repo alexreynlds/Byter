@@ -11,9 +11,15 @@ public class PlayerMovement : MonoBehaviour
 
     public Sprite[] bodySprites;
 
+    public Sprite[] bottomSprites;
+
     private GameObject playerBodyObject;
 
     private SpriteRenderer playerBodySpriteRenderer;
+
+    private GameObject playerBottomObject;
+
+    private SpriteRenderer playerBottomSpriteRenderer;
 
     Vector2 movementInput;
 
@@ -38,6 +44,11 @@ public class PlayerMovement : MonoBehaviour
         playerBodySpriteRenderer =
             playerBodyObject.GetComponent<SpriteRenderer>();
         playerBodySpriteRenderer.sprite = bodySprites[bodySpriteInt];
+
+        playerBottomObject = GameObject.Find("PlayerBottom");
+
+        playerBottomSpriteRenderer =
+            playerBottomObject.GetComponent<SpriteRenderer>();
     }
 
     void Update()
@@ -54,6 +65,13 @@ public class PlayerMovement : MonoBehaviour
                     success = TryMove(new Vector2(0, movementInput.y));
             }
         }
+
+        if (movementInput == Vector2.zero)
+        {
+            playerBodySpriteRenderer.sprite = bodySprites[0];
+        }
+
+        // Debug.Log(movementInput);
     }
 
     void FixedUpdate()
@@ -61,9 +79,9 @@ public class PlayerMovement : MonoBehaviour
         moveSpeed = GetComponent<PlayerStats>().moveSpeed;
 
         // Every 10 frames cycle through the body sprite
-        if (bodySpriteCounter == 10)
+        if (bodySpriteCounter == 5)
         {
-            if (bodySpriteInt == 3)
+            if (bodySpriteInt == 2)
             {
                 bodySpriteInt = 0;
             }
@@ -72,7 +90,7 @@ public class PlayerMovement : MonoBehaviour
                 bodySpriteInt++;
             }
             bodySpriteCounter = 0;
-            playerBodySpriteRenderer.sprite = bodySprites[bodySpriteInt];
+            playerBottomSpriteRenderer.sprite = bottomSprites[bodySpriteInt];
         }
         else
         {
@@ -94,6 +112,23 @@ public class PlayerMovement : MonoBehaviour
             rb
                 .MovePosition(rb.position +
                 direction * moveSpeed * Time.fixedDeltaTime);
+            // Change body sprite depending on movement direction.
+
+            if (direction == Vector2.up){
+                playerBodySpriteRenderer.sprite = bodySprites[2];
+            }
+            else if (direction == Vector2.down){
+                playerBodySpriteRenderer.sprite = bodySprites[0];
+
+            }
+            else if (direction == Vector2.left){
+                playerBodySpriteRenderer.sprite = bodySprites[1];
+                playerBodySpriteRenderer.flipX = false;
+            }
+            else if (direction == Vector2.right){
+                playerBodySpriteRenderer.sprite = bodySprites[1];
+                playerBodySpriteRenderer.flipX = true;
+            }
             return true;
         }
         else
