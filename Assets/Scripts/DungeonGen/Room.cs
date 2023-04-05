@@ -40,7 +40,6 @@ public class Room : MonoBehaviour
         if (other.tag == "Player")
         {
             CameraController.instance.currentRoom = this;
-            Debug.Log("Epic");
         }
     }
 }

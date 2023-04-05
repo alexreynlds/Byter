@@ -35,11 +35,14 @@ public class RoomController : MonoBehaviour
 
     void Start()
     {
-        LoadRoom("Start", 0, 0);
-        LoadRoom("Empty", 1, 0);
-        LoadRoom("Empty", -1, 0);
-        LoadRoom("Empty", 0, 1);
-        LoadRoom("Empty", 0, -1);
+        // LoadRoom("Start", 0, 0);
+        // LoadRoom("Empty", 1, 0);
+        // LoadRoom("Empty", -1, 0);
+        // LoadRoom("Empty", 0, 1);
+        // LoadRoom("Empty", 0, -1);
+        UnityEditor
+            .SceneView
+            .FocusWindowIfItsOpen(typeof (UnityEditor.SceneView));
     }
 
     void Update()
