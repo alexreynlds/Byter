@@ -389,7 +389,7 @@ Tilemap:
     second:
       serializedVersion: 2
       m_TileIndex: 1
-      m_TileSpriteIndex: 3
+      m_TileSpriteIndex: 8
       m_TileMatrixIndex: 0
       m_TileColorIndex: 0
       m_TileObjectToInstantiateIndex: 65535
@@ -559,7 +559,7 @@ Tilemap:
     second:
       serializedVersion: 2
       m_TileIndex: 0
-      m_TileSpriteIndex: 1
+      m_TileSpriteIndex: 3
       m_TileMatrixIndex: 0
       m_TileColorIndex: 0
       m_TileObjectToInstantiateIndex: 65535
@@ -760,12 +760,12 @@ Tilemap:
   m_TileSpriteArray:
   - m_RefCount: 0
     m_Data: {fileID: 0}
-  - m_RefCount: 1
-    m_Data: {fileID: -633229314, guid: 9fc80f29fd826434eb0e227734d9bd3b, type: 3}
+  - m_RefCount: 0
+    m_Data: {fileID: 0}
   - m_RefCount: 8
     m_Data: {fileID: 1376895368, guid: 9fc80f29fd826434eb0e227734d9bd3b, type: 3}
   - m_RefCount: 1
-    m_Data: {fileID: 1741308462, guid: 9fc80f29fd826434eb0e227734d9bd3b, type: 3}
+    m_Data: {fileID: -633229314, guid: 9fc80f29fd826434eb0e227734d9bd3b, type: 3}
   - m_RefCount: 16
     m_Data: {fileID: 1753269633, guid: 9fc80f29fd826434eb0e227734d9bd3b, type: 3}
   - m_RefCount: 16
@@ -774,8 +774,8 @@ Tilemap:
     m_Data: {fileID: -874702068, guid: 9fc80f29fd826434eb0e227734d9bd3b, type: 3}
   - m_RefCount: 8
     m_Data: {fileID: -2089898639, guid: 9fc80f29fd826434eb0e227734d9bd3b, type: 3}
-  - m_RefCount: 0
-    m_Data: {fileID: 0}
+  - m_RefCount: 1
+    m_Data: {fileID: 1741308462, guid: 9fc80f29fd826434eb0e227734d9bd3b, type: 3}
   - m_RefCount: 1
     m_Data: {fileID: -1204355338, guid: 9fc80f29fd826434eb0e227734d9bd3b, type: 3}
   m_TileMatrixArray:
@@ -851,6 +851,7 @@ GameObject:
   - component: {fileID: 569043906}
   - component: {fileID: 569043905}
   - component: {fileID: 569043907}
+  - component: {fileID: 569043908}
   m_Layer: 0
   m_Name: Room
   m_TagString: Untagged
@@ -904,6 +905,32 @@ MonoBehaviour:
   Height: 1.92
   X: 0
   Y: 0
+--- !u!61 &569043908
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 569043904}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 2.850463, y: 1.5749424}
+  m_EdgeRadius: 0
 --- !u!1 &838780906
 GameObject:
   m_ObjectHideFlags: 0
