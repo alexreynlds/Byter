@@ -13,6 +13,9 @@ public class DungeonGenerator : MonoBehaviour
         dungeonRooms =
             DungeonCrawlerController.GenerateDungeon(dungeonGenerationData);
         SpawnRooms (dungeonRooms);
+
+        foreach (Room room in RoomController.instance.loadedRooms)
+        room.RemoveUnconnectedDoors();
     }
 
     private void SpawnRooms(IEnumerable<Vector2Int> rooms)
