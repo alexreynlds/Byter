@@ -11,4 +11,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/DungeonRooms/Floor1Empty.unity
     guid: 34fbf6edefb184880ba8e4a251aad68b
+  - enabled: 1
+    path: Assets/Scenes/DungeonRooms/Floor1End.unity
+    guid: b6b8691de44094a6d9fe2ae8acf211f1
   m_configObjects: {}
