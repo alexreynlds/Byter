@@ -29,8 +29,8 @@ public class GridController : MonoBehaviour
     void Awake()
     {
         room = GetComponentInParent<Room>();
-        grid.columns = room.roomW - 2;
-        grid.rows = room.roomH - 2;
+        grid.columns = room.roomW - 1;
+        grid.rows = room.roomH - 1;
         GenerateGrid();
     }
 

@@ -171,8 +171,8 @@ MonoBehaviour:
   grid:
     columns: 0
     rows: 0
-    verticalOffset: 3
-    horizontalOffset: 6
+    verticalOffset: 3.5
+    horizontalOffset: 6.5
   gridTile: {fileID: 838477582645670028, guid: d860a6eb16d164065a373a93eac173f0, type: 3}
   availablePositions: []
 --- !u!1 &240532169
