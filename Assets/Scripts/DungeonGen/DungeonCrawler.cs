@@ -4,19 +4,19 @@ using UnityEngine;
 
 public class DungeonCrawler
 {
-    public Vector2Int Position { get; set; }
+    public Vector2Int position { get; set; }
 
-    public DungeonCrawler(Vector2Int startPosition)
+    public DungeonCrawler(Vector2Int startPos)
     {
-        Position = startPosition;
+        position = startPos;
     }
 
     public Vector2Int
-    Move(Dictionary<Direction, Vector2Int> directionMovementMap)
+    move(Dictionary<Direction, Vector2Int> directionMovementMap)
     {
-        Direction toMove =
+        Direction moveDir =
             (Direction) Random.Range(0, directionMovementMap.Count);
-        Position += directionMovementMap[toMove];
-        return Position;
+        position += directionMovementMap[moveDir];
+        return position;
     }
 }

@@ -6,12 +6,15 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
+    path: Assets/Scenes/DungeonRooms/Floor1Main.unity
+    guid: 6cda1396a44d146ada6f38ab546c0672
+  - enabled: 1
     path: Assets/Scenes/DungeonRooms/Floor1Start.unity
-    guid: d941a1dffa566459a93627e6154d82c2
+    guid: 024c0d34bfbf548a2b6594ea674c923f
   - enabled: 1
     path: Assets/Scenes/DungeonRooms/Floor1Empty.unity
-    guid: 34fbf6edefb184880ba8e4a251aad68b
+    guid: 8e241ad248ee0464a8d7f251c4270d9c
   - enabled: 1
     path: Assets/Scenes/DungeonRooms/Floor1End.unity
-    guid: b6b8691de44094a6d9fe2ae8acf211f1
+    guid: c74d06b747dc64f63837957b8b0cdb00
   m_configObjects: {}

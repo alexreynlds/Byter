@@ -8,17 +8,21 @@ public class CameraController : MonoBehaviour
 
     public Room currentRoom;
 
-    public float roomChangeMoveSpeed;
+    public float cameraMoveSpeed = 5f;
+
+    public float cameraOffset = -0.5f;
 
     void Awake()
     {
         instance = this;
     }
 
+    // Start is called before the first frame update
     void Start()
     {
     }
 
+    // Update is called once per frame
     void Update()
     {
         UpdatePosition();
@@ -32,11 +36,9 @@ public class CameraController : MonoBehaviour
 
         transform.position =
             Vector3
-                .MoveTowards(transform.position,
+                .Lerp(transform.position,
                 targetPos,
-                roomChangeMoveSpeed * Time.deltaTime);
-
-        // Debug.Log (currentRoom);
+                cameraMoveSpeed * Time.deltaTime);
     }
 
     Vector3 GetCameraTargetPosition()
@@ -44,12 +46,15 @@ public class CameraController : MonoBehaviour
         if (currentRoom == null) return Vector3.zero;
 
         Vector3 targetPos = currentRoom.GetRoomCenter();
+        targetPos.x += cameraOffset;
+        targetPos.y += cameraOffset;
+
         targetPos.z = transform.position.z;
 
         return targetPos;
     }
 
-    public bool IsSwitchingScene()
+    public bool IsSwitchingRoom()
     {
         return transform.position.Equals(GetCameraTargetPosition()) == false;
     }

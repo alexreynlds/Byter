@@ -4,13 +4,13 @@ using UnityEngine;
 
 public class Door : MonoBehaviour
 {
-    public enum DoorType
+    public enum DoorDir
     {
-        top,
-        bottom,
+        up,
+        down,
         left,
         right
     }
 
-    public DoorType doorType;
+    public DoorDir doorDir;
 }

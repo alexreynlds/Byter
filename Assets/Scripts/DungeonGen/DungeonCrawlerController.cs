@@ -4,49 +4,50 @@ using UnityEngine;
 
 public enum Direction
 {
-    top = 0,
-    bottom = 1,
-    left = 2,
-    right = 3
+    up = 0,
+    right = 1,
+    down = 2,
+    left = 3
 }
 
+// Data for generating a dungeon
 public class DungeonCrawlerController : MonoBehaviour
 {
+    // List of positions visited by crawlers
     public static List<Vector2Int> positionsVisited = new List<Vector2Int>();
 
+    // Map of directions to movement vectors
     private static readonly Dictionary<Direction, Vector2Int>
         directionMovementMap =
-            new Dictionary<Direction, Vector2Int>()
-            {
-                { Direction.top, new Vector2Int(0, 1) },
-                { Direction.bottom, new Vector2Int(0, -1) },
-                { Direction.left, new Vector2Int(-1, 0) },
-                { Direction.right, new Vector2Int(1, 0) }
+            new Dictionary<Direction, Vector2Int> {
+                { Direction.up, new Vector2Int(0, 1) },
+                { Direction.right, new Vector2Int(1, 0) },
+                { Direction.down, new Vector2Int(0, -1) },
+                { Direction.left, new Vector2Int(-1, 0) }
             };
 
+    // Generate a dungeon
     public static List<Vector2Int>
     GenerateDungeon(DungeonGenerationData dungeonData)
     {
-        List<DungeonCrawler> dungeonCrawlers = new List<DungeonCrawler>();
+        // Create a list of crawlers
+        List<DungeonCrawler> crawlers = new List<DungeonCrawler>();
 
-        for (int i = 0; i < dungeonData.numberOfCrawlers; i++)
+        for (int i = 0; i < dungeonData.numOfCrawlers; i++)
         {
-            dungeonCrawlers.Add(new DungeonCrawler(Vector2Int.zero));
+            crawlers.Add(new DungeonCrawler(Vector2Int.zero));
         }
 
         int iterations =
             Random.Range(dungeonData.iterationMin, dungeonData.iterationMax);
 
+        // Move the crawlers
         for (int i = 0; i < iterations; i++)
         {
-            foreach (DungeonCrawler dungeonCrawler in dungeonCrawlers)
+            foreach (DungeonCrawler crawler in crawlers)
             {
-                Vector2Int newPosition =
-                    dungeonCrawler.Move(directionMovementMap);
-                if (!positionsVisited.Contains(newPosition))
-                {
-                    positionsVisited.Add (newPosition);
-                }
+                Vector2Int newPos = crawler.move(directionMovementMap);
+                positionsVisited.Add (newPos);
             }
         }
 

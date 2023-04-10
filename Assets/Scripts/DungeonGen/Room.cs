@@ -4,191 +4,169 @@ using UnityEngine;
 
 public class Room : MonoBehaviour
 {
-    public float Width;
+    public int roomW;
 
-    public float Height;
+    public int roomH;
 
     public int X;
 
     public int Y;
 
-    public Door leftdoor;
+    private bool updatedDoors = false;
 
-    public Door rightdoor;
+    public Room(int x, int y)
+    {
+        X = x;
+        Y = y;
+    }
 
-    public Door topdoor;
+    public Door topDoor;
 
-    public Door bottomdoor;
+    public Door bottomDoor;
+
+    public Door leftDoor;
+
+    public Door rightDoor;
 
     public List<Door> doors = new List<Door>();
 
     // Start is called before the first frame update
     void Start()
     {
+        // Ensure that RoomController exists
         if (RoomController.instance == null)
         {
             Debug.Log("RoomController.instance is null");
             return;
         }
 
+        // Add doors to the list
         Door[] ds = GetComponentsInChildren<Door>();
         foreach (Door d in ds)
         {
             doors.Add (d);
-            switch (d.doorType)
+            switch (d.doorDir)
             {
-                case Door.DoorType.top:
-                    topdoor = d;
+                case Door.DoorDir.up:
+                    topDoor = d;
                     break;
-                case Door.DoorType.bottom:
-                    bottomdoor = d;
+                case Door.DoorDir.down:
+                    bottomDoor = d;
                     break;
-                case Door.DoorType.left:
-                    leftdoor = d;
+                case Door.DoorDir.left:
+                    leftDoor = d;
                     break;
-                case Door.DoorType.right:
-                    rightdoor = d;
+                case Door.DoorDir.right:
+                    rightDoor = d;
                     break;
             }
         }
 
+        // Add this room to the list of loaded rooms
         RoomController.instance.RegisterRoom(this);
     }
 
-    public void RemoveUnconnectedDoors()
+    void Update()
+    {
+        if (!updatedDoors)
+        {
+            RemoveUnusedDoors();
+            updatedDoors = true;
+        }
+    }
+
+    public void RemoveUnusedDoors()
     {
         foreach (Door door in doors)
         {
-            switch (door.doorType)
+            switch (door.doorDir)
             {
-                case Door.DoorType.top:
-                    if (GetTop() == null)
+                case Door.DoorDir.up:
+                    if (GetRoom("u") == null)
                     {
-                        // door.gameObject.SetActive(false);
-                        door
-                            .gameObject
-                            .transform
-                            .Find("Doors")
-                            .gameObject
-                            .SetActive(false);
-                        // door
-                        //     .gameObject
-                        //     .transform
-                        //     .Find("Walls")
-                        //     .gameObject
-                        //     .SetActive(true);
+                        door.gameObject.SetActive(false);
                     }
                     break;
-                case Door.DoorType.bottom:
-                    if (GetBottom() == null)
+                case Door.DoorDir.down:
+                    if (GetRoom("d") == null)
                     {
-                        // door.gameObject.SetActive(false);
-                        door
-                            .gameObject
-                            .transform
-                            .Find("Doors")
-                            .gameObject
-                            .SetActive(false);
-                        // door
-                        //     .gameObject
-                        //     .transform
-                        //     .Find("Walls")
-                        //     .gameObject
-                        //     .SetActive(true);
+                        door.gameObject.SetActive(false);
                     }
                     break;
-                case Door.DoorType.left:
-                    if (GetLeft() == null)
+                case Door.DoorDir.left:
+                    if (GetRoom("l") == null)
                     {
-                        // door.gameObject.SetActive(false);
-                        door
-                            .gameObject
-                            .transform
-                            .Find("Doors")
-                            .gameObject
-                            .SetActive(false);
-                        // door
-                        //     .gameObject
-                        //     .transform
-                        //     .Find("Walls")
-                        //     .gameObject
-                        //     .SetActive(true);
+                        door.gameObject.SetActive(false);
                     }
                     break;
-                case Door.DoorType.right:
-                    if (GetRight() == null)
+                case Door.DoorDir.right:
+                    if (GetRoom("r") == null)
                     {
-                        // door.gameObject.SetActive(false);
-                        door
-                            .gameObject
-                            .transform
-                            .Find("Doors")
-                            .gameObject
-                            .SetActive(false);
-                        // door
-                        //     .gameObject
-                        //     .transform
-                        //     .Find("Walls")
-                        //     .gameObject
-                        //     .SetActive(true);
+                        door.gameObject.SetActive(false);
                     }
                     break;
             }
         }
     }
 
-    public Room GetRight()
+    public Room GetRoom(string dir)
     {
-        if (RoomController.instance.DoesRoomExist(X + 1, Y))
+        if (dir == "u")
         {
-            return RoomController.instance.FindRoom(X + 1, Y);
+            if (RoomController.instance.DoesRoomExist(X, Y + 1))
+            {
+                return RoomController.instance.FindRoom(X, Y + 1);
+            }
+            return null;
         }
-        return null;
-    }
-
-    public Room GetLeft()
-    {
-        if (RoomController.instance.DoesRoomExist(X - 1, Y))
+        else if (dir == "d")
         {
-            return RoomController.instance.FindRoom(X - 1, Y);
+            if (RoomController.instance.DoesRoomExist(X, Y - 1))
+            {
+                return RoomController.instance.FindRoom(X, Y - 1);
+            }
+            return null;
         }
-        return null;
-    }
-
-    public Room GetTop()
-    {
-        if (RoomController.instance.DoesRoomExist(X, Y + 1))
+        else if (dir == "l")
         {
-            return RoomController.instance.FindRoom(X, Y + 1);
+            if (RoomController.instance.DoesRoomExist(X - 1, Y))
+            {
+                return RoomController.instance.FindRoom(X - 1, Y);
+            }
+            return null;
         }
-        return null;
-    }
-
-    public Room GetBottom()
-    {
-        if (RoomController.instance.DoesRoomExist(X, Y - 1))
+        else if (dir == "r")
         {
-            return RoomController.instance.FindRoom(X, Y - 1);
+            if (RoomController.instance.DoesRoomExist(X + 1, Y))
+            {
+                return RoomController.instance.FindRoom(X + 1, Y);
+            }
+            return null;
         }
-        return null;
+        else
+        {
+            return null;
+        }
     }
 
     void OnDrawGizmos()
     {
         Gizmos.color = Color.red;
-        Gizmos.DrawWireCube(GetRoomCenter(), new Vector3(Width, Height, 0));
+        Gizmos
+            .DrawWireCube(GetRoomCenter() - new Vector3(0.5f, 0.5f, 0),
+            new Vector3(roomW, roomH, 0));
     }
 
     public Vector3 GetRoomCenter()
     {
-        return new Vector3(X * Width, Y * Height, 0);
+        return new Vector3(X * roomW, Y * roomH, 0);
     }
 
-    void OnTriggerEnter2D(Collider2D other)
+    private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.tag == "Player")
         {
-            CameraController.instance.currentRoom = this;
+            RoomController.instance.OnPlayerEnterRoom(this);
         }
     }
 }
