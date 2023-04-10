@@ -11,6 +11,8 @@ public class PlayerStats : MonoBehaviour
 
     public float moveSpeed = 1f;
 
+    public List<string> inventory = new List<string>();
+
     // Start is called before the first frame update
     void Start()
     {

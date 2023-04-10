@@ -173,7 +173,7 @@ MonoBehaviour:
     rows: 0
     verticalOffset: 3.5
     horizontalOffset: 6.5
-  gridTile: {fileID: 838477582645670028, guid: d860a6eb16d164065a373a93eac173f0, type: 3}
+  gridTile: {fileID: 846488740507086539, guid: 2e27a9499dc92487b8c97a90bd67c151, type: 3}
   availablePositions: []
 --- !u!1 &240532169
 GameObject:
@@ -872,6 +872,7 @@ GameObject:
   - component: {fileID: 546838473}
   - component: {fileID: 546838475}
   - component: {fileID: 546838476}
+  - component: {fileID: 546838477}
   m_Layer: 0
   m_Name: Room
   m_TagString: Untagged
@@ -957,6 +958,22 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 13.172396, y: 7.405203}
   m_EdgeRadius: 0
+--- !u!114 &546838477
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 546838472}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6b25d600dabaf492b92182ff196a62ad, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  grid: {fileID: 10542993}
+  spawners:
+  - name: ItemSpawner
+    spawnerData: {fileID: 11400000, guid: 907ff601c550c46abbde872a6e7619ed, type: 2}
 --- !u!1 &819172371
 GameObject:
   m_ObjectHideFlags: 0
