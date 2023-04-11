@@ -10,6 +10,7 @@ public class UIScript : MonoBehaviour
     void Awake()
     {
         player = GameObject.Find("Player");
+        Application.targetFrameRate = -1;
     }
 
     // Start is called before the first frame update
@@ -20,11 +21,12 @@ public class UIScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        UpdateInventory();
+        UpdateElements();
     }
 
-    void UpdateInventory()
+    private void UpdateElements()
     {
+        // Inventory Screen
         string inventoryString = "Inventory: ";
         foreach (string item in player.GetComponent<PlayerStats>().inventory)
         {
@@ -34,5 +36,13 @@ public class UIScript : MonoBehaviour
             inventoryString.Substring(0, inventoryString.Length - 2);
         transform.Find("Inventory").GetComponent<TextMeshProUGUI>().text =
             inventoryString;
+
+        // FPS Counter
+        transform.Find("FPSCounter").GetComponent<TextMeshProUGUI>().text =
+            "FPS: " + (1f / Time.unscaledDeltaTime).ToString("F0");
+
+        // Coins
+        transform.Find("Coins").GetComponent<TextMeshProUGUI>().text =
+            "Coins: " + player.GetComponent<PlayerStats>().coins.ToString();
     }
 }

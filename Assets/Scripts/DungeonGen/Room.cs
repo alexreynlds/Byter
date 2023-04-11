@@ -68,15 +68,16 @@ public class Room : MonoBehaviour
 
     void Update()
     {
-        if (!updatedDoors)
-        {
-            RemoveUnusedDoors();
-            updatedDoors = true;
-        }
+        // if (!updatedDoors)
+        // {
+        //     RemoveUnusedDoors();
+        //     updatedDoors = true;
+        // }
     }
 
     public void RemoveUnusedDoors()
     {
+        // Remove unused doors
         foreach (Door door in doors)
         {
             switch (door.doorDir)
@@ -84,29 +85,98 @@ public class Room : MonoBehaviour
                 case Door.DoorDir.up:
                     if (GetRoom("u") == null)
                     {
-                        door.gameObject.SetActive(false);
+                        // Disable the door
+                        door
+                            .gameObject
+                            .transform
+                            .GetChild(0)
+                            .gameObject
+                            .SetActive(false);
+
+                        if (GetRoom("d") != null)
+                        {
+                            // Enable the wall
+                            door
+                                .gameObject
+                                .transform
+                                .GetChild(1)
+                                .gameObject
+                                .SetActive(true);
+                        }
                     }
                     break;
                 case Door.DoorDir.down:
                     if (GetRoom("d") == null)
                     {
-                        door.gameObject.SetActive(false);
+                        // Disable the door
+                        door
+                            .gameObject
+                            .transform
+                            .GetChild(0)
+                            .gameObject
+                            .SetActive(false);
+
+                        if (GetRoom("u") != null)
+                        {
+                            // Enable the wall
+                            door
+                                .gameObject
+                                .transform
+                                .GetChild(1)
+                                .gameObject
+                                .SetActive(true);
+                        }
                     }
                     break;
                 case Door.DoorDir.left:
                     if (GetRoom("l") == null)
                     {
-                        door.gameObject.SetActive(false);
+                        // Disable the door
+                        door
+                            .gameObject
+                            .transform
+                            .GetChild(0)
+                            .gameObject
+                            .SetActive(false);
+
+                        if (GetRoom("r") != null)
+                        {
+                            // Enable the wall
+                            door
+                                .gameObject
+                                .transform
+                                .GetChild(1)
+                                .gameObject
+                                .SetActive(true);
+                        }
                     }
                     break;
                 case Door.DoorDir.right:
                     if (GetRoom("r") == null)
                     {
-                        door.gameObject.SetActive(false);
+                        // Disable the door
+                        door
+                            .gameObject
+                            .transform
+                            .GetChild(0)
+                            .gameObject
+                            .SetActive(false);
+
+                        if (GetRoom("l") != null)
+                        {
+                            // Enable the wall
+                            door
+                                .gameObject
+                                .transform
+                                .GetChild(1)
+                                .gameObject
+                                .SetActive(true);
+                        }
                     }
                     break;
             }
         }
+        updatedDoors = true;
     }
 
     public Room GetRoom(string dir)

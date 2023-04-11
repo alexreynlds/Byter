@@ -10,7 +10,16 @@ public class ItemPickupScript : MonoBehaviour
         {
             string itemName = gameObject.name;
             itemName = itemName.Substring(0, itemName.Length - 7);
-            other.GetComponent<PlayerStats>().inventory.Add(itemName);
+
+            if (itemName == "Coin")
+            {
+                other.GetComponent<PlayerStats>().coins += 1;
+            }
+            else
+            {
+                other.GetComponent<PlayerStats>().inventory.Add(itemName);
+            }
+
             Destroy (gameObject);
         }
     }

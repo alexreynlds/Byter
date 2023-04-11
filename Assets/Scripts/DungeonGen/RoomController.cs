@@ -60,6 +60,10 @@ public class RoomController : MonoBehaviour
                     room.RemoveUnusedDoors();
                 }
                 updatedRooms = true;
+                GameObject
+                    .Find("Player")
+                    .GetComponent<PlayerStats>()
+                    .wipeInventory();
             }
             return;
         }
