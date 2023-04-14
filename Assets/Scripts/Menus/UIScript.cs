@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class UIScript : MonoBehaviour
 {
@@ -34,15 +35,14 @@ public class UIScript : MonoBehaviour
         }
         inventoryString =
             inventoryString.Substring(0, inventoryString.Length - 2);
-        transform.Find("Inventory").GetComponent<TextMeshProUGUI>().text =
-            inventoryString;
+        transform.Find("Inventory").GetComponent<Text>().text = inventoryString;
 
         // FPS Counter
-        transform.Find("FPSCounter").GetComponent<TextMeshProUGUI>().text =
+        transform.Find("FPSCounter").GetComponent<Text>().text =
             "FPS: " + (1f / Time.unscaledDeltaTime).ToString("F0");
 
         // Coins
-        transform.Find("Coins").GetComponent<TextMeshProUGUI>().text =
+        transform.Find("Coins").GetComponent<Text>().text =
             "Coins: " + player.GetComponent<PlayerStats>().coins.ToString();
     }
 }

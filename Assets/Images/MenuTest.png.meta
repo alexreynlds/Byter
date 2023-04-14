@@ -129,10 +129,10 @@ TextureImporter:
       name: MenuTest_1
       rect:
         serializedVersion: 2
-        x: 1
-        y: 83
-        width: 62
-        height: 33
+        x: 14
+        y: 108
+        width: 36
+        height: 8
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -151,7 +151,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 64
-        y: 100
+        y: 104
         width: 12
         height: 12
       alignment: 0
@@ -171,10 +171,10 @@ TextureImporter:
       name: MenuTest_3
       rect:
         serializedVersion: 2
-        x: 64
-        y: 87
-        width: 12
-        height: 12
+        x: 1
+        y: 74
+        width: 62
+        height: 33
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -192,10 +192,10 @@ TextureImporter:
       name: MenuTest_4
       rect:
         serializedVersion: 2
-        x: 8
-        y: 72
-        width: 48
-        height: 9
+        x: 64
+        y: 91
+        width: 12
+        height: 12
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -213,10 +213,10 @@ TextureImporter:
       name: MenuTest_5
       rect:
         serializedVersion: 2
-        x: 8
-        y: 62
-        width: 48
-        height: 9
+        x: 64
+        y: 78
+        width: 12
+        height: 12
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -226,6 +226,48 @@ TextureImporter:
       bones: []
       spriteID: 84610fc8b18ac02429c79931635b7db6
       internalID: -1149027081
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MenuTest_6
+      rect:
+        serializedVersion: 2
+        x: 8
+        y: 63
+        width: 48
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0696b48efd812514a9d9797a4a7ca0e3
+      internalID: -1200217807
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MenuTest_7
+      rect:
+        serializedVersion: 2
+        x: 8
+        y: 53
+        width: 48
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 214403f10653e354db14e2c5d29d6ac5
+      internalID: 1266664478
       vertices: []
       indices: 
       edges: []
@@ -247,6 +289,8 @@ TextureImporter:
       MenuTest_3: -830622673
       MenuTest_4: -1203949556
       MenuTest_5: -1149027081
+      MenuTest_6: -1200217807
+      MenuTest_7: 1266664478
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0
