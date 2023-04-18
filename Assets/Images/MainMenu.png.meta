@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 5fb15481dcbf87b41ac111ba8e167d0c
+guid: 702997f42906cbf4ca7d0727c2cae534
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -105,7 +105,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: MenuTest_0
+      name: MainMenu_0
       rect:
         serializedVersion: 2
         x: 0
@@ -119,14 +119,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: d12ea8c41be2adb4082d041b54adaaf1
-      internalID: 1864738125
+      spriteID: 790bd05b872ca6a45a957e5b7f6a2814
+      internalID: 1367715357
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: MenuTest_1
+      name: MainMenu_1
       rect:
         serializedVersion: 2
         x: 14
@@ -140,14 +140,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: b3b9f8c6c8459224aae5be84db228b82
-      internalID: -669093020
+      spriteID: 92ccef63948aa6145b94dc67cfba9c7a
+      internalID: 1487070649
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: MenuTest_2
+      name: MainMenu_2
       rect:
         serializedVersion: 2
         x: 64
@@ -161,14 +161,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 71922c51cd7f16346801548f32ae21b3
-      internalID: -2144196342
+      spriteID: 3c11bf7cfb4813d479e22cd48a69344f
+      internalID: 1491749259
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: MenuTest_3
+      name: MainMenu_3
       rect:
         serializedVersion: 2
         x: 1
@@ -182,14 +182,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 39dc798750a75a2419dd2d510bf2efdd
-      internalID: -830622673
+      spriteID: 418db272e90bb0b4daa1817bbf6e8615
+      internalID: -803373816
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: MenuTest_4
+      name: MainMenu_4
       rect:
         serializedVersion: 2
         x: 64
@@ -203,14 +203,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: f484fac4f426e3e449a3b32f424f67e3
-      internalID: -1203949556
+      spriteID: ef0824d70efc23443903c2450e9d2a66
+      internalID: -41809831
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: MenuTest_5
+      name: MainMenu_5
       rect:
         serializedVersion: 2
         x: 64
@@ -224,14 +224,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 84610fc8b18ac02429c79931635b7db6
-      internalID: -1149027081
+      spriteID: 9cc339468f3616244b83da0d7ca1926a
+      internalID: 253764478
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: MenuTest_6
+      name: MainMenu_6
       rect:
         serializedVersion: 2
         x: 8
@@ -245,29 +245,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 0696b48efd812514a9d9797a4a7ca0e3
-      internalID: -1200217807
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: MenuTest_7
-      rect:
-        serializedVersion: 2
-        x: 8
-        y: 53
-        width: 48
-        height: 9
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 214403f10653e354db14e2c5d29d6ac5
-      internalID: 1266664478
+      spriteID: de8e1d8142b761a46879e9f254b0845c
+      internalID: -1888075962
       vertices: []
       indices: 
       edges: []
@@ -283,14 +262,13 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      MenuTest_0: 1864738125
-      MenuTest_1: -669093020
-      MenuTest_2: -2144196342
-      MenuTest_3: -830622673
-      MenuTest_4: -1203949556
-      MenuTest_5: -1149027081
-      MenuTest_6: -1200217807
-      MenuTest_7: 1266664478
+      MainMenu_0: 1367715357
+      MainMenu_1: 1487070649
+      MainMenu_2: 1491749259
+      MainMenu_3: -803373816
+      MainMenu_4: -41809831
+      MainMenu_5: 253764478
+      MainMenu_6: -1888075962
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0
