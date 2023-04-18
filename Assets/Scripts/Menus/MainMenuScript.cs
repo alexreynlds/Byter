@@ -48,24 +48,66 @@ public class MainMenuScript : MonoBehaviour
         }
 
         resolutionDropdown.AddOptions(options);
-        resolutionDropdown.value = currentResolutionIndex;
-        resolutionDropdown.RefreshShownValue();
 
-        graphicsDropdown.value = QualitySettings.GetQualityLevel();
-        graphicsDropdown.RefreshShownValue();
+        if(!PlayerPrefs.HasKey("Resolution"))
+        {
+            PlayerPrefs.SetInt("Resolution", currentResolutionIndex);
+            resolutionDropdown.value = currentResolutionIndex;
+            resolutionDropdown.RefreshShownValue();
+        } else {
+            currentResolutionIndex = PlayerPrefs.GetInt("Resolution");
+            resolutionDropdown.value = currentResolutionIndex;
+            resolutionDropdown.RefreshShownValue();
+        }
 
-        
+        if(!PlayerPrefs.HasKey("Fullscreen"))
+        {
+            PlayerPrefs.SetInt("Fullscreen", 1);
+            SetFullscreen(true);
+            fullscreenToggle.isOn = true;
+        } else {
+            SetFullscreen(PlayerPrefs.GetInt("Fullscreen") == 1 ? true : false);
+            fullscreenToggle.isOn = PlayerPrefs.GetInt("Fullscreen") == 1 ? true : false;
+        }
 
-        SetSFXVolume(-40);
-        SetMusicVolume(-40);
+        if(!PlayerPrefs.HasKey("Quality"))
+        {
+            PlayerPrefs.SetInt("Quality", 3);
+            graphicsDropdown.value = 3;
+            graphicsDropdown.RefreshShownValue();
+            SetQuality(3);
+        } else {
+            graphicsDropdown.value = PlayerPrefs.GetInt("Quality");
+            graphicsDropdown.RefreshShownValue();
+            SetQuality(PlayerPrefs.GetInt("Quality"));
+        }
+
+        if(PlayerPrefs.HasKey("SFXVol"))
+        {
+            SetSFXVolume(PlayerPrefs.GetFloat("SFXVol"));
+            sfxVolumeSlider.value = PlayerPrefs.GetFloat("SFXVol");
+        } else {
+            SetSFXVolume(-40);
+            sfxVolumeSlider.value = -40;
+        }
+        if(PlayerPrefs.HasKey("musicVol"))
+        {
+            SetMusicVolume(PlayerPrefs.GetFloat("musicVol"));
+            musicVolumeSlider.value = PlayerPrefs.GetFloat("musicVol");
+        } else {
+            SetMusicVolume(-40);
+            musicVolumeSlider.value = -40;
+        }
     }
 
     public void SetSFXVolume(float volume){
         audioMixer.SetFloat("SFXVol", volume);
+        PlayerPrefs.SetFloat("SFXVol", volume);
     }
 
     public void SetMusicVolume(float volume){
         audioMixer.SetFloat("musicVol", volume);
+        PlayerPrefs.SetFloat("musicVol", volume);
     }
 
     public void StartGame()
@@ -90,17 +132,20 @@ public class MainMenuScript : MonoBehaviour
     public void SetQuality (int qualityIndex)
     {
         QualitySettings.SetQualityLevel(qualityIndex);
+        PlayerPrefs.SetInt("Quality", qualityIndex);
     }
 
     public void SetFullscreen (bool isFullscreen)
     {
         Screen.fullScreen = isFullscreen;
+        PlayerPrefs.SetInt("Fullscreen", isFullscreen ? 1 : 0);        
     }
 
     public void SetResolution (int resIndex)
     {
         Resolution resolution = resolutions[resIndex];
         Screen.SetResolution(resolution.width, resolution.height, Screen.fullScreen);
+        PlayerPrefs.SetInt("Resolution", resIndex);
     }
 
     public void ResetAudio()
@@ -111,15 +156,16 @@ public class MainMenuScript : MonoBehaviour
 
     public void ResetGraphics()
     {
-        resolutionDropdown.value = currentResolutionIndex;
+        resolutionDropdown.value = resolutionDropdown.options.Count - 1;
         resolutionDropdown.RefreshShownValue();
+        SetResolution(resolutionDropdown.options.Count - 1);
 
         SetFullscreen(true);
         fullscreenToggle.isOn = true;
 
-
         graphicsDropdown.value = 3;
         graphicsDropdown.RefreshShownValue();
+        SetQuality(3);
 
     }
 
