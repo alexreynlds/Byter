@@ -5,6 +5,9 @@ using UnityEngine.SceneManagement;
 
 public class MainMenuScript : MonoBehaviour
 {
+    [SerializeField]
+    private AudioSource clickSound;
+
     // Start is called bdawdawdefore the first frame update
     void Start()
     {
@@ -23,5 +26,13 @@ public class MainMenuScript : MonoBehaviour
     public void QuitGame()
     {
         Application.Quit();
+    }
+
+    public void PlayClickSound()
+    {
+        if (clickSound != null)
+        {
+            clickSound.Play();
+        }
     }
 }
