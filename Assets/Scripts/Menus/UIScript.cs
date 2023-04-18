@@ -42,7 +42,6 @@ public class UIScript : MonoBehaviour
             "FPS: " + (1f / Time.unscaledDeltaTime).ToString("F0");
 
         // Coins
-        transform.Find("Coins").GetComponent<Text>().text =
-            "Coins: " + player.GetComponent<PlayerStats>().coins.ToString();
+        transform.Find("CoinsText").GetComponent<Text>().text =player.GetComponent<PlayerStats>().coins.ToString();
     }
 }

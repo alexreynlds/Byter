@@ -13,7 +13,12 @@ public class ItemPickupScript : MonoBehaviour
 
             if (itemName == "Coin")
             {
-                other.GetComponent<PlayerStats>().coins += 1;
+                if(other.GetComponent<PlayerStats>().coins < 100){
+                    other.GetComponent<PlayerStats>().coins += 1;
+                }
+                else{
+                    return;
+                }
             }
             else
             {
