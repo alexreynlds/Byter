@@ -159,6 +159,7 @@ public class MainMenuScript : MonoBehaviour
         resolutionDropdown.value = resolutionDropdown.options.Count - 1;
         resolutionDropdown.RefreshShownValue();
         SetResolution(resolutionDropdown.options.Count - 1);
+        
 
         SetFullscreen(true);
         fullscreenToggle.isOn = true;
