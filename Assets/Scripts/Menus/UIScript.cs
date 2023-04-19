@@ -88,7 +88,6 @@ public class UIScript : MonoBehaviour
 
         if(PlayerPrefs.HasKey("SFXVol"))
         {
-            Debug.Log("Epic");
             SetSFXVolume(PlayerPrefs.GetFloat("SFXVol"));
             sfxVolumeSlider.value = PlayerPrefs.GetFloat("SFXVol");
         } else {
@@ -168,6 +167,7 @@ public class UIScript : MonoBehaviour
     public void SetSFXVolume(float volume){
         audioMixer.SetFloat("SFXVol", volume);
         PlayerPrefs.SetFloat("SFXVol", volume);
+        // PlayerPrefs.Save();
     }
 
     public void SetMusicVolume(float volume){
@@ -196,6 +196,7 @@ public class UIScript : MonoBehaviour
 
     public void ResetAudio()
     {
+        Debug.Log("Resetting Audio");
         musicVolumeSlider.value = -40;
         sfxVolumeSlider.value = -40;
     }
