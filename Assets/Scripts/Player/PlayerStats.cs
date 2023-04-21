@@ -5,8 +5,6 @@ using UnityEngine;
 public class PlayerStats : MonoBehaviour
 {
     // Main Stats
-    public int health = 8;
-
     public int maxHealth = 8;
     public int currentHealth;
 
@@ -27,6 +25,14 @@ public class PlayerStats : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (currentHealth > maxHealth)
+        {
+            currentHealth = maxHealth;
+        }
+        else if (currentHealth <= 0)
+        {
+            currentHealth = 0;
+        }
     }
 
     public void wipeInventory()

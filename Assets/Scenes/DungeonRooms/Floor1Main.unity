@@ -5126,12 +5126,11 @@ MonoBehaviour:
   middleHealthSprites:
   - {fileID: 281520622, guid: 2c644162d3965214e943de2f82b2294a, type: 3}
   - {fileID: -1365526937, guid: 2c644162d3965214e943de2f82b2294a, type: 3}
-  - {fileID: -660856560, guid: 2c644162d3965214e943de2f82b2294a, type: 3}
+  - {fileID: -835107373, guid: 2c644162d3965214e943de2f82b2294a, type: 3}
   endHealthSprites:
   - {fileID: 1313399070, guid: 2c644162d3965214e943de2f82b2294a, type: 3}
   - {fileID: 917287685, guid: 2c644162d3965214e943de2f82b2294a, type: 3}
   - {fileID: -660856560, guid: 2c644162d3965214e943de2f82b2294a, type: 3}
-  playerHealth: 0
 --- !u!1 &1420442764
 GameObject:
   m_ObjectHideFlags: 0
@@ -6919,7 +6918,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   health: 100
-  maxHealth: 10
+  maxHealth: 8
   currentHealth: 0
   moveSpeed: 3
   inventory: []
