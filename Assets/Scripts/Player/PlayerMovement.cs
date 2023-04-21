@@ -15,6 +15,21 @@ public class PlayerMovement : MonoBehaviour
 
     public ContactFilter2D movementFilter;
 
+    [Header("Sprites")]
+    [SerializeField] private Sprite[] bodySprites;
+    [SerializeField] private Sprite[] headSprites;
+
+    [SerializeField]
+    private Sprite[] bottomSprites;
+    [SerializeField] private GameObject body;
+    [SerializeField] private GameObject head;
+    [SerializeField] private GameObject bottom;
+
+    private int currentBottomSprite = 0;
+
+    [SerializeField] private float bottomSpriteChangeTimer = 0.25f;
+
+    private float bottomSpriteChangeTimerTemp;
     List<RaycastHit2D> castCollisions = new List<RaycastHit2D>();
 
     // Start is called before the first frame update
@@ -22,6 +37,7 @@ public class PlayerMovement : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
         moveSpeed = GetComponent<PlayerStats>().moveSpeed;
+        bottomSpriteChangeTimerTemp = bottomSpriteChangeTimer;
     }
 
     // Update is called once per frame
@@ -40,7 +56,19 @@ public class PlayerMovement : MonoBehaviour
                     TryMove(new Vector2(0, movementInput.y));
                 }
             }
+            UpdateSprite();
         }
+
+        if (bottomSpriteChangeTimer > 0)
+        {
+            bottomSpriteChangeTimer -= Time.deltaTime;
+        }
+        else
+        {
+            UpdateBottomSprite();
+            bottomSpriteChangeTimer = bottomSpriteChangeTimerTemp;
+        }
+
     }
 
     private bool TryMove(Vector2 direction)
@@ -78,5 +106,38 @@ public class PlayerMovement : MonoBehaviour
     void OnTest2()
     {
         GetComponent<PlayerStats>().maxHealth += 2;
+    }
+
+    void UpdateSprite()
+    {
+        if (movementInput.x > 0)
+        {
+            body.GetComponent<SpriteRenderer>().flipX = true;
+            body.GetComponent<SpriteRenderer>().sprite = bodySprites[1];
+        }
+        else if (movementInput.x < 0)
+        {
+            body.GetComponent<SpriteRenderer>().flipX = false;
+            body.GetComponent<SpriteRenderer>().sprite = bodySprites[1];
+        }
+        else if (movementInput.y > 0)
+        {
+            body.GetComponent<SpriteRenderer>().flipX = false;
+            body.GetComponent<SpriteRenderer>().sprite = bodySprites[2];
+        }
+        else if (movementInput.y < 0)
+        {
+            body.GetComponent<SpriteRenderer>().flipX = false;
+            body.GetComponent<SpriteRenderer>().sprite = bodySprites[0];
+        }
+    }
+
+    void UpdateBottomSprite()
+    {
+
+        currentBottomSprite++;
+        if (currentBottomSprite > 2) currentBottomSprite = 0;
+
+        bottom.GetComponent<SpriteRenderer>().sprite = bottomSprites[currentBottomSprite];
     }
 }
