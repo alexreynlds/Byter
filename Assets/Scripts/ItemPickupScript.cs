@@ -4,8 +4,9 @@ using UnityEngine;
 
 public class ItemPickupScript : MonoBehaviour
 {
-    [SerializeField] private int healthChange = 0;
-    [SerializeField] private int maxHealthChange = 0;
+    [SerializeField] private enum ItemType { Health, MaxHealth, Energy, Coin };
+    [SerializeField] private ItemType itemType;
+    [SerializeField] private int changeAmount = 0;
     private void OnTriggerEnter2D(Collider2D other)
     {
 
@@ -14,7 +15,7 @@ public class ItemPickupScript : MonoBehaviour
             string itemName = gameObject.name;
             itemName = itemName.Substring(0, itemName.Length - 7);
 
-            if (itemName == "Coin")
+            if (itemType == ItemType.Coin)
             {
                 if (other.GetComponent<PlayerStats>().coins < 100)
                 {
@@ -25,13 +26,29 @@ public class ItemPickupScript : MonoBehaviour
                     return;
                 }
             }
-            else if (healthChange != 0)
+            else if (itemType == ItemType.Health)
             {
-                other.GetComponent<PlayerStats>().currentHealth += healthChange;
+                other.GetComponent<PlayerStats>().currentHealth += changeAmount;
             }
-            else if (maxHealthChange != 0)
+            else if (itemType == ItemType.MaxHealth)
             {
-                other.GetComponent<PlayerStats>().maxHealth += maxHealthChange;
+                if (changeAmount < 0)
+                {
+                    if (other.GetComponent<PlayerStats>().maxHealth > 4)
+                    {
+                        other.GetComponent<PlayerStats>().maxHealth += changeAmount;
+                    }
+                    else return;
+                }
+                else if (changeAmount > 0)
+                {
+                    other.GetComponent<PlayerStats>().maxHealth += changeAmount;
+                }
+                else return;
+            }
+            else if (itemType == ItemType.Energy)
+            {
+                other.GetComponent<PlayerStats>().currentEnergy += changeAmount;
             }
             else
             {

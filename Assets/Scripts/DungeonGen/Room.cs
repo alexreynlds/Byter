@@ -44,7 +44,7 @@ public class Room : MonoBehaviour
         Door[] ds = GetComponentsInChildren<Door>();
         foreach (Door d in ds)
         {
-            doors.Add (d);
+            doors.Add(d);
             switch (d.doorDir)
             {
                 case Door.DoorDir.up:

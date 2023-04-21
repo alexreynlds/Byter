@@ -267,8 +267,8 @@ TextureImporter:
       name: Collectables_7
       rect:
         serializedVersion: 2
-        x: 0
-        y: 16
+        x: 48
+        y: 32
         width: 16
         height: 16
       alignment: 0
@@ -288,7 +288,7 @@ TextureImporter:
       name: Collectables_8
       rect:
         serializedVersion: 2
-        x: 16
+        x: 0
         y: 16
         width: 16
         height: 16
@@ -309,7 +309,7 @@ TextureImporter:
       name: Collectables_9
       rect:
         serializedVersion: 2
-        x: 32
+        x: 16
         y: 16
         width: 16
         height: 16
@@ -351,7 +351,7 @@ TextureImporter:
       name: Collectables_11
       rect:
         serializedVersion: 2
-        x: 0
+        x: 48
         y: 0
         width: 16
         height: 16
@@ -364,69 +364,6 @@ TextureImporter:
       bones: []
       spriteID: 1f6d922b9a0dc46acbd9c938a9b2cd73
       internalID: -483289150
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Collectables_12
-      rect:
-        serializedVersion: 2
-        x: 16
-        y: 0
-        width: 16
-        height: 16
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: baa191cf8620b434d8f95a64c7c1a031
-      internalID: -1393624862
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Collectables_13
-      rect:
-        serializedVersion: 2
-        x: 32
-        y: 0
-        width: 16
-        height: 16
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: c233f82f0e53c47d3ab8adc0b471ee5b
-      internalID: 1261087368
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Collectables_14
-      rect:
-        serializedVersion: 2
-        x: 48
-        y: 0
-        width: 16
-        height: 16
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: a3c1bb9783cbe4632ab32b5de2fe1aa6
-      internalID: 687838030
       vertices: []
       indices: 
       edges: []
@@ -446,9 +383,6 @@ TextureImporter:
       Collectables_1: 110503470
       Collectables_10: 1492440043
       Collectables_11: -483289150
-      Collectables_12: -1393624862
-      Collectables_13: 1261087368
-      Collectables_14: 687838030
       Collectables_2: -2066669924
       Collectables_3: -1332076771
       Collectables_4: 1086119850
