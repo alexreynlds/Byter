@@ -34,7 +34,7 @@ public class HealthBarScript : MonoBehaviour
     void CreateHealthBar()
     {
         GameObject startHealth = Instantiate(startHealthContainer, new Vector3(0, 0, 0), Quaternion.identity, transform);
-        startHealth.GetComponent<RectTransform>().anchoredPosition = new Vector3(-250, 155, 0);
+        startHealth.GetComponent<RectTransform>().anchoredPosition = new Vector3(-265, 160, 0);
         healthSprites.Add(startHealth);
 
         int middleHealthCount = maxPlayerHealth - 4;
@@ -43,12 +43,12 @@ public class HealthBarScript : MonoBehaviour
         for (int i = 0; i < middleHealthCount / 2; i++)
         {
             GameObject middleHealth = Instantiate(middleHealthContainer, new Vector3(0, 0, 0), Quaternion.identity, transform);
-            middleHealth.GetComponent<RectTransform>().anchoredPosition = new Vector3(healthSprites[healthSprites.Count - 1].GetComponent<RectTransform>().anchoredPosition.x + 40, 155, 0);
+            middleHealth.GetComponent<RectTransform>().anchoredPosition = new Vector3(healthSprites[healthSprites.Count - 1].GetComponent<RectTransform>().anchoredPosition.x + 30, 160, 0);
             healthSprites.Add(middleHealth);
         }
 
         GameObject endHealth = Instantiate(endHealthContainer, new Vector3(0, 0, 0), Quaternion.identity, transform);
-        endHealth.GetComponent<RectTransform>().anchoredPosition = new Vector3(healthSprites[healthSprites.Count - 1].GetComponent<RectTransform>().anchoredPosition.x + 40, 155, 0);
+        endHealth.GetComponent<RectTransform>().anchoredPosition = new Vector3(healthSprites[healthSprites.Count - 1].GetComponent<RectTransform>().anchoredPosition.x + 30, 160, 0);
         healthSprites.Add(endHealth);
 
     }
