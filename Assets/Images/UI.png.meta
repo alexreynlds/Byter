@@ -192,8 +192,8 @@ TextureImporter:
       name: UI_4
       rect:
         serializedVersion: 2
-        x: 64
-        y: 112
+        x: 0
+        y: 96
         width: 16
         height: 16
       alignment: 0
@@ -213,8 +213,8 @@ TextureImporter:
       name: UI_5
       rect:
         serializedVersion: 2
-        x: 80
-        y: 112
+        x: 16
+        y: 96
         width: 16
         height: 16
       alignment: 0
@@ -234,8 +234,8 @@ TextureImporter:
       name: UI_6
       rect:
         serializedVersion: 2
-        x: 96
-        y: 112
+        x: 32
+        y: 96
         width: 16
         height: 16
       alignment: 0
@@ -255,7 +255,7 @@ TextureImporter:
       name: UI_7
       rect:
         serializedVersion: 2
-        x: 0
+        x: 48
         y: 96
         width: 16
         height: 16
@@ -276,7 +276,7 @@ TextureImporter:
       name: UI_8
       rect:
         serializedVersion: 2
-        x: 16
+        x: 64
         y: 96
         width: 16
         height: 16
@@ -297,7 +297,7 @@ TextureImporter:
       name: UI_9
       rect:
         serializedVersion: 2
-        x: 32
+        x: 80
         y: 96
         width: 16
         height: 16
@@ -318,8 +318,8 @@ TextureImporter:
       name: UI_10
       rect:
         serializedVersion: 2
-        x: 48
-        y: 96
+        x: 0
+        y: 80
         width: 16
         height: 16
       alignment: 0
@@ -339,8 +339,8 @@ TextureImporter:
       name: UI_11
       rect:
         serializedVersion: 2
-        x: 64
-        y: 96
+        x: 16
+        y: 80
         width: 16
         height: 16
       alignment: 0
@@ -360,8 +360,8 @@ TextureImporter:
       name: UI_12
       rect:
         serializedVersion: 2
-        x: 80
-        y: 96
+        x: 32
+        y: 80
         width: 16
         height: 16
       alignment: 0
@@ -381,7 +381,7 @@ TextureImporter:
       name: UI_13
       rect:
         serializedVersion: 2
-        x: 0
+        x: 48
         y: 80
         width: 16
         height: 16
@@ -402,7 +402,7 @@ TextureImporter:
       name: UI_14
       rect:
         serializedVersion: 2
-        x: 16
+        x: 64
         y: 80
         width: 16
         height: 16
@@ -423,7 +423,7 @@ TextureImporter:
       name: UI_15
       rect:
         serializedVersion: 2
-        x: 32
+        x: 80
         y: 80
         width: 16
         height: 16
@@ -445,7 +445,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 48
-        y: 80
+        y: 64
         width: 16
         height: 16
       alignment: 0
@@ -455,8 +455,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: faa75d880361f8844be3feca6c47dd9f
-      internalID: 1939251553
+      spriteID: 8a52dcfba8d2c7c47bf2ad5ddde46735
+      internalID: 410226324
       vertices: []
       indices: 
       edges: []
@@ -465,8 +465,8 @@ TextureImporter:
       name: UI_17
       rect:
         serializedVersion: 2
-        x: 64
-        y: 80
+        x: 48
+        y: 48
         width: 16
         height: 16
       alignment: 0
@@ -476,29 +476,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 73463b58e63157241a12e52724b2f80d
-      internalID: -1446068094
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: UI_18
-      rect:
-        serializedVersion: 2
-        x: 80
-        y: 80
-        width: 16
-        height: 16
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: d92ce470b11d67b4e8e60e90ddf664f0
-      internalID: 585421625
+      spriteID: 5e278ca67218e91408c69cac5bd3a219
+      internalID: -319264317
       vertices: []
       indices: 
       edges: []
@@ -522,9 +501,8 @@ TextureImporter:
       UI_13: -351030498
       UI_14: 281520622
       UI_15: 1313399070
-      UI_16: 1939251553
-      UI_17: -1446068094
-      UI_18: 585421625
+      UI_16: 410226324
+      UI_17: -319264317
       UI_2: -660856560
       UI_3: -1405057591
       UI_4: -1082900762

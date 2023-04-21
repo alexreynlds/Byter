@@ -100,7 +100,7 @@ public class PlayerMovement : MonoBehaviour
 
     void OnTest()
     {
-        GetComponent<PlayerStats>().currentHealth -= 1;
+        GetComponent<PlayerStats>().currentEnergy -= 1;
     }
 
     void OnTest2()

@@ -8,7 +8,7 @@ using UnityEngine.Audio;
 
 public class UIScript : MonoBehaviour
 {
-    private GameObject player; 
+    private GameObject player;
     [SerializeField] private GameObject inGameUI;
 
     [SerializeField] private GameObject pauseMenu;
@@ -26,7 +26,7 @@ public class UIScript : MonoBehaviour
 
     private Resolution[] resolutions;
     private int currentResolutionIndex = 0;
-   
+
     void Awake()
     {
         player = GameObject.Find("Player");
@@ -45,7 +45,7 @@ public class UIScript : MonoBehaviour
             string option = resolutions[i].width + " x " + resolutions[i].height + " @ " + resolutions[i].refreshRate + "hz";
             options.Add(option);
 
-            if(resolutions[i].width == Screen.currentResolution.width && resolutions[i].height == Screen.currentResolution.height)
+            if (resolutions[i].width == Screen.currentResolution.width && resolutions[i].height == Screen.currentResolution.height)
             {
                 currentResolutionIndex = i;
             }
@@ -53,52 +53,62 @@ public class UIScript : MonoBehaviour
 
         resolutionDropdown.AddOptions(options);
 
-        if(!PlayerPrefs.HasKey("Resolution"))
+        if (!PlayerPrefs.HasKey("Resolution"))
         {
             PlayerPrefs.SetInt("Resolution", currentResolutionIndex);
             resolutionDropdown.value = currentResolutionIndex;
             resolutionDropdown.RefreshShownValue();
-        } else {
+        }
+        else
+        {
             currentResolutionIndex = PlayerPrefs.GetInt("Resolution");
             resolutionDropdown.value = currentResolutionIndex;
             resolutionDropdown.RefreshShownValue();
         }
 
-        if(!PlayerPrefs.HasKey("Fullscreen"))
+        if (!PlayerPrefs.HasKey("Fullscreen"))
         {
             PlayerPrefs.SetInt("Fullscreen", 1);
             SetFullscreen(true);
             fullscreenToggle.isOn = true;
-        } else {
+        }
+        else
+        {
             SetFullscreen(PlayerPrefs.GetInt("Fullscreen") == 1 ? true : false);
             fullscreenToggle.isOn = PlayerPrefs.GetInt("Fullscreen") == 1 ? true : false;
         }
 
-        if(!PlayerPrefs.HasKey("Quality"))
+        if (!PlayerPrefs.HasKey("Quality"))
         {
             PlayerPrefs.SetInt("Quality", 3);
             graphicsDropdown.value = 3;
             graphicsDropdown.RefreshShownValue();
             SetQuality(3);
-        } else {
+        }
+        else
+        {
             graphicsDropdown.value = PlayerPrefs.GetInt("Quality");
             graphicsDropdown.RefreshShownValue();
             SetQuality(PlayerPrefs.GetInt("Quality"));
         }
 
-        if(PlayerPrefs.HasKey("SFXVol"))
+        if (PlayerPrefs.HasKey("SFXVol"))
         {
             SetSFXVolume(PlayerPrefs.GetFloat("SFXVol"));
             sfxVolumeSlider.value = PlayerPrefs.GetFloat("SFXVol");
-        } else {
+        }
+        else
+        {
             SetSFXVolume(-40);
             sfxVolumeSlider.value = -40;
         }
-        if(PlayerPrefs.HasKey("musicVol"))
+        if (PlayerPrefs.HasKey("musicVol"))
         {
             SetMusicVolume(PlayerPrefs.GetFloat("musicVol"));
             musicVolumeSlider.value = PlayerPrefs.GetFloat("musicVol");
-        } else {
+        }
+        else
+        {
             SetMusicVolume(-40);
             musicVolumeSlider.value = -40;
         }
@@ -127,12 +137,13 @@ public class UIScript : MonoBehaviour
             "FPS: " + (1f / Time.unscaledDeltaTime).ToString("F0");
 
         // Coins
-        inGameUI.transform.Find("CoinsText").GetComponent<Text>().text =player.GetComponent<PlayerStats>().coins.ToString();
+        // inGameUI.transform.Find("CoinsText").GetComponent<Text>().text = player.GetComponent<PlayerStats>().coins.ToString();
+        inGameUI.transform.Find("CoinHolder").transform.Find("CoinsText").GetComponent<Text>().text = player.GetComponent<PlayerStats>().coins.ToString();
     }
 
     public void OnPause()
     {
-        if(!isPaused)
+        if (!isPaused)
         {
             Time.timeScale = 0;
             pauseMenu.SetActive(true);
@@ -151,7 +162,7 @@ public class UIScript : MonoBehaviour
             Time.timeScale = 1;
             isPaused = false;
         }
-        
+
     }
 
     public void OnQuit()
@@ -164,30 +175,32 @@ public class UIScript : MonoBehaviour
         clickSound.Play();
     }
 
-    public void SetSFXVolume(float volume){
+    public void SetSFXVolume(float volume)
+    {
         audioMixer.SetFloat("SFXVol", volume);
         PlayerPrefs.SetFloat("SFXVol", volume);
         // PlayerPrefs.Save();
     }
 
-    public void SetMusicVolume(float volume){
+    public void SetMusicVolume(float volume)
+    {
         audioMixer.SetFloat("musicVol", volume);
         PlayerPrefs.SetFloat("musicVol", volume);
     }
 
-    public void SetQuality (int qualityIndex)
+    public void SetQuality(int qualityIndex)
     {
         QualitySettings.SetQualityLevel(qualityIndex);
         PlayerPrefs.SetInt("Quality", qualityIndex);
     }
 
-    public void SetFullscreen (bool isFullscreen)
+    public void SetFullscreen(bool isFullscreen)
     {
         Screen.fullScreen = isFullscreen;
-        PlayerPrefs.SetInt("Fullscreen", isFullscreen ? 1 : 0);        
+        PlayerPrefs.SetInt("Fullscreen", isFullscreen ? 1 : 0);
     }
 
-    public void SetResolution (int resIndex)
+    public void SetResolution(int resIndex)
     {
         Resolution resolution = resolutions[resIndex];
         Screen.SetResolution(resolution.width, resolution.height, Screen.fullScreen);
@@ -206,7 +219,7 @@ public class UIScript : MonoBehaviour
         resolutionDropdown.value = resolutionDropdown.options.Count - 1;
         resolutionDropdown.RefreshShownValue();
         SetResolution(resolutionDropdown.options.Count - 1);
-        
+
 
         SetFullscreen(true);
         fullscreenToggle.isOn = true;

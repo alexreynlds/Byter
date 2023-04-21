@@ -8,6 +8,9 @@ public class PlayerStats : MonoBehaviour
     public int maxHealth = 8;
     public int currentHealth;
 
+    public int maxEnergy = 4;
+
+    public int currentEnergy;
     public float moveSpeed = 1f;
 
     // Inventory
@@ -20,6 +23,7 @@ public class PlayerStats : MonoBehaviour
     void Awake()
     {
         currentHealth = maxHealth;
+        currentEnergy = maxEnergy;
     }
 
     // Update is called once per frame
@@ -32,6 +36,14 @@ public class PlayerStats : MonoBehaviour
         else if (currentHealth <= 0)
         {
             currentHealth = 0;
+        }
+        if (currentEnergy > maxEnergy)
+        {
+            currentEnergy = maxEnergy;
+        }
+        else if (currentEnergy < 0)
+        {
+            currentEnergy = 0;
         }
     }
 
