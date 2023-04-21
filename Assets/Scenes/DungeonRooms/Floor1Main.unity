@@ -6954,6 +6954,7 @@ GameObject:
   - component: {fileID: 1751143391}
   - component: {fileID: 1751143390}
   - component: {fileID: 1751143386}
+  - component: {fileID: 1751143393}
   - component: {fileID: 1751143392}
   - component: {fileID: 1751143389}
   m_Layer: 0
@@ -6994,16 +6995,11 @@ MonoBehaviour:
   - {fileID: 2112761049, guid: 4c2c9874ec3e149da92797c1ac1bb1f7, type: 3}
   - {fileID: 1536664168, guid: 4c2c9874ec3e149da92797c1ac1bb1f7, type: 3}
   - {fileID: 45304834, guid: 4c2c9874ec3e149da92797c1ac1bb1f7, type: 3}
-  headSprites:
-  - {fileID: 491769620, guid: 4c2c9874ec3e149da92797c1ac1bb1f7, type: 3}
-  - {fileID: -60838243, guid: 4c2c9874ec3e149da92797c1ac1bb1f7, type: 3}
-  - {fileID: 1121938011, guid: 4c2c9874ec3e149da92797c1ac1bb1f7, type: 3}
   bottomSprites:
   - {fileID: 1173522815, guid: 4c2c9874ec3e149da92797c1ac1bb1f7, type: 3}
   - {fileID: 1817185288, guid: 4c2c9874ec3e149da92797c1ac1bb1f7, type: 3}
   - {fileID: -467649297, guid: 4c2c9874ec3e149da92797c1ac1bb1f7, type: 3}
   body: {fileID: 58363376}
-  head: {fileID: 1764438762}
   bottom: {fileID: 890273328}
   bottomSpriteChangeTimer: 0.5
 --- !u!4 &1751143388
@@ -7170,12 +7166,33 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 4
-  currentHealth: 0
   maxEnergy: 4
-  currentEnergy: 0
   moveSpeed: 3
+  attackSpeed: 1
+  attackDamage: 1
+  attackRange: 1
+  attackKnockback: 1
+  currentHealth: 0
+  currentEnergy: 0
   inventory: []
   coins: 0
+--- !u!114 &1751143393
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1751143385}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6ea7ebccaeaf6df45ad7e403aac4aa0f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  headSprites:
+  - {fileID: 491769620, guid: 4c2c9874ec3e149da92797c1ac1bb1f7, type: 3}
+  - {fileID: -60838243, guid: 4c2c9874ec3e149da92797c1ac1bb1f7, type: 3}
+  - {fileID: 1121938011, guid: 4c2c9874ec3e149da92797c1ac1bb1f7, type: 3}
+  head: {fileID: 1764438762}
 --- !u!1 &1764438762
 GameObject:
   m_ObjectHideFlags: 0

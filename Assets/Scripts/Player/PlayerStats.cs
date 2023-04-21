@@ -4,17 +4,19 @@ using UnityEngine;
 
 public class PlayerStats : MonoBehaviour
 {
-    // Main Stats
+    // Adjustable stats
     public int maxHealth = 8;
-    public int currentHealth;
-
     public int maxEnergy = 4;
-
-    public int currentEnergy;
     public float moveSpeed = 1f;
+    public float attackSpeed = 1f;
+    public float attackDamage = 1f;
+    public float attackRange = 1f;
+    public float attackKnockback = 1f;
+    // Main Stats
+    public int currentHealth;
+    public int currentEnergy;
 
     // Inventory
-
     public List<string> inventory = new List<string>();
 
     public int coins;

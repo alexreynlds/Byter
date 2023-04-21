@@ -17,12 +17,11 @@ public class PlayerMovement : MonoBehaviour
 
     [Header("Sprites")]
     [SerializeField] private Sprite[] bodySprites;
-    [SerializeField] private Sprite[] headSprites;
 
     [SerializeField]
     private Sprite[] bottomSprites;
     [SerializeField] private GameObject body;
-    [SerializeField] private GameObject head;
+
     [SerializeField] private GameObject bottom;
 
     private int currentBottomSprite = 0;
