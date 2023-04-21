@@ -69,4 +69,14 @@ public class PlayerMovement : MonoBehaviour
     {
         movementInput = movementValue.Get<Vector2>();
     }
+
+    void OnTest()
+    {
+        GetComponent<PlayerStats>().currentHealth -= 1;
+    }
+
+    void OnTest2()
+    {
+        GetComponent<PlayerStats>().maxHealth += 2;
+    }
 }

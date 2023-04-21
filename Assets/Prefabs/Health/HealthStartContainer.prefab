@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 7540960604489006951}
   - component: {fileID: 7540960604489006948}
   m_Layer: 5
-  m_Name: HealthStartEmpty
+  m_Name: HealthStartContainer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

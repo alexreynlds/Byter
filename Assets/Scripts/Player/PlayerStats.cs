@@ -5,9 +5,10 @@ using UnityEngine;
 public class PlayerStats : MonoBehaviour
 {
     // Main Stats
-    public int health = 100;
+    public int health = 8;
 
-    public int maxHealth = 100;
+    public int maxHealth = 8;
+    public int currentHealth;
 
     public float moveSpeed = 1f;
 
@@ -18,8 +19,9 @@ public class PlayerStats : MonoBehaviour
     public int coins;
 
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
+        currentHealth = maxHealth;
     }
 
     // Update is called once per frame

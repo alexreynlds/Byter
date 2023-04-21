@@ -5116,18 +5116,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cec523a10774eee42aae067730834529, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fullHealthSprites:
-  - {fileID: 567033178407800861, guid: 411c9136f03e90e4291485c84b439a4b, type: 3}
-  - {fileID: 3744679392974855912, guid: eafb13a98ecce1b419cd4bbf4af088d3, type: 3}
-  - {fileID: 6281751382751635123, guid: 41a7ed9e314408b41b1bb799078a0c8a, type: 3}
-  halfHealthSprites:
-  - {fileID: 3822145453304067689, guid: 9dcf9d40a288f5a4181bdcb727fc6d2f, type: 3}
-  - {fileID: 6277808608842461554, guid: c8d8e83a005a01343afd587567685e3b, type: 3}
-  - {fileID: 9155296848582051829, guid: 91a243a0aebd98b4f963e91131390ac1, type: 3}
-  emptyHealthSprites:
-  - {fileID: 7540960604489006946, guid: 40f046d4aad63724aa6ebfbb4613aaa8, type: 3}
-  - {fileID: 1855806364718499612, guid: eaba32a5cec7eba42a4e1428d062e3af, type: 3}
-  - {fileID: 1985953979000922837, guid: fe6bb0ca5889b97438cd58114ab19ffa, type: 3}
+  startHealthContainer: {fileID: 7540960604489006946, guid: 40f046d4aad63724aa6ebfbb4613aaa8, type: 3}
+  middleHealthContainer: {fileID: 1855806364718499612, guid: eaba32a5cec7eba42a4e1428d062e3af, type: 3}
+  endHealthContainer: {fileID: 1985953979000922837, guid: fe6bb0ca5889b97438cd58114ab19ffa, type: 3}
+  startHealthSprites:
+  - {fileID: -351030498, guid: 2c644162d3965214e943de2f82b2294a, type: 3}
+  - {fileID: 870784345, guid: 2c644162d3965214e943de2f82b2294a, type: 3}
+  - {fileID: 1544037217, guid: 2c644162d3965214e943de2f82b2294a, type: 3}
+  middleHealthSprites:
+  - {fileID: 281520622, guid: 2c644162d3965214e943de2f82b2294a, type: 3}
+  - {fileID: -1365526937, guid: 2c644162d3965214e943de2f82b2294a, type: 3}
+  - {fileID: -660856560, guid: 2c644162d3965214e943de2f82b2294a, type: 3}
+  endHealthSprites:
+  - {fileID: 1313399070, guid: 2c644162d3965214e943de2f82b2294a, type: 3}
+  - {fileID: 917287685, guid: 2c644162d3965214e943de2f82b2294a, type: 3}
+  - {fileID: -660856560, guid: 2c644162d3965214e943de2f82b2294a, type: 3}
+  playerHealth: 0
 --- !u!1 &1420442764
 GameObject:
   m_ObjectHideFlags: 0
@@ -6915,7 +6919,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   health: 100
-  maxHealth: 100
+  maxHealth: 10
+  currentHealth: 0
   moveSpeed: 3
   inventory: []
   coins: 0
