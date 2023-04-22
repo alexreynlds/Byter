@@ -22,6 +22,7 @@ public class BulletController : MonoBehaviour
         if (other.gameObject.tag == "Enemy")
         {
             // other.gameObject.GetComponent<EnemyController>().TakeDamage(damage);
+            other.gameObject.GetComponent<EnemyController>().Die();
             Destroy(gameObject);
         }
         else

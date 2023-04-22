@@ -30,6 +30,8 @@ public class Room : MonoBehaviour
 
     public List<Door> doors = new List<Door>();
 
+    public bool isActive;
+
     // Start is called before the first frame update
     void Start()
     {
