@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.InputSystem;
 
 public class RoomInfo
 {
@@ -31,6 +32,9 @@ public class RoomController : MonoBehaviour
 
     bool spawnedBossRoom = false;
 
+    bool finishedLoading = false;
+
+
     // bool spawnedShopRoom = false;
     bool updatedRooms = false;
 
@@ -41,7 +45,17 @@ public class RoomController : MonoBehaviour
 
     void Update()
     {
-        UpdateRoomQueue();
+        if (!finishedLoading)
+        {
+            UpdateRoomQueue();
+        }
+
+
+        // if (finishedLoading)
+        // {
+        //     GameObject.Find("Player").GetComponent<PlayerStats>().wipeInventory();
+        //     Debug.Log("Finished Loading");
+        // }
     }
 
     void UpdateRoomQueue()
@@ -49,6 +63,7 @@ public class RoomController : MonoBehaviour
         if (isLoadingRoom) return;
         if (loadRoomQueue.Count == 0)
         {
+            Debug.Log("epic");
             if (!spawnedBossRoom)
             {
                 StartCoroutine(SpawnBossRoom());
@@ -60,10 +75,9 @@ public class RoomController : MonoBehaviour
                     room.RemoveUnusedDoors();
                 }
                 updatedRooms = true;
-                GameObject
-                    .Find("Player")
-                    .GetComponent<PlayerStats>()
-                    .wipeInventory();
+                finishedLoading = true;
+                GameObject.Find("Player").GetComponent<PlayerStats>().wipeInventory();
+                GameObject.Find("Player").GetComponent<PlayerInput>().enabled = true;
             }
             return;
         }
@@ -84,7 +98,7 @@ public class RoomController : MonoBehaviour
             Destroy(bossRoom.gameObject);
             var roomToRemove =
                 loadedRooms.Single(r => r.X == tempRoom.x && r.Y == tempRoom.y);
-            loadedRooms.Remove (roomToRemove);
+            loadedRooms.Remove(roomToRemove);
             LoadRoom("End", tempRoom.x, tempRoom.y);
         }
     }
@@ -99,7 +113,7 @@ public class RoomController : MonoBehaviour
         newRoomData.X = x;
         newRoomData.Y = y;
 
-        loadRoomQueue.Enqueue (newRoomData);
+        loadRoomQueue.Enqueue(newRoomData);
     }
 
     IEnumerator LoadRoomRoutine(RoomInfo roomInfo)
@@ -143,7 +157,7 @@ public class RoomController : MonoBehaviour
                 CameraController.instance.currentRoom = room;
             }
 
-            loadedRooms.Add (room);
+            loadedRooms.Add(room);
             // room.RemoveUnusedDoors();
         }
         else

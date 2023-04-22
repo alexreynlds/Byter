@@ -58,6 +58,12 @@ public class PlayerMovement : MonoBehaviour
             UpdateSprite();
         }
 
+
+
+    }
+
+    void Update()
+    {
         if (bottomSpriteChangeTimer > 0)
         {
             bottomSpriteChangeTimer -= Time.deltaTime;
@@ -67,7 +73,6 @@ public class PlayerMovement : MonoBehaviour
             UpdateBottomSprite();
             bottomSpriteChangeTimer = bottomSpriteChangeTimerTemp;
         }
-
     }
 
     private bool TryMove(Vector2 direction)
