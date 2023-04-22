@@ -8,6 +8,22 @@ public class PlayerShooting : MonoBehaviour
     Vector2 shootInput;
     [SerializeField] private Sprite[] headSprites;
     [SerializeField] private GameObject head;
+    [SerializeField] private GameObject bulletPrefab;
+
+    private float attackDamage;
+    private float lastFire;
+    private float fireDelay;
+    private float projectileSpeed;
+
+    [SerializeField] private bool isShooting = false;
+
+
+    private void Awake()
+    {
+        attackDamage = GetComponent<PlayerStats>().attackDamage;
+        projectileSpeed = GetComponent<PlayerStats>().projectileSpeed;
+        fireDelay = GetComponent<PlayerStats>().attackSpeed;
+    }
 
     private void Update()
     {
@@ -19,10 +35,27 @@ public class PlayerShooting : MonoBehaviour
         {
             head.GetComponent<SpriteRenderer>().sprite = headSprites[0];
         }
+
+        if (isShooting && Time.time > lastFire + fireDelay)
+        {
+            ShootBullet(shootInput.x, shootInput.y);
+            lastFire = Time.time;
+        }
+
+        UpdateStats();
     }
+
     private void OnFire(InputValue shootDir)
     {
         shootInput = shootDir.Get<Vector2>();
+        if (shootInput != Vector2.zero)
+        {
+            isShooting = true;
+        }
+        else
+        {
+            isShooting = false;
+        }
     }
 
     private void ChangeHeadSprite()
@@ -47,5 +80,20 @@ public class PlayerShooting : MonoBehaviour
             head.GetComponent<SpriteRenderer>().sprite = headSprites[0];
             head.GetComponent<SpriteRenderer>().flipX = false;
         }
+    }
+
+    private void ShootBullet(float x, float y)
+    {
+        GameObject bullet = Instantiate(bulletPrefab, transform.position, Quaternion.identity);
+        bullet.AddComponent<Rigidbody2D>().gravityScale = 0;
+        bullet.GetComponent<BulletController>().damage = attackDamage;
+        bullet.GetComponent<Rigidbody2D>().velocity = new Vector2(x, y) * projectileSpeed;
+    }
+
+    private void UpdateStats()
+    {
+        attackDamage = GetComponent<PlayerStats>().attackDamage;
+        projectileSpeed = GetComponent<PlayerStats>().projectileSpeed;
+        fireDelay = GetComponent<PlayerStats>().attackSpeed;
     }
 }

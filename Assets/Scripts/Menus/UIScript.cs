@@ -167,6 +167,7 @@ public class UIScript : MonoBehaviour
 
     public void OnQuit()
     {
+        Time.timeScale = 1;
         SceneManager.LoadScene(0);
     }
 

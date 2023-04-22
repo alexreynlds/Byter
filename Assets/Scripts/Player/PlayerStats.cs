@@ -8,9 +8,13 @@ public class PlayerStats : MonoBehaviour
     public int maxHealth = 8;
     public int maxEnergy = 4;
     public float moveSpeed = 1f;
-    public float attackSpeed = 1f;
+
+    public float projectileSpeed = 1f;
+    public float attackSpeed = 0.5f;
     public float attackDamage = 1f;
-    public float attackRange = 1f;
+    // Range controls the amount of time before the bullet is destroyed
+    // Lower float means lower range
+    public float attackRange = 3f;
     public float attackKnockback = 1f;
     // Main Stats
     public int currentHealth;

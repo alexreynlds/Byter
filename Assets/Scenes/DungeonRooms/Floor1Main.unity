@@ -7167,10 +7167,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 4
   maxEnergy: 4
-  moveSpeed: 3
+  moveSpeed: 2
+  projectileSpeed: 3
   attackSpeed: 1
   attackDamage: 1
-  attackRange: 1
+  attackRange: 3
   attackKnockback: 1
   currentHealth: 0
   currentEnergy: 0
@@ -7193,6 +7194,8 @@ MonoBehaviour:
   - {fileID: -60838243, guid: 4c2c9874ec3e149da92797c1ac1bb1f7, type: 3}
   - {fileID: 1121938011, guid: 4c2c9874ec3e149da92797c1ac1bb1f7, type: 3}
   head: {fileID: 1764438762}
+  bulletPrefab: {fileID: 7639679029451292464, guid: b91d9a99209e985478796834308f3faa, type: 3}
+  isShooting: 0
 --- !u!1 &1764438762
 GameObject:
   m_ObjectHideFlags: 0
