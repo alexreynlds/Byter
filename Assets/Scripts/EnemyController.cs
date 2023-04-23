@@ -14,10 +14,13 @@ public class EnemyController : MonoBehaviour
     GameObject player;
     public EnemyState currentState = EnemyState.Wander;
 
-    public float range;
-    public float speed;
+    [Header("Enemy Stats")]
+    [SerializeField] private float range;
+    [SerializeField] private float speed;
+    [SerializeField] private float health;
+
     private bool chooseDir = false;
-    private bool dead = false;
+    // private bool dead = false;
     private Vector3 wanderTarget;
 
     // Start is called before the first frame update
@@ -57,6 +60,22 @@ public class EnemyController : MonoBehaviour
         {
             currentState = EnemyState.Wander;
         }
+    }
+
+    public void TakeDamage(float damage)
+    {
+        health--;
+        GetComponent<SpriteRenderer>().color = Color.red;
+        Invoke("ResetColor", 0.1f);
+        if (health <= 0)
+        {
+            currentState = EnemyState.Die;
+        }
+    }
+
+    private void ResetColor()
+    {
+        GetComponent<SpriteRenderer>().color = Color.white;
     }
 
     private bool InRange()

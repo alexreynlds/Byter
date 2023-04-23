@@ -5636,7 +5636,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!212 &1492020320
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -5745,6 +5745,7 @@ MonoBehaviour:
   currentState: 1
   range: 5
   speed: 2
+  health: 5
 --- !u!1 &1535509358
 GameObject:
   m_ObjectHideFlags: 0
@@ -7243,7 +7244,7 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: -0.000000007450581, y: -0.100677274}

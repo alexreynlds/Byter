@@ -63,7 +63,7 @@ public class RoomController : MonoBehaviour
         if (isLoadingRoom) return;
         if (loadRoomQueue.Count == 0)
         {
-            Debug.Log("epic");
+            // Debug.Log("epic");
             if (!spawnedBossRoom)
             {
                 StartCoroutine(SpawnBossRoom());
