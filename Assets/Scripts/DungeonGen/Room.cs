@@ -91,7 +91,7 @@ public class Room : MonoBehaviour
                         door
                             .gameObject
                             .transform
-                            .GetChild(0)
+                            .Find("Door")
                             .gameObject
                             .SetActive(false);
 
@@ -101,7 +101,7 @@ public class Room : MonoBehaviour
                             door
                                 .gameObject
                                 .transform
-                                .GetChild(1)
+                                .Find("Wall")
                                 .gameObject
                                 .SetActive(true);
                         }
@@ -114,7 +114,7 @@ public class Room : MonoBehaviour
                         door
                             .gameObject
                             .transform
-                            .GetChild(0)
+                            .Find("Door")
                             .gameObject
                             .SetActive(false);
 
@@ -124,7 +124,7 @@ public class Room : MonoBehaviour
                             door
                                 .gameObject
                                 .transform
-                                .GetChild(1)
+                                .Find("Wall")
                                 .gameObject
                                 .SetActive(true);
                         }
@@ -137,7 +137,7 @@ public class Room : MonoBehaviour
                         door
                             .gameObject
                             .transform
-                            .GetChild(0)
+                            .Find("Door")
                             .gameObject
                             .SetActive(false);
 
@@ -147,7 +147,7 @@ public class Room : MonoBehaviour
                             door
                                 .gameObject
                                 .transform
-                                .GetChild(1)
+                                .Find("Wall")
                                 .gameObject
                                 .SetActive(true);
                         }
@@ -160,7 +160,7 @@ public class Room : MonoBehaviour
                         door
                             .gameObject
                             .transform
-                            .GetChild(0)
+                            .Find("Door")
                             .gameObject
                             .SetActive(false);
 
@@ -170,7 +170,7 @@ public class Room : MonoBehaviour
                             door
                                 .gameObject
                                 .transform
-                                .GetChild(1)
+                                .Find("Wall")
                                 .gameObject
                                 .SetActive(true);
                         }

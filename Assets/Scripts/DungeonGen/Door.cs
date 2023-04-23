@@ -18,7 +18,7 @@ public class Door : MonoBehaviour
     private GameObject player;
 
     private float widthOffset = 3.5f;
-    private float heightOffset = 3.3f;
+    private float heightOffset = 3.5f;
 
     private void Start()
     {
@@ -29,27 +29,22 @@ public class Door : MonoBehaviour
     {
         if (other.gameObject.tag == ("Player"))
         {
-            Debug.Log("Player entered door");
             switch (doorDir)
             {
 
                 case DoorDir.up:
-                    player.transform.position = new Vector2(transform.position.x, transform.position.y + heightOffset);
+                    player.transform.position = new Vector2(player.transform.position.x, player.transform.position.y + heightOffset);
                     break;
                 case DoorDir.down:
-                    player.transform.position = new Vector2(transform.position.x, transform.position.y - heightOffset);
+                    player.transform.position = new Vector2(player.transform.position.x, player.transform.position.y - heightOffset);
                     break;
                 case DoorDir.left:
-                    player.transform.position = new Vector2(transform.position.x - widthOffset, transform.position.y);
+                    player.transform.position = new Vector2(player.transform.position.x - widthOffset, player.transform.position.y);
                     break;
                 case DoorDir.right:
-                    player.transform.position = new Vector2(transform.position.x + widthOffset, transform.position.y);
+                    player.transform.position = new Vector2(player.transform.position.x + widthOffset, player.transform.position.y);
                     break;
             }
-        }
-        else
-        {
-            Debug.Log("Player did not enter door");
         }
     }
 

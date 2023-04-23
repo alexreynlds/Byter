@@ -84,7 +84,7 @@ public class PlayerShooting : MonoBehaviour
 
     private void ShootBullet(float x, float y)
     {
-        GameObject bullet = Instantiate(bulletPrefab, transform.position, Quaternion.identity);
+        GameObject bullet = Instantiate(bulletPrefab, new Vector2(transform.position.x, transform.position.y + 0.5f), Quaternion.identity);
         bullet.AddComponent<Rigidbody2D>().gravityScale = 0;
         bullet.GetComponent<BulletController>().damage = attackDamage;
         bullet.GetComponent<Rigidbody2D>().velocity = new Vector2(x, y) * projectileSpeed;

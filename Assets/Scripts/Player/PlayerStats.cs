@@ -56,5 +56,6 @@ public class PlayerStats : MonoBehaviour
     public void wipeInventory()
     {
         inventory.Clear();
+        coins = 0;
     }
 }

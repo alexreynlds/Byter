@@ -35,7 +35,7 @@ public class EnemyController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Debug.Log(currentState);
+        // Debug.Log(currentState);
         switch (currentState)
         {
             case EnemyState.Idle:
@@ -58,18 +58,7 @@ public class EnemyController : MonoBehaviour
 
         if (!notInRoom)
         {
-            if (InRange() && currentState != EnemyState.Die)
-            {
-                currentState = EnemyState.Follow;
-            }
-            else if (!InRange() && currentState != EnemyState.Die)
-            {
-                currentState = EnemyState.Wander;
-            }
-        }
-        else
-        {
-            currentState = EnemyState.Idle;
+            currentState = EnemyState.Follow;
         }
     }
 
