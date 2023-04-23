@@ -19,7 +19,7 @@ public class EnemyController : MonoBehaviour
     [SerializeField] private float speed;
     [SerializeField] private float health;
 
-    public bool notInRoom = false;
+    public bool notInRoom = true;
 
     private bool chooseDir = false;
     // private bool dead = false;
@@ -29,12 +29,13 @@ public class EnemyController : MonoBehaviour
     void Start()
     {
         player = GameObject.Find("Player");
-
+        notInRoom = true;
     }
 
     // Update is called once per frame
     void Update()
     {
+        Debug.Log(currentState);
         switch (currentState)
         {
             case EnemyState.Idle:
