@@ -55,7 +55,7 @@ public class Door : MonoBehaviour
 
     public void Close()
     {
-        doorCollider.SetActive(false);
+        doorCollider.SetActive(true);
         transform.GetChild(0).GetComponent<SpriteRenderer>().color = Color.red;
 
     }
@@ -63,7 +63,7 @@ public class Door : MonoBehaviour
     public void Open()
     {
 
-        doorCollider.SetActive(true);
+        doorCollider.SetActive(false);
         transform.GetChild(0).GetComponent<SpriteRenderer>().color = Color.white;
     }
 }

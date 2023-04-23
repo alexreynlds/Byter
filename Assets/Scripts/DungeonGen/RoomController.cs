@@ -195,35 +195,11 @@ public class RoomController : MonoBehaviour
     {
         foreach (Room room in loadedRooms)
         {
-            if (room == currentRoom)
+            if (room != currentRoom)
             {
                 EnemyController[] enemies = room.GetComponentsInChildren<EnemyController>();
 
                 if (enemies != null)
-                {
-                    foreach (EnemyController enemy in enemies)
-                    {
-                        enemy.notInRoom = false;
-                    }
-
-                    foreach (Door door in room.GetComponentsInChildren<Door>())
-                    {
-                        door.Close();
-                    }
-                }
-                else
-                {
-                    foreach (Door door in room.GetComponentsInChildren<Door>())
-                    {
-                        door.Close();
-                    }
-                }
-            }
-            else
-            {
-                EnemyController[] enemies = room.GetComponentsInChildren<EnemyController>();
-
-                if (enemies.Length > 0)
                 {
                     foreach (EnemyController enemy in enemies)
                     {
@@ -239,7 +215,31 @@ public class RoomController : MonoBehaviour
                 {
                     foreach (Door door in room.GetComponentsInChildren<Door>())
                     {
+                        door.Open();
+                    }
+                }
+            }
+            else
+            {
+                EnemyController[] enemies = room.GetComponentsInChildren<EnemyController>();
+
+                if (enemies.Length > 0)
+                {
+                    foreach (EnemyController enemy in enemies)
+                    {
+                        enemy.notInRoom = false;
+                    }
+
+                    foreach (Door door in room.GetComponentsInChildren<Door>())
+                    {
                         door.Close();
+                    }
+                }
+                else
+                {
+                    foreach (Door door in room.GetComponentsInChildren<Door>())
+                    {
+                        door.Open();
                     }
                 }
             }
