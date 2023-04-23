@@ -29,8 +29,8 @@ public class GridController : MonoBehaviour
     void Awake()
     {
         room = GetComponentInParent<Room>();
-        grid.columns = room.roomW - 1;
-        grid.rows = room.roomH - 1;
+        grid.columns = room.roomW - 4;
+        grid.rows = room.roomH - 4;
         GenerateGrid();
     }
 
@@ -49,7 +49,7 @@ public class GridController : MonoBehaviour
                         y - (grid.rows - grid.verticalOffset));
                 go.name = "X: " + x + ", Y: " + y;
                 availablePositions.Add(go.transform.position);
-                go.SetActive(false); 
+                go.SetActive(false);
             }
         }
         GetComponentInParent<ObjectRoomSpawner>().InitialiseObjectSpawning();
