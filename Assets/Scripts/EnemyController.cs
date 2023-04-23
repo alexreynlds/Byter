@@ -12,12 +12,14 @@ public enum EnemyState
 public class EnemyController : MonoBehaviour
 {
     GameObject player;
-    public EnemyState currentState = EnemyState.Wander;
+    public EnemyState currentState = EnemyState.Idle;
 
     [Header("Enemy Stats")]
     [SerializeField] private float range;
     [SerializeField] private float speed;
     [SerializeField] private float health;
+
+    public bool notInRoom = false;
 
     private bool chooseDir = false;
     // private bool dead = false;
@@ -37,6 +39,7 @@ public class EnemyController : MonoBehaviour
         {
             case EnemyState.Idle:
                 // Do nothing
+                // idle();
                 break;
             case EnemyState.Wander:
                 // Wander
@@ -52,13 +55,20 @@ public class EnemyController : MonoBehaviour
                 break;
         }
 
-        if (InRange() && currentState != EnemyState.Die)
+        if (!notInRoom)
         {
-            currentState = EnemyState.Follow;
+            if (InRange() && currentState != EnemyState.Die)
+            {
+                currentState = EnemyState.Follow;
+            }
+            else if (!InRange() && currentState != EnemyState.Die)
+            {
+                currentState = EnemyState.Wander;
+            }
         }
-        else if (!InRange() && currentState != EnemyState.Die)
+        else
         {
-            currentState = EnemyState.Wander;
+            currentState = EnemyState.Idle;
         }
     }
 

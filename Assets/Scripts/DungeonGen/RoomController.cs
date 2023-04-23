@@ -45,17 +45,7 @@ public class RoomController : MonoBehaviour
 
     void Update()
     {
-        if (!finishedLoading)
-        {
-            UpdateRoomQueue();
-        }
-
-
-        // if (finishedLoading)
-        // {
-        //     GameObject.Find("Player").GetComponent<PlayerStats>().wipeInventory();
-        //     Debug.Log("Finished Loading");
-        // }
+        UpdateRoomQueue();
     }
 
     void UpdateRoomQueue()
@@ -68,14 +58,16 @@ public class RoomController : MonoBehaviour
             {
                 StartCoroutine(SpawnBossRoom());
             }
+
             else if (spawnedBossRoom && !updatedRooms)
             {
                 foreach (Room room in loadedRooms)
                 {
                     room.RemoveUnusedDoors();
                 }
+                UpdateRooms();
                 updatedRooms = true;
-                finishedLoading = true;
+
                 GameObject.Find("Player").GetComponent<PlayerStats>().wipeInventory();
                 GameObject.Find("Player").GetComponent<PlayerInput>().enabled = true;
             }
@@ -85,6 +77,7 @@ public class RoomController : MonoBehaviour
         currentLoadRoomData = loadRoomQueue.Dequeue();
         isLoadingRoom = true;
         StartCoroutine(LoadRoomRoutine(currentLoadRoomData));
+        // finishedLoading = true;
     }
 
     IEnumerator SpawnBossRoom()
@@ -188,5 +181,38 @@ public class RoomController : MonoBehaviour
     {
         CameraController.instance.currentRoom = room;
         currentRoom = room;
+
+        UpdateRooms();
+    }
+
+    private void UpdateRooms()
+    {
+        foreach (Room room in loadedRooms)
+        {
+            if (room == currentRoom)
+            {
+                EnemyController[] enemies = room.GetComponentsInChildren<EnemyController>();
+
+                if (enemies != null)
+                {
+                    foreach (EnemyController enemy in enemies)
+                    {
+                        enemy.notInRoom = false;
+                    }
+                }
+            }
+            else
+            {
+                EnemyController[] enemies = room.GetComponentsInChildren<EnemyController>();
+
+                if (enemies != null)
+                {
+                    foreach (EnemyController enemy in enemies)
+                    {
+                        enemy.notInRoom = true;
+                    }
+                }
+            }
+        }
     }
 }

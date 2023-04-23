@@ -222,6 +222,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   doorDir: 1
+  doorCollider: {fileID: 0}
 --- !u!1 &207889018
 GameObject:
   m_ObjectHideFlags: 0
@@ -1057,6 +1058,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   doorDir: 0
+  doorCollider: {fileID: 0}
 --- !u!1 &377297501
 GameObject:
   m_ObjectHideFlags: 0
@@ -1241,6 +1243,7 @@ MonoBehaviour:
   leftDoor: {fileID: 0}
   rightDoor: {fileID: 0}
   doors: []
+  isActive: 0
 --- !u!61 &546838476
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -1281,8 +1284,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   grid: {fileID: 10542993}
   spawners:
-  - name: ItemSpawner
-    spawnerData: {fileID: 11400000, guid: 907ff601c550c46abbde872a6e7619ed, type: 2}
+  - name: Enemy1
+    spawnerData: {fileID: 11400000, guid: 36ec978856f283f4da80b7e1702f4cd7, type: 2}
 --- !u!1 &550581869
 GameObject:
   m_ObjectHideFlags: 0
@@ -1560,6 +1563,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   doorDir: 3
+  doorCollider: {fileID: 0}
 --- !u!1 &1182270855
 GameObject:
   m_ObjectHideFlags: 0
@@ -3448,6 +3452,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   doorDir: 2
+  doorCollider: {fileID: 0}
 --- !u!1 &1970723597
 GameObject:
   m_ObjectHideFlags: 0
