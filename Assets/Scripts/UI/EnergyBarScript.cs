@@ -43,7 +43,6 @@ public class EnergyBarScript : MonoBehaviour
 
     void UpdateEnergyBar()
     {
-        // Debug.Log("Updating Energy Bar. Player health is " + playerEnergy + ".");
         if (playerEnergy == 4)
         {
             energySprites[0].GetComponent<Image>().sprite = startEnergySprites[2];

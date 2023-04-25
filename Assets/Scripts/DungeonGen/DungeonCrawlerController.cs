@@ -44,7 +44,6 @@ public class DungeonCrawlerController : MonoBehaviour
         // Move the crawlers
         for (int i = 0; i < iterations; i++)
         {
-            // Debug.
             foreach (DungeonCrawler crawler in crawlers)
             {
                 Vector2Int newPos = crawler.move(directionMovementMap);

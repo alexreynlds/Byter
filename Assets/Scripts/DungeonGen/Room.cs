@@ -95,8 +95,8 @@ public class Room : MonoBehaviour
                             .gameObject
                             .SetActive(false);
 
-                        if (GetRoom("d") != null)
-                        {
+                        // if (GetRoom("d") != null)
+                        // {
                             // Enable the wall
                             door
                                 .gameObject
@@ -104,7 +104,7 @@ public class Room : MonoBehaviour
                                 .Find("Wall")
                                 .gameObject
                                 .SetActive(true);
-                        }
+                        // }
                     }
                     break;
                 case Door.DoorDir.down:
@@ -118,8 +118,8 @@ public class Room : MonoBehaviour
                             .gameObject
                             .SetActive(false);
 
-                        if (GetRoom("u") != null)
-                        {
+                        // if (GetRoom("u") != null)
+                        // {
                             // Enable the wall
                             door
                                 .gameObject
@@ -127,7 +127,7 @@ public class Room : MonoBehaviour
                                 .Find("Wall")
                                 .gameObject
                                 .SetActive(true);
-                        }
+                        // }
                     }
                     break;
                 case Door.DoorDir.left:
@@ -141,8 +141,8 @@ public class Room : MonoBehaviour
                             .gameObject
                             .SetActive(false);
 
-                        if (GetRoom("r") != null)
-                        {
+                        // if (GetRoom("r") != null)
+                        // {
                             // Enable the wall
                             door
                                 .gameObject
@@ -150,7 +150,7 @@ public class Room : MonoBehaviour
                                 .Find("Wall")
                                 .gameObject
                                 .SetActive(true);
-                        }
+                        // }
                     }
                     break;
                 case Door.DoorDir.right:
@@ -164,8 +164,8 @@ public class Room : MonoBehaviour
                             .gameObject
                             .SetActive(false);
 
-                        if (GetRoom("l") != null)
-                        {
+                        // if (GetRoom("l") != null)
+                        // {
                             // Enable the wall
                             door
                                 .gameObject
@@ -173,7 +173,7 @@ public class Room : MonoBehaviour
                                 .Find("Wall")
                                 .gameObject
                                 .SetActive(true);
-                        }
+                        // }
                     }
                     break;
             }

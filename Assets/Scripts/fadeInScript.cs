@@ -20,8 +20,6 @@ public class fadeInScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Debug.Log(image.color.a);
-
         if(waitTime > 0)
         {
             waitTime -= Time.deltaTime;

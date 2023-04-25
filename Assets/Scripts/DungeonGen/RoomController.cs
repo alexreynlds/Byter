@@ -56,7 +56,6 @@ public class RoomController : MonoBehaviour
         if (isLoadingRoom) return;
         if (loadRoomQueue.Count == 0)
         {
-            // Debug.Log("epic");
             if (!spawnedBossRoom)
             {
                 StartCoroutine(SpawnBossRoom());
@@ -72,13 +71,13 @@ public class RoomController : MonoBehaviour
                 StartCoroutine(SpawnItemRoom());
             }
 
-
             else if (spawnedBossRoom && !updatedRooms && spawnedShopRoom && spawnedItemRoom)
             {
-                foreach (Room room in loadedRooms)
-                {
-                    room.RemoveUnusedDoors();
-                }
+                // foreach (Room room in loadedRooms)
+                // {
+                //     room.RemoveUnusedDoors();
+                // }
+                StartCoroutine(test());
                 UpdateRooms();
                 updatedRooms = true;
 
@@ -92,6 +91,15 @@ public class RoomController : MonoBehaviour
         currentLoadRoomData = loadRoomQueue.Dequeue();
         isLoadingRoom = true;
         StartCoroutine(LoadRoomRoutine(currentLoadRoomData));
+    }
+
+    IEnumerator test()
+    {
+        yield return new WaitForSeconds(1.0f);
+        foreach (Room room in loadedRooms)
+        {
+            room.RemoveUnusedDoors();
+        }
     }
 
     IEnumerator SpawnBossRoom()
@@ -108,9 +116,7 @@ public class RoomController : MonoBehaviour
                 loadedRooms.Single(r => r.X == tempRoom.x && r.Y == tempRoom.y);
             loadedRooms.Remove(roomToRemove);
             LoadRoom("End", tempRoom.x, tempRoom.y);
-
         }
-
     }
 
     IEnumerator SpawnShopRoom()
@@ -125,7 +131,6 @@ public class RoomController : MonoBehaviour
             loadedRooms.Single(r => r.X == tempRoom.x && r.Y == tempRoom.y);
         loadedRooms.Remove(roomToRemove);
         LoadRoom("Shop", tempRoom.x, tempRoom.y);
-
     }
 
     IEnumerator SpawnItemRoom()
