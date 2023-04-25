@@ -2,16 +2,24 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[System.Serializable]
+public struct Spawnable
+{
+    public GameObject gameObject;
+
+    public float weight;
+}
+
 public class ItemSpawner : MonoBehaviour
 {
-    [System.Serializable]
-    public struct Spawnable
-    {
-        public GameObject gameObject;
+    // [System.Serializable]
+    // public struct Spawnable
+    // {
+    //     public GameObject gameObject;
 
-        public float weight;
-    }
-
+    //     public float weight;
+    // }
+    // [System.Serializable]
     public List<Spawnable> itemPool = new List<Spawnable>();
 
     float totalWeight;
@@ -36,9 +44,5 @@ public class ItemSpawner : MonoBehaviour
             chosenIndex++;
             cumulativeWeight += itemPool[chosenIndex].weight;
         }
-
-        GameObject i =
-            Instantiate(itemPool[chosenIndex].gameObject, transform) as
-            GameObject;
     }
 }

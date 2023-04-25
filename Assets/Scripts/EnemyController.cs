@@ -21,9 +21,21 @@ public class EnemyController : MonoBehaviour
 
     public bool notInRoom = true;
 
+    float totalWeight;
+
     private bool chooseDir = false;
     // private bool dead = false;
     private Vector3 wanderTarget;
+
+    public List<Spawnable> itemPool = new List<Spawnable>();
+    
+    private void Awake() {
+        totalWeight = 0;
+        foreach (Spawnable spawnable in itemPool)
+        {
+            totalWeight += spawnable.weight;
+        }
+    }
 
     // Start is called before the first frame update
     void Start()
@@ -35,7 +47,6 @@ public class EnemyController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        // Debug.Log(currentState);
         switch (currentState)
         {
             case EnemyState.Idle:
@@ -120,7 +131,26 @@ public class EnemyController : MonoBehaviour
     public void Die()
     {
         // Die
+        DropItem();
         RoomController.instance.StartCoroutine(RoomController.instance.RoomCoroutine());
         Destroy(gameObject);
+    }
+
+    private void DropItem(){
+        float pick = Random.Range(0, totalWeight);
+        int chosenIndex = 0;
+        float cumulativeWeight = itemPool[0].weight;
+
+        while (pick > cumulativeWeight && chosenIndex < itemPool.Count - 1)
+        {
+            chosenIndex++;
+            cumulativeWeight += itemPool[chosenIndex].weight;
+        }
+        
+        if(itemPool[chosenIndex].gameObject != null){
+            RoomController.instance.spawnItem(itemPool[chosenIndex].gameObject, transform.position);
+        } else {
+            return;
+        }
     }
 }

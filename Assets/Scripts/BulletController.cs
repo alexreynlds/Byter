@@ -31,23 +31,13 @@ public class BulletController : MonoBehaviour
         }
     }
 
-    // private void OnTriggerEnter2D(Collider2D other)
-    // {
-    //     if (other.gameObject.tag == "Enemy")
-    //     {
-    //         other.gameObject.GetComponent<EnemyController>().TakeDamage(damage);
-    //         // other.gameObject.GetComponent<EnemyController>().Die();
-    //         Destroy(gameObject);
-    //     }
-    //     else if (other.gameObject.tag == "Player")
-    //     {
-    //         return;
-    //     }
-    //     else
-    //     {
-    //         Destroy(gameObject);
-    //     }
-    // }
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if(other.gameObject.tag == "Door")
+        {
+            Destroy(gameObject);
+        }
+    }
 
     // Update is called once per frame
     void Update()

@@ -12,7 +12,7 @@ public class Room : MonoBehaviour
 
     public int Y;
 
-    private bool updatedDoors = false;
+    // private bool updatedDoors = false;
 
     public Room(int x, int y)
     {
@@ -178,7 +178,6 @@ public class Room : MonoBehaviour
                     break;
             }
         }
-        updatedDoors = true;
     }
 
     public Room GetRoom(string dir)

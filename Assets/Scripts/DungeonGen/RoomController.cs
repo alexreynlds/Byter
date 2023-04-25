@@ -35,7 +35,7 @@ public class RoomController : MonoBehaviour
     bool spawnedShopRoom = false;
     bool spawnedItemRoom = false;
 
-    bool finishedLoading = false;
+    // bool finishedLoading = false;
 
 
     // bool spawnedShopRoom = false;
@@ -290,5 +290,9 @@ public class RoomController : MonoBehaviour
                 }
             }
         }
+    }
+
+    public void spawnItem(GameObject item, Vector3 position){
+        Instantiate(item, position, Quaternion.identity);
     }
 }

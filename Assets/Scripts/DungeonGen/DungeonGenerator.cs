@@ -8,8 +8,10 @@ public class DungeonGenerator : MonoBehaviour
 
     private List<Vector2Int> dungeonRooms;
 
-    private void Start()
+    private void Awake()
     {
+        Random.InitState(System.DateTime.Now.Millisecond);
+
         dungeonRooms = DungeonCrawlerController.GenerateDungeon(dungeonData);
         SpawnRooms (dungeonRooms);
     }
