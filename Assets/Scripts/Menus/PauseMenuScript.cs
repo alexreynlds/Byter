@@ -4,15 +4,14 @@ using UnityEngine;
 
 public class PauseMenuScript : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-    
-    }
+    [SerializeField] private GameObject statsScreen;
+    [SerializeField] private GameObject showIcon;
+    [SerializeField] private GameObject hideIcon;
 
-    // Update is called once per frame
-    void Update()
+    public void ToggleStatsScreen()
     {
-        
+        statsScreen.SetActive(!statsScreen.activeSelf);
+        showIcon.SetActive(!showIcon.activeSelf);
+        hideIcon.SetActive(!hideIcon.activeSelf);
     }
 }

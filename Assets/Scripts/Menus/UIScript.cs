@@ -145,9 +145,10 @@ public class UIScript : MonoBehaviour
     {
         if (!isPaused)
         {
+
             Time.timeScale = 0;
             pauseMenu.SetActive(true);
-            inGameUI.SetActive(false);
+            // inGameUI.SetActive(false);
             isPaused = true;
         }
         else
@@ -158,7 +159,7 @@ public class UIScript : MonoBehaviour
             pauseMenu.transform.Find("OptionsMenuContainer").gameObject.SetActive(false);
             pauseMenu.transform.Find("PauseMenuContainer").gameObject.SetActive(true);
             pauseMenu.SetActive(false);
-            inGameUI.SetActive(true);
+            // inGameUI.SetActive(true);
             Time.timeScale = 1;
             isPaused = false;
         }

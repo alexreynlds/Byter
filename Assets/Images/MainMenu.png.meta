@@ -132,7 +132,7 @@ TextureImporter:
         x: 80
         y: 96
         width: 16
-        height: 16
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -276,10 +276,10 @@ TextureImporter:
       name: MainMenu_8
       rect:
         serializedVersion: 2
-        x: 80
-        y: 112
-        width: 16
-        height: 16
+        x: 1
+        y: 28
+        width: 30
+        height: 33
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -289,6 +289,48 @@ TextureImporter:
       bones: []
       spriteID: 6ba0195703cc896469cf4bab1d084f3a
       internalID: 1050752625
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MainMenu_9
+      rect:
+        serializedVersion: 2
+        x: 33
+        y: 45
+        width: 9
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ca9eba6050fe31f45bbb3daba23d78ef
+      internalID: -214696390
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MainMenu_10
+      rect:
+        serializedVersion: 2
+        x: 44
+        y: 54
+        width: 3
+        height: 5
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3624560621ed35048b610ec6dc3944b0
+      internalID: 992012248
       vertices: []
       indices: 
       edges: []
@@ -306,6 +348,7 @@ TextureImporter:
     nameFileIdTable:
       MainMenu_0: 1367715357
       MainMenu_1: 1487070649
+      MainMenu_10: 992012248
       MainMenu_2: 1491749259
       MainMenu_3: -803373816
       MainMenu_4: -41809831
@@ -313,6 +356,7 @@ TextureImporter:
       MainMenu_6: -1888075962
       MainMenu_7: 1547432599
       MainMenu_8: 1050752625
+      MainMenu_9: -214696390
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

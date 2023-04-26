@@ -48,6 +48,32 @@ public class PlayerShooting : MonoBehaviour
     private void OnFire(InputValue shootDir)
     {
         shootInput = shootDir.Get<Vector2>();
+
+        if (shootInput.x > 0)
+        {
+            shootInput.x = 1;
+        }
+        else if (shootInput.x < 0)
+        {
+            shootInput.x = -1;
+        }
+        else
+        {
+            shootInput.x = 0;
+        }
+
+        if (shootInput.y > 0)
+        {
+            shootInput.y = 1;
+        }
+        else if (shootInput.y < 0)
+        {
+            shootInput.y = -1;
+        }
+        else
+        {
+            shootInput.y = 0;
+        }
         if (shootInput != Vector2.zero)
         {
             isShooting = true;
