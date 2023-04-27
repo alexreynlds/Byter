@@ -34,7 +34,6 @@ public class PopupWindowScript : MonoBehaviour
 
     public void AddToQueue(string headingText, string text)
     {
-        // Debug.Log(headingText + ' ' + text);
         popupQueue.Enqueue(new popupItem { headingText = headingText, text = text });
         if (queueChecker == null)
         {
@@ -44,7 +43,6 @@ public class PopupWindowScript : MonoBehaviour
 
     private void ShowPopup(popupItem popupItem)
     {
-        Debug.Log(popupItem.headingText + ' ' + popupItem.text);
         isActive = true;
         window.SetActive(true);
         popupHeading.text = popupItem.headingText;

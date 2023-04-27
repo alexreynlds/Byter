@@ -13,105 +13,61 @@ public class ItemPickupScript : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-
         if (other.CompareTag("Player"))
         {
-            if (itemType != BasicItemType.None)
+            itemPickup(other);
+        }
+    }
+
+    public void itemPickup(Collider2D other)
+    {
+        if (itemType != BasicItemType.None)
+        {
+            if (itemType == BasicItemType.Coin)
             {
-                if (itemType == BasicItemType.Coin)
+                if (other.GetComponent<PlayerStats>().coins < 100)
                 {
-                    if (other.GetComponent<PlayerStats>().coins < 100)
-                    {
-                        other.GetComponent<PlayerStats>().coins += 1;
-                    }
-                    else
-                    {
-                        return;
-                    }
+                    other.GetComponent<PlayerStats>().coins += 1;
                 }
-                else if (itemType == BasicItemType.Health)
+                else
                 {
-                    other.GetComponent<PlayerStats>().currentHealth += changeAmount;
-                }
-                else if (itemType == BasicItemType.Energy)
-                {
-                    other.GetComponent<PlayerStats>().currentEnergy += changeAmount;
+                    return;
                 }
             }
-            else
+            else if (itemType == BasicItemType.Health)
             {
-                string tempName = gameObject.name;
+                other.GetComponent<PlayerStats>().currentHealth += changeAmount;
+            }
+            else if (itemType == BasicItemType.Energy)
+            {
+                other.GetComponent<PlayerStats>().currentEnergy += changeAmount;
+            }
+        }
+        else
+        {
+            string tempName = gameObject.name;
 
-                if (tempName == "MHealthUp" || tempName == "MHealthDown")
+            if (tempName == "MHealthUp" || tempName == "MHealthDown")
+            {
+                if (changeAmount < 0)
                 {
-                    if (changeAmount < 0)
+                    // If max health is above 4, decrease it, 4 is the least it can be
+                    if (other.GetComponent<PlayerStats>().maxHealth > 4)
                     {
-                        // If max health is above 4, decrease it, 4 is the least it can be
-                        if (other.GetComponent<PlayerStats>().maxHealth > 4)
-                        {
-                            FindObjectOfType<PopupWindowScript>().AddToQueue(itemName, "Decreased Max Health!");
-                            other.GetComponent<PlayerStats>().maxHealth += changeAmount;
-                        }
-                        else return;
-                    }
-                    // Increase the player's max health
-                    else if (changeAmount > 0)
-                    {
-                        FindObjectOfType<PopupWindowScript>().AddToQueue(itemName, "Increased Max Health!");
+                        FindObjectOfType<PopupWindowScript>().AddToQueue(itemName, "Decreased Max Health!");
                         other.GetComponent<PlayerStats>().maxHealth += changeAmount;
                     }
                     else return;
                 }
+                // Increase the player's max health
+                else if (changeAmount > 0)
+                {
+                    FindObjectOfType<PopupWindowScript>().AddToQueue(itemName, "Increased Max Health!");
+                    other.GetComponent<PlayerStats>().maxHealth += changeAmount;
+                }
+                else return;
             }
-
-
-            // string itemName = gameObject.name;
-            // // itemName = itemName.Substring(0, itemName.Length - 7);
-            // if (itemType == ItemType.Coin)
-            // {
-            //     if (other.GetComponent<PlayerStats>().coins < 100)
-            //     {
-            //         other.GetComponent<PlayerStats>().coins += 1;
-            //     }
-            //     else
-            //     {
-            //         return;
-            //     }
-            // }
-            // else if (itemType == ItemType.Health)
-            // {
-            //     other.GetComponent<PlayerStats>().currentHealth += changeAmount;
-            // }
-            // else if (itemType == ItemType.MaxHealth)
-            // {
-            //     if (changeAmount < 0)
-            //     {
-            //         // If max health is above 4, decrease it, 4 is the least it can be
-            //         if (other.GetComponent<PlayerStats>().maxHealth > 4)
-            //         {
-            //             FindObjectOfType<PopupWindowScript>().AddToQueue(itemName, "Decreased Max Health!");
-            //             other.GetComponent<PlayerStats>().maxHealth += changeAmount;
-            //         }
-            //         else return;
-            //     }
-            //     // Increase the player's max health
-            //     else if (changeAmount > 0)
-            //     {
-            //         FindObjectOfType<PopupWindowScript>().AddToQueue(itemName, "Increased Max Health!");
-            //         other.GetComponent<PlayerStats>().maxHealth += changeAmount;
-            //     }
-            //     else return;
-            // }
-            // else if (itemType == ItemType.Energy)
-            // {
-            //     other.GetComponent<PlayerStats>().currentEnergy += changeAmount;
-            // }
-            // else
-            // {
-            //     other.GetComponent<PlayerStats>().inventory.Add(itemName);
-            // }
-
-            Destroy(gameObject);
         }
+        Destroy(gameObject);
     }
 }

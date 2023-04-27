@@ -21,6 +21,9 @@ public class ShopItemScript : MonoBehaviour
 
     [SerializeField] private GameObject priceText;
 
+    private ShopItem chosenItem;
+    private GameObject storedItem;
+
     void Awake()
     {
         totalWeight = 0;
@@ -43,13 +46,27 @@ public class ShopItemScript : MonoBehaviour
             cumulativeWeight += shopItems[chosenIndex].weight;
         }
 
-        var item = Instantiate(shopItems[chosenIndex].gameObject, new Vector2(transform.position.x, transform.position.y + 0.5f), Quaternion.identity);
-        item.transform.parent = transform;
+        chosenItem = shopItems[chosenIndex];
+        storedItem = Instantiate(shopItems[chosenIndex].gameObject, new Vector2(transform.position.x, transform.position.y + 0.5f), Quaternion.identity);
+        storedItem.GetComponent<BoxCollider2D>().enabled = false;
+        storedItem.transform.parent = transform;
+
         priceText.GetComponent<TextMeshPro>().text = shopItems[chosenIndex].price.ToString();
     }
 
     private void OnTriggerEnter2D(Collider2D other)
     {
         Debug.Log("Triggered");
+        if (other.GetComponent<PlayerStats>().coins > chosenItem.price)
+        {
+            Debug.Log("Bought");
+            other.GetComponent<PlayerStats>().coins -= chosenItem.price;
+            storedItem.GetComponent<BoxCollider2D>().enabled = true;
+            Destroy(gameObject);
+        }
+        else
+        {
+            Debug.Log("Not enough coins");
+        }
     }
 }
