@@ -109,13 +109,43 @@ public class RoomController : MonoBehaviour
         if (loadRoomQueue.Count == 0)
         {
             int i = loadedRooms.Count - 1;
+            int newX, newY;
+            bool roomFound = false;
             Room bossRoom = loadedRooms[i];
-            Vector2Int tempRoom = new Vector2Int(bossRoom.X, bossRoom.Y);
-            Destroy(bossRoom.gameObject);
-            var roomToRemove =
-                loadedRooms.Single(r => r.X == tempRoom.x && r.Y == tempRoom.y);
-            loadedRooms.Remove(roomToRemove);
-            LoadRoom("End", tempRoom.x, tempRoom.y);
+            newX = bossRoom.X;
+            newY = bossRoom.Y;
+            while (!roomFound)
+            {
+                int tempX = Mathf.Abs(newX);
+                int tempY = Mathf.Abs(newY);
+                if (tempX > tempY)
+                {
+                    if (newX > 0)
+                    {
+                        newX++;
+                    }
+                    else
+                    {
+                        newX--;
+                    }
+                }
+                else
+                {
+                    if (newY > 0)
+                    {
+                        newY++;
+                    }
+                    else
+                    {
+                        newY--;
+                    }
+                }
+                if (!DoesRoomExist(newX, newY))
+                {
+                    roomFound = true;
+                }
+            }
+            LoadRoom("End", newX, newY);
         }
     }
 
@@ -297,7 +327,8 @@ public class RoomController : MonoBehaviour
         }
     }
 
-    public void spawnItem(GameObject item, Vector3 position){
+    public void spawnItem(GameObject item, Vector3 position)
+    {
         Instantiate(item, position, Quaternion.identity);
     }
 }
