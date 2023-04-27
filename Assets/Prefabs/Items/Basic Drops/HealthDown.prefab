@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 8946186298040356175}
   - component: {fileID: 8786737970721948768}
   m_Layer: 0
-  m_Name: MHealthDown
+  m_Name: HealthDown
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -75,7 +75,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: -508953194, guid: 525071cdd1d978f4690c49553056724d, type: 3}
+  m_Sprite: {fileID: -298661800, guid: 525071cdd1d978f4690c49553056724d, type: 3}
   m_Color: {r: 0.9725245, g: 1, b: 0, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -100,6 +100,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemType: 1
   changeAmount: -2
+  itemName: 
+  itemDescription: 
 --- !u!61 &8786737970721948768
 BoxCollider2D:
   m_ObjectHideFlags: 0

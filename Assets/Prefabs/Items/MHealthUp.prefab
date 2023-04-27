@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 8946186298040356175}
   - component: {fileID: 8786737970721948768}
   m_Layer: 0
-  m_Name: HealthUp
+  m_Name: MHealthUp
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -75,8 +75,8 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 1086119850, guid: e70b17ab34393402982c0d24ba96225e, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Sprite: {fileID: 1204989088, guid: 525071cdd1d978f4690c49553056724d, type: 3}
+  m_Color: {r: 0.9725245, g: 1, b: 0, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -99,7 +99,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   itemType: 0
-  changeAmount: 1
+  changeAmount: 2
+  itemName: Bio-Organic Servo
+  itemDescription: Increased Max Health!
 --- !u!61 &8786737970721948768
 BoxCollider2D:
   m_ObjectHideFlags: 0

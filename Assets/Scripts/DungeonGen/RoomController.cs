@@ -152,29 +152,101 @@ public class RoomController : MonoBehaviour
     IEnumerator SpawnShopRoom()
     {
         spawnedShopRoom = true;
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(0.7f);
 
-        Room shopRoom = loadedRooms[Random.Range(loadedRooms.Count / 2, loadedRooms.Count - 2)];
-        Vector2Int tempRoom = new Vector2Int(shopRoom.X, shopRoom.Y);
-        Destroy(shopRoom.gameObject);
-        var roomToRemove =
-            loadedRooms.Single(r => r.X == tempRoom.x && r.Y == tempRoom.y);
-        loadedRooms.Remove(roomToRemove);
-        LoadRoom("Shop", tempRoom.x, tempRoom.y);
+        // Room shopRoom = loadedRooms[Random.Range(loadedRooms.Count / 2, loadedRooms.Count - 2)];
+        // Vector2Int tempRoom = new Vector2Int(shopRoom.X, shopRoom.Y);
+        // Destroy(shopRoom.gameObject);
+        // var roomToRemove =
+        //     loadedRooms.Single(r => r.X == tempRoom.x && r.Y == tempRoom.y);
+        // loadedRooms.Remove(roomToRemove);
+        // LoadRoom("Shop", tempRoom.x, tempRoom.y);
+
+        // int i = loadedRooms.Count - 1;
+        int newX, newY;
+        bool roomFound = false;
+        Room shopRoom = loadedRooms[Random.Range(2, loadedRooms.Count - 3)];
+
+        newX = shopRoom.X;
+        newY = shopRoom.Y;
+
+        while (!roomFound)
+        {
+            int tempX = Mathf.Abs(newX);
+            int tempY = Mathf.Abs(newY);
+            if (tempX > tempY)
+            {
+                if (newX > 0)
+                {
+                    newX++;
+                }
+                else
+                {
+                    newX--;
+                }
+            }
+            else
+            {
+                if (newY > 0)
+                {
+                    newY++;
+                }
+                else
+                {
+                    newY--;
+                }
+            }
+            if (!DoesRoomExist(newX, newY))
+            {
+                roomFound = true;
+            }
+        }
+        LoadRoom("Shop", newX, newY);
     }
 
     IEnumerator SpawnItemRoom()
     {
         spawnedItemRoom = true;
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(0.6f);
 
+        int newX, newY;
+        bool roomFound = false;
         Room itemRoom = loadedRooms[Random.Range(1, loadedRooms.Count - 2)];
-        Vector2Int tempRoom = new Vector2Int(itemRoom.X, itemRoom.Y);
-        Destroy(itemRoom.gameObject);
-        var roomToRemove =
-            loadedRooms.Single(r => r.X == tempRoom.x && r.Y == tempRoom.y);
-        loadedRooms.Remove(roomToRemove);
-        LoadRoom("ItemRoom", tempRoom.x, tempRoom.y);
+        newX = itemRoom.X;
+        newY = itemRoom.Y;
+
+        while (!roomFound)
+        {
+            int tempX = Mathf.Abs(newX);
+            int tempY = Mathf.Abs(newY);
+            if (tempX > tempY)
+            {
+                if (newX > 0)
+                {
+                    newX++;
+                }
+                else
+                {
+                    newX--;
+                }
+            }
+            else
+            {
+                if (newY > 0)
+                {
+                    newY++;
+                }
+                else
+                {
+                    newY--;
+                }
+            }
+            if (!DoesRoomExist(newX, newY))
+            {
+                roomFound = true;
+            }
+        }
+        LoadRoom("ItemRoom", newX, newY);
     }
 
     public void LoadRoom(string name, int x, int y)

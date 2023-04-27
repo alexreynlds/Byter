@@ -52,12 +52,10 @@ public class Door : MonoBehaviour
     {
         doorCollider.SetActive(true);
         transform.GetChild(0).GetComponent<SpriteRenderer>().color = Color.red;
-
     }
 
     public void Open()
     {
-
         doorCollider.SetActive(false);
         transform.GetChild(0).GetComponent<SpriteRenderer>().color = Color.white;
     }
