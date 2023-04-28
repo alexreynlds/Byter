@@ -14,11 +14,14 @@ public class Door : MonoBehaviour
 
     public DoorDir doorDir;
     public GameObject doorCollider;
+    public GameObject keycardCollider;
 
     private GameObject player;
 
     private float widthOffset = 3.5f;
     private float heightOffset = 3.5f;
+
+    public bool keycardLocked = false;
 
     private void Start()
     {
@@ -27,26 +30,44 @@ public class Door : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.gameObject.tag == ("Player"))
+        if (other.gameObject.tag == ("Player") && !keycardLocked)
         {
             switch (doorDir)
             {
-
                 case DoorDir.up:
-                    player.transform.position = new Vector2(player.transform.position.x, player.transform.position.y + heightOffset);
+                    player.transform.position = new Vector2(
+                        player.transform.position.x,
+                        player.transform.position.y + heightOffset
+                    );
                     break;
                 case DoorDir.down:
-                    player.transform.position = new Vector2(player.transform.position.x, player.transform.position.y - heightOffset);
+                    player.transform.position = new Vector2(
+                        player.transform.position.x,
+                        player.transform.position.y - heightOffset
+                    );
                     break;
                 case DoorDir.left:
-                    player.transform.position = new Vector2(player.transform.position.x - widthOffset, player.transform.position.y);
+                    player.transform.position = new Vector2(
+                        player.transform.position.x - widthOffset,
+                        player.transform.position.y
+                    );
                     break;
                 case DoorDir.right:
-                    player.transform.position = new Vector2(player.transform.position.x + widthOffset, player.transform.position.y);
+                    player.transform.position = new Vector2(
+                        player.transform.position.x + widthOffset,
+                        player.transform.position.y
+                    );
                     break;
             }
         }
     }
+
+    public void KeycardClose()
+    {
+        doorCollider.SetActive(true);
+    }
+
+    public void KeycardOpen() { }
 
     public void Close()
     {

@@ -88,92 +88,132 @@ public class Room : MonoBehaviour
                     if (GetRoom("u") == null)
                     {
                         // Disable the door
-                        door
-                            .gameObject
-                            .transform
-                            .Find("Door")
-                            .gameObject
-                            .SetActive(false);
+                        door.gameObject.transform.Find("Door").gameObject.SetActive(false);
 
                         // if (GetRoom("d") != null)
                         // {
-                            // Enable the wall
-                            door
-                                .gameObject
-                                .transform
-                                .Find("Wall")
-                                .gameObject
-                                .SetActive(true);
+                        // Enable the wall
+                        door.gameObject.transform.Find("Wall").gameObject.SetActive(true);
                         // }
+                    }
+                    else
+                    {
+                        if (GetRoom("u").name.Contains("ItemRoom"))
+                        {
+                            Debug.Log("Epic");
+                            door.gameObject.transform
+                                .Find("Door")
+                                .GetComponent<SpriteRenderer>()
+                                .color = Color.yellow;
+                            door.GetComponent<Door>().keycardLocked = true;
+                        }
+                        else if (GetRoom("u").name.Contains("End"))
+                        {
+                            Debug.Log("Epic");
+                            door.gameObject.transform
+                                .Find("Door")
+                                .GetComponent<SpriteRenderer>()
+                                .color = Color.black;
+                        }
                     }
                     break;
                 case Door.DoorDir.down:
                     if (GetRoom("d") == null)
                     {
                         // Disable the door
-                        door
-                            .gameObject
-                            .transform
-                            .Find("Door")
-                            .gameObject
-                            .SetActive(false);
+                        door.gameObject.transform.Find("Door").gameObject.SetActive(false);
 
                         // if (GetRoom("u") != null)
                         // {
-                            // Enable the wall
-                            door
-                                .gameObject
-                                .transform
-                                .Find("Wall")
-                                .gameObject
-                                .SetActive(true);
+                        // Enable the wall
+                        door.gameObject.transform.Find("Wall").gameObject.SetActive(true);
                         // }
+                    }
+                    else
+                    {
+                        if (GetRoom("d").name.Contains("ItemRoom"))
+                        {
+                            Debug.Log("Epic");
+                            door.gameObject.transform
+                                .Find("Door")
+                                .GetComponent<SpriteRenderer>()
+                                .color = Color.yellow;
+                            door.GetComponent<Door>().keycardLocked = true;
+                        }
+                        else if (GetRoom("d").name.Contains("End"))
+                        {
+                            Debug.Log("Epic");
+                            door.gameObject.transform
+                                .Find("Door")
+                                .GetComponent<SpriteRenderer>()
+                                .color = Color.black;
+                        }
                     }
                     break;
                 case Door.DoorDir.left:
                     if (GetRoom("l") == null)
                     {
                         // Disable the door
-                        door
-                            .gameObject
-                            .transform
-                            .Find("Door")
-                            .gameObject
-                            .SetActive(false);
+                        door.gameObject.transform.Find("Door").gameObject.SetActive(false);
 
                         // if (GetRoom("r") != null)
                         // {
-                            // Enable the wall
-                            door
-                                .gameObject
-                                .transform
-                                .Find("Wall")
-                                .gameObject
-                                .SetActive(true);
+                        // Enable the wall
+                        door.gameObject.transform.Find("Wall").gameObject.SetActive(true);
                         // }
+                    }
+                    else
+                    {
+                        if (GetRoom("l").name.Contains("ItemRoom"))
+                        {
+                            Debug.Log("Epic");
+                            door.gameObject.transform
+                                .Find("Door")
+                                .GetComponent<SpriteRenderer>()
+                                .color = Color.yellow;
+                            door.GetComponent<Door>().keycardLocked = true;
+                        }
+                        else if (GetRoom("l").name.Contains("End"))
+                        {
+                            Debug.Log("Epic");
+                            door.gameObject.transform
+                                .Find("Door")
+                                .GetComponent<SpriteRenderer>()
+                                .color = Color.black;
+                        }
                     }
                     break;
                 case Door.DoorDir.right:
                     if (GetRoom("r") == null)
                     {
                         // Disable the door
-                        door
-                            .gameObject
-                            .transform
-                            .Find("Door")
-                            .gameObject
-                            .SetActive(false);
+                        door.gameObject.transform.Find("Door").gameObject.SetActive(false);
 
                         // if (GetRoom("l") != null)
                         // {
-                            // Enable the wall
-                            door
-                                .gameObject
-                                .transform
-                                .Find("Wall")
-                                .gameObject
-                                .SetActive(true);
+                        // Enable the wall
+                        door.gameObject.transform.Find("Wall").gameObject.SetActive(true);
                         // }
+                    }
+                    else
+                    {
+                        if (GetRoom("r").name.Contains("ItemRoom"))
+                        {
+                            Debug.Log("Epic");
+                            door.gameObject.transform
+                                .Find("Door")
+                                .GetComponent<SpriteRenderer>()
+                                .color = Color.yellow;
+                            door.GetComponent<Door>().keycardLocked = true;
+                        }
+                        else if (GetRoom("r").name.Contains("End"))
+                        {
+                            Debug.Log("Epic");
+                            door.gameObject.transform
+                                .Find("Door")
+                                .GetComponent<SpriteRenderer>()
+                                .color = Color.black;
+                        }
                     }
                     break;
             }
@@ -223,9 +263,10 @@ public class Room : MonoBehaviour
     void OnDrawGizmos()
     {
         Gizmos.color = Color.red;
-        Gizmos
-            .DrawWireCube(GetRoomCenter() - new Vector3(0.5f, 0.5f, 0),
-            new Vector3(roomW, roomH, 0));
+        Gizmos.DrawWireCube(
+            GetRoomCenter() - new Vector3(0.5f, 0.5f, 0),
+            new Vector3(roomW, roomH, 0)
+        );
     }
 
     public Vector3 GetRoomCenter()

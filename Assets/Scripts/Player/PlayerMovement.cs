@@ -16,17 +16,22 @@ public class PlayerMovement : MonoBehaviour
     public ContactFilter2D movementFilter;
 
     [Header("Sprites")]
-    [SerializeField] private Sprite[] bodySprites;
+    [SerializeField]
+    private Sprite[] bodySprites;
 
     [SerializeField]
     private Sprite[] bottomSprites;
-    [SerializeField] private GameObject body;
 
-    [SerializeField] private GameObject bottom;
+    [SerializeField]
+    private GameObject body;
+
+    [SerializeField]
+    private GameObject bottom;
 
     private int currentBottomSprite = 0;
 
-    [SerializeField] private float bottomSpriteChangeTimer = 0.25f;
+    [SerializeField]
+    private float bottomSpriteChangeTimer = 0.25f;
 
     private float bottomSpriteChangeTimerTemp;
     List<RaycastHit2D> castCollisions = new List<RaycastHit2D>();
@@ -57,9 +62,6 @@ public class PlayerMovement : MonoBehaviour
             }
             UpdateSprite();
         }
-
-
-
     }
 
     void Update()
@@ -77,18 +79,16 @@ public class PlayerMovement : MonoBehaviour
 
     private bool TryMove(Vector2 direction)
     {
-        int count =
-            rb
-                .Cast(direction,
-                movementFilter,
-                castCollisions,
-                moveSpeed * Time.deltaTime + collisionOffset);
+        int count = rb.Cast(
+            direction,
+            movementFilter,
+            castCollisions,
+            moveSpeed * Time.deltaTime + collisionOffset
+        );
 
         if (count == 0)
         {
-            rb
-                .MovePosition(rb.position +
-                direction * moveSpeed * Time.deltaTime);
+            rb.MovePosition(rb.position + direction * moveSpeed * Time.deltaTime);
             return true;
         }
         else
@@ -100,16 +100,6 @@ public class PlayerMovement : MonoBehaviour
     void OnMove(InputValue movementValue)
     {
         movementInput = movementValue.Get<Vector2>();
-    }
-
-    void OnTest()
-    {
-        GetComponent<PlayerStats>().currentEnergy -= 1;
-    }
-
-    void OnTest2()
-    {
-        GetComponent<PlayerStats>().maxHealth += 2;
     }
 
     void UpdateSprite()
@@ -138,9 +128,9 @@ public class PlayerMovement : MonoBehaviour
 
     void UpdateBottomSprite()
     {
-
         currentBottomSprite++;
-        if (currentBottomSprite > 2) currentBottomSprite = 0;
+        if (currentBottomSprite > 2)
+            currentBottomSprite = 0;
 
         bottom.GetComponent<SpriteRenderer>().sprite = bottomSprites[currentBottomSprite];
     }

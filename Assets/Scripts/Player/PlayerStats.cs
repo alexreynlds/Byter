@@ -12,10 +12,12 @@ public class PlayerStats : MonoBehaviour
     public float projectileSpeed = 1f;
     public float attackSpeed = 0.5f;
     public float attackDamage = 1f;
+
     // Range controls the amount of time before the bullet is destroyed
     // Lower float means lower range
     public float attackRange = 3f;
     public float attackKnockback = 1f;
+
     // Main Stats
     public int currentHealth;
     public int currentEnergy;
@@ -24,12 +26,15 @@ public class PlayerStats : MonoBehaviour
     public List<string> inventory = new List<string>();
 
     public int coins;
+    public int keycards;
 
     // Start is called before the first frame update
     void Awake()
     {
         currentHealth = maxHealth;
         currentEnergy = maxEnergy;
+        coins = 0;
+        keycards = 0;
     }
 
     // Update is called once per frame
@@ -57,5 +62,6 @@ public class PlayerStats : MonoBehaviour
     {
         inventory.Clear();
         coins = 0;
+        keycards = 0;
     }
 }

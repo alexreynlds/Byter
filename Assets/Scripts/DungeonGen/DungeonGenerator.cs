@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class DungeonGenerator : MonoBehaviour
 {
@@ -13,7 +14,7 @@ public class DungeonGenerator : MonoBehaviour
         Random.InitState(System.DateTime.Now.Millisecond);
 
         dungeonRooms = DungeonCrawlerController.GenerateDungeon(dungeonData);
-        SpawnRooms (dungeonRooms);
+        SpawnRooms(dungeonRooms);
     }
 
     private void SpawnRooms(IEnumerable<Vector2Int> rooms)
@@ -22,11 +23,33 @@ public class DungeonGenerator : MonoBehaviour
 
         foreach (Vector2Int roomLocation in rooms)
         {
-            RoomController
-                .instance
-                .LoadRoom(RoomController.instance.GetRandomRoomName(),
+            RoomController.instance.LoadRoom(
+                RoomController.instance.GetRandomRoomName(),
                 roomLocation.x,
-                roomLocation.y);
+                roomLocation.y
+            );
         }
     }
+
+    // public void RegenDungeon()
+    // {
+    //     this.gameObject.GetComponent<RoomController>().enabled = false;
+
+    //     for (int i = 0; i < RoomController.instance.loadedRooms.Count; i++)
+    //     {
+    //         string x = RoomController.instance.loadedRooms[i].name;
+    //         string[] roomName = x.Split('_');
+    //         x = roomName[0] + roomName[1];
+    //         x = x.Substring(0, x.Length - 5);
+    //         Debug.Log(x);
+    //         Destroy(RoomController.instance.loadedRooms[i].gameObject);
+    //         SceneManager.UnloadSceneAsync(SceneManager.GetSceneByName(x));
+    //     }
+
+    //     // SceneManager.UnloadSceneAsync(SceneManager.GetSceneByName("Floor1Start"));
+
+    //     RoomController.instance.loadedRooms.Clear();
+    //     dungeonRooms = DungeonCrawlerController.GenerateDungeon(dungeonData);
+    //     SpawnRooms(dungeonRooms);
+    // }
 }

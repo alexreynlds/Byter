@@ -9,20 +9,36 @@ using UnityEngine.Audio;
 public class UIScript : MonoBehaviour
 {
     private GameObject player;
-    [SerializeField] private GameObject inGameUI;
 
-    [SerializeField] private GameObject pauseMenu;
+    [SerializeField]
+    private GameObject inGameUI;
+
+    [SerializeField]
+    private GameObject pauseMenu;
 
     private bool isPaused = false;
-    [SerializeField] private AudioSource clickSound;
+
+    [SerializeField]
+    private AudioSource clickSound;
 
     [Header("Options Menu")]
-    [SerializeField] private AudioMixer audioMixer;
-    [SerializeField] private Slider musicVolumeSlider;
-    [SerializeField] private Slider sfxVolumeSlider;
-    [SerializeField] private Dropdown resolutionDropdown;
-    [SerializeField] private Dropdown graphicsDropdown;
-    [SerializeField] private Toggle fullscreenToggle;
+    [SerializeField]
+    private AudioMixer audioMixer;
+
+    [SerializeField]
+    private Slider musicVolumeSlider;
+
+    [SerializeField]
+    private Slider sfxVolumeSlider;
+
+    [SerializeField]
+    private Dropdown resolutionDropdown;
+
+    [SerializeField]
+    private Dropdown graphicsDropdown;
+
+    [SerializeField]
+    private Toggle fullscreenToggle;
 
     private Resolution[] resolutions;
     private int currentResolutionIndex = 0;
@@ -42,10 +58,19 @@ public class UIScript : MonoBehaviour
 
         for (int i = 0; i < resolutions.Length; i++)
         {
-            string option = resolutions[i].width + " x " + resolutions[i].height + " @ " + resolutions[i].refreshRate + "hz";
+            string option =
+                resolutions[i].width
+                + " x "
+                + resolutions[i].height
+                + " @ "
+                + resolutions[i].refreshRate
+                + "hz";
             options.Add(option);
 
-            if (resolutions[i].width == Screen.currentResolution.width && resolutions[i].height == Screen.currentResolution.height)
+            if (
+                resolutions[i].width == Screen.currentResolution.width
+                && resolutions[i].height == Screen.currentResolution.height
+            )
             {
                 currentResolutionIndex = i;
             }
@@ -128,8 +153,7 @@ public class UIScript : MonoBehaviour
         {
             inventoryString += item + ", ";
         }
-        inventoryString =
-            inventoryString.Substring(0, inventoryString.Length - 2);
+        inventoryString = inventoryString.Substring(0, inventoryString.Length - 2);
         inGameUI.transform.Find("Inventory").GetComponent<Text>().text = inventoryString;
 
         // FPS Counter
@@ -138,14 +162,22 @@ public class UIScript : MonoBehaviour
 
         // Coins
         // inGameUI.transform.Find("CoinsText").GetComponent<Text>().text = player.GetComponent<PlayerStats>().coins.ToString();
-        inGameUI.transform.Find("CoinHolder").transform.Find("CoinsText").GetComponent<Text>().text = player.GetComponent<PlayerStats>().coins.ToString();
+        inGameUI.transform
+            .Find("CoinHolder")
+            .transform.Find("CoinsText")
+            .GetComponent<Text>()
+            .text = player.GetComponent<PlayerStats>().coins.ToString();
+        inGameUI.transform
+            .Find("CoinHolder")
+            .transform.Find("KeycardText")
+            .GetComponent<Text>()
+            .text = player.GetComponent<PlayerStats>().keycards.ToString();
     }
 
     public void OnPause()
     {
         if (!isPaused)
         {
-
             Time.timeScale = 0;
             pauseMenu.SetActive(true);
             // inGameUI.SetActive(false);
@@ -163,7 +195,6 @@ public class UIScript : MonoBehaviour
             Time.timeScale = 1;
             isPaused = false;
         }
-
     }
 
     public void OnQuit()
@@ -222,13 +253,11 @@ public class UIScript : MonoBehaviour
         resolutionDropdown.RefreshShownValue();
         SetResolution(resolutionDropdown.options.Count - 1);
 
-
         SetFullscreen(true);
         fullscreenToggle.isOn = true;
 
         graphicsDropdown.value = 3;
         graphicsDropdown.RefreshShownValue();
         SetQuality(3);
-
     }
 }
