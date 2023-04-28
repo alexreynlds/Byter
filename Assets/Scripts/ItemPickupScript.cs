@@ -15,11 +15,11 @@ public class ItemPickupScript : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            itemPickup(other);
+            ItemPickup(other.gameObject);
         }
     }
 
-    public void itemPickup(Collider2D other)
+    public void ItemPickup(GameObject other)
     {
         if (itemType != BasicItemType.None)
         {

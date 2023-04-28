@@ -32,11 +32,11 @@ public class EnergyBarScript : MonoBehaviour
     void CreateEnergyBar()
     {
         GameObject startEnergy = Instantiate(startEnergyContainer, new Vector3(0, 0, 0), Quaternion.identity, transform);
-        startEnergy.GetComponent<RectTransform>().anchoredPosition = new Vector3(-300, 125, 0);
+        startEnergy.GetComponent<RectTransform>().anchoredPosition = new Vector3(0, 0, 0);
         energySprites.Add(startEnergy);
 
         GameObject endEnergy = Instantiate(endEnergyContainer, new Vector3(0, 0, 0), Quaternion.identity, transform);
-        endEnergy.GetComponent<RectTransform>().anchoredPosition = new Vector3(-300 , 95, 0);
+        endEnergy.GetComponent<RectTransform>().anchoredPosition = new Vector3(0, -30, 0);
         energySprites.Add(endEnergy);
         UpdateEnergyBar();
     }

@@ -17,15 +17,20 @@ public class ShopItemScript : MonoBehaviour
 
     float totalWeight;
 
-    [SerializeField] private List<ShopItem> shopItems = new List<ShopItem>();
+    [SerializeField]
+    private List<ShopItem> shopItems = new List<ShopItem>();
 
-    [SerializeField] private GameObject priceText;
+    [SerializeField]
+    private GameObject priceText;
 
     private ShopItem chosenItem;
     private GameObject storedItem;
+    private GameObject player;
+    private bool bought = false;
 
     void Awake()
     {
+        player = GameObject.FindGameObjectWithTag("Player");
         totalWeight = 0;
         foreach (ShopItem shopItem in shopItems)
         {
@@ -47,7 +52,11 @@ public class ShopItemScript : MonoBehaviour
         }
 
         chosenItem = shopItems[chosenIndex];
-        storedItem = Instantiate(shopItems[chosenIndex].gameObject, new Vector2(transform.position.x, transform.position.y + 0.5f), Quaternion.identity);
+        storedItem = Instantiate(
+            shopItems[chosenIndex].gameObject,
+            new Vector2(transform.position.x, transform.position.y + 0.5f),
+            Quaternion.identity
+        );
         storedItem.GetComponent<BoxCollider2D>().enabled = false;
         storedItem.transform.parent = transform;
 
@@ -57,16 +66,23 @@ public class ShopItemScript : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D other)
     {
         Debug.Log("Triggered");
-        if (other.GetComponent<PlayerStats>().coins > chosenItem.price)
+        if (!bought && other.CompareTag("Player"))
         {
-            Debug.Log("Bought");
-            other.GetComponent<PlayerStats>().coins -= chosenItem.price;
-            storedItem.GetComponent<BoxCollider2D>().enabled = true;
-            Destroy(gameObject);
+            if (other.GetComponent<PlayerStats>().coins >= chosenItem.price)
+            {
+                Debug.Log("Bought");
+                other.GetComponent<PlayerStats>().coins -= chosenItem.price;
+                storedItem.GetComponent<ItemPickupScript>().ItemPickup(player);
+                priceText.SetActive(false);
+            }
+            else
+            {
+                Debug.Log("Not enough coins");
+            }
         }
         else
         {
-            Debug.Log("Not enough coins");
+            return;
         }
     }
 }

@@ -53,7 +53,8 @@ public class RoomController : MonoBehaviour
 
     void UpdateRoomQueue()
     {
-        if (isLoadingRoom) return;
+        if (isLoadingRoom)
+            return;
         if (loadRoomQueue.Count == 0)
         {
             if (!spawnedBossRoom)
@@ -70,7 +71,6 @@ public class RoomController : MonoBehaviour
             {
                 StartCoroutine(SpawnItemRoom());
             }
-
             else if (spawnedBossRoom && !updatedRooms && spawnedShopRoom && spawnedItemRoom)
             {
                 // foreach (Room room in loadedRooms)
@@ -83,7 +83,6 @@ public class RoomController : MonoBehaviour
 
                 GameObject.Find("Player").GetComponent<PlayerStats>().wipeInventory();
                 GameObject.Find("Player").GetComponent<PlayerInput>().enabled = true;
-
             }
             return;
         }
@@ -109,7 +108,8 @@ public class RoomController : MonoBehaviour
         if (loadRoomQueue.Count == 0)
         {
             int i = loadedRooms.Count - 1;
-            int newX, newY;
+            int newX,
+                newY;
             bool roomFound = false;
             Room bossRoom = loadedRooms[i];
             newX = bossRoom.X;
@@ -154,18 +154,10 @@ public class RoomController : MonoBehaviour
         spawnedShopRoom = true;
         yield return new WaitForSeconds(0.7f);
 
-        // Room shopRoom = loadedRooms[Random.Range(loadedRooms.Count / 2, loadedRooms.Count - 2)];
-        // Vector2Int tempRoom = new Vector2Int(shopRoom.X, shopRoom.Y);
-        // Destroy(shopRoom.gameObject);
-        // var roomToRemove =
-        //     loadedRooms.Single(r => r.X == tempRoom.x && r.Y == tempRoom.y);
-        // loadedRooms.Remove(roomToRemove);
-        // LoadRoom("Shop", tempRoom.x, tempRoom.y);
-
-        // int i = loadedRooms.Count - 1;
-        int newX, newY;
+        int newX,
+            newY;
         bool roomFound = false;
-        Room shopRoom = loadedRooms[Random.Range(2, loadedRooms.Count - 3)];
+        Room shopRoom = loadedRooms[Random.Range(0, loadedRooms.Count - 3)];
 
         newX = shopRoom.X;
         newY = shopRoom.Y;
@@ -209,9 +201,10 @@ public class RoomController : MonoBehaviour
         spawnedItemRoom = true;
         yield return new WaitForSeconds(0.6f);
 
-        int newX, newY;
+        int newX,
+            newY;
         bool roomFound = false;
-        Room itemRoom = loadedRooms[Random.Range(1, loadedRooms.Count - 2)];
+        Room itemRoom = loadedRooms[Random.Range(0, loadedRooms.Count - 2)];
         newX = itemRoom.X;
         newY = itemRoom.Y;
 
@@ -252,7 +245,8 @@ public class RoomController : MonoBehaviour
     public void LoadRoom(string name, int x, int y)
     {
         // Check if room already exists
-        if (DoesRoomExist(x, y)) return;
+        if (DoesRoomExist(x, y))
+            return;
 
         RoomInfo newRoomData = new RoomInfo();
         newRoomData.name = name;
@@ -266,8 +260,7 @@ public class RoomController : MonoBehaviour
     {
         string roomName = currentLevelName + roomInfo.name;
 
-        AsyncOperation loadRoom =
-            SceneManager.LoadSceneAsync(roomName, LoadSceneMode.Additive);
+        AsyncOperation loadRoom = SceneManager.LoadSceneAsync(roomName, LoadSceneMode.Additive);
 
         while (loadRoom.isDone == false)
         {
@@ -279,21 +272,16 @@ public class RoomController : MonoBehaviour
     {
         if (!DoesRoomExist(currentLoadRoomData.X, currentLoadRoomData.Y))
         {
-            room.transform.position =
-                new Vector3(currentLoadRoomData.X * room.roomW,
-                    currentLoadRoomData.Y * room.roomH,
-                    0);
+            room.transform.position = new Vector3(
+                currentLoadRoomData.X * room.roomW,
+                currentLoadRoomData.Y * room.roomH,
+                0
+            );
 
             room.X = currentLoadRoomData.X;
             room.Y = currentLoadRoomData.Y;
             room.name =
-                currentLevelName +
-                "_" +
-                currentLoadRoomData.name +
-                " " +
-                room.X +
-                ", " +
-                room.Y;
+                currentLevelName + "_" + currentLoadRoomData.name + " " + room.X + ", " + room.Y;
             room.transform.parent = this.transform;
 
             isLoadingRoom = false;
