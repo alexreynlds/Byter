@@ -147,7 +147,7 @@ public class Door : MonoBehaviour
         // transform.GetComponent<BoxCollider2D>().isTrigger = true;
         door.GetComponent<SpriteRenderer>().sprite = doorSprites[3];
         transform.GetComponent<BoxCollider2D>().size = doorColliderSize;
-        RoomController.instance.ItemRoomUnlockDoorTest();
+        RoomController.instance.ItemRoomUnlockDoors();
     }
 
     public void Close()

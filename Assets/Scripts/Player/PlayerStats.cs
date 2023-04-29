@@ -64,4 +64,9 @@ public class PlayerStats : MonoBehaviour
         coins = 0;
         keycards = 0;
     }
+
+    public void TakeDamage(int damage)
+    {
+        currentHealth -= damage;
+    }
 }

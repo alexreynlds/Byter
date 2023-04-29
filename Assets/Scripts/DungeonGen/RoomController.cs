@@ -16,45 +16,53 @@ public class RoomInfo
 
 public class RoomController : MonoBehaviour
 {
+    // public static RoomController instance;
+
+    // string currentLevelName = "Floor1";
+
+    // RoomInfo currentLoadRoomData;
+
+    // Room currentRoom;
+
+    // Queue<RoomInfo> loadRoomQueue = new Queue<RoomInfo>();
+
+    // public List<Room> loadedRooms = new List<Room>();
+
+    // bool isLoadingRoom = false;
+
+    // // Special Rooms
+    // bool spawnedBossRoom = false;
+    // bool spawnedShopRoom = false;
+    // bool spawnedItemRoom = false;
+
+    // private Vector2 u = new Vector2(0, 1);
+    // private Vector2 d = new Vector2(0, -1);
+    // private Vector2 l = new Vector2(-1, 0);
+    // private Vector2 r = new Vector2(1, 0);
+
+    // private List<Vector2> directions;
+
+
+
+    // bool updatedRooms = false;
+
     public static RoomController instance;
-
-    string currentLevelName = "Floor1";
-
-    RoomInfo currentLoadRoomData;
-
-    Room currentRoom;
-
-    Queue<RoomInfo> loadRoomQueue = new Queue<RoomInfo>();
-
-    public List<Room> loadedRooms = new List<Room>();
-
-    bool isLoadingRoom = false;
-
-    // Special Rooms
-    bool spawnedBossRoom = false;
-    bool spawnedShopRoom = false;
-    bool spawnedItemRoom = false;
-
-    private Vector2 u = new Vector2(0, 1);
-    private Vector2 d = new Vector2(0, -1);
-    private Vector2 l = new Vector2(-1, 0);
-    private Vector2 r = new Vector2(1, 0);
-
-    private List<Vector2> directions;
-
-
-
-    bool updatedRooms = false;
+    private string currentLevelName = "Floor1";
+    private RoomInfo currentLoadRoomData;
+    private Room currentRoom;
+    private Queue<RoomInfo> loadRoomQueue = new Queue<RoomInfo>();
+    private List<Room> loadedRooms = new List<Room>();
+    private bool isLoadingRoom = false;
+    private bool spawnedBossRoom = false;
+    private bool spawnedShopRoom = false;
+    private bool spawnedItemRoom = false;
+    private List<Vector2> directions = new List<Vector2> { new Vector2(0, 1), new Vector2(0, -1), new Vector2(-1, 0), new Vector2(1, 0) };
+    private bool updatedRooms = false;
 
     void Awake()
     {
         instance = this;
         GameObject.Find("Player").GetComponent<PlayerInput>().enabled = false;
-        directions = new List<Vector2>();
-        directions.Add(u);
-        directions.Add(d);
-        directions.Add(l);
-        directions.Add(r);
     }
 
     void Update()
@@ -85,7 +93,7 @@ public class RoomController : MonoBehaviour
             else if (spawnedBossRoom && !updatedRooms && spawnedShopRoom && spawnedItemRoom)
             {
 
-                StartCoroutine(test());
+                StartCoroutine(FinishUp());
                 UpdateRooms();
                 updatedRooms = true;
             }
@@ -97,7 +105,7 @@ public class RoomController : MonoBehaviour
         StartCoroutine(LoadRoomRoutine(currentLoadRoomData));
     }
 
-    IEnumerator test()
+    IEnumerator FinishUp()
     {
         yield return new WaitForSeconds(1.0f);
         foreach (Room room in loadedRooms)
@@ -138,7 +146,10 @@ public class RoomController : MonoBehaviour
         int maxIterations = 50;
         int minimum = 0;
 
-        if (roomType == "end") minimum = loadedRooms.Count - 1;
+        if (roomType == "end")
+        {
+            minimum = loadedRooms.Count - 1;
+        }
 
         while (!roomFound && maxIterations > 0)
         {
@@ -148,6 +159,7 @@ public class RoomController : MonoBehaviour
             {
                 randomRoom = loadedRooms[Random.Range(0, loadedRooms.Count - 1)];
             }
+
             while (randomRoom.name.Contains("End"))
             {
                 randomRoom = loadedRooms[Random.Range(loadedRooms.Count / 2, loadedRooms.Count - 1)];
@@ -174,102 +186,70 @@ public class RoomController : MonoBehaviour
 
                 tempDirections.Remove(tempDirection);
             }
+
             maxIterations--;
         }
+
         if (roomFound)
         {
             LoadRoom(roomType, newX, newY);
         }
     }
 
-    public void ItemRoomUnlockDoorTest()
+
+    public void ItemRoomUnlockDoors()
     {
-        Room itemRoom = null;
-        bool roomUp = false;
-        bool roomDown = false;
-        bool roomLeft = false;
-        bool roomRight = false;
+        Room itemRoom = loadedRooms.FirstOrDefault(room => room.name.Contains("ItemRoom"));
+        if (itemRoom == null) return;
 
-        foreach (Room room in loadedRooms)
-        {
-            if (room.name.Contains("ItemRoom"))
-            {
-                itemRoom = room;
-            }
-        }
+        int x = itemRoom.X;
+        int y = itemRoom.Y;
 
-        if (DoesRoomExist(itemRoom.X, itemRoom.Y + 1))
+        if (DoesRoomExist(x, y + 1))
         {
-            roomUp = true;
+            loadedRooms.FirstOrDefault(room => room.X == x && room.Y == y + 1)?.UnlockDoors();
         }
-        if (DoesRoomExist(itemRoom.X, itemRoom.Y - 1))
+        if (DoesRoomExist(x, y - 1))
         {
-            roomDown = true;
+            loadedRooms.FirstOrDefault(room => room.X == x && room.Y == y - 1)?.UnlockDoors();
         }
-        if (DoesRoomExist(itemRoom.X - 1, itemRoom.Y))
+        if (DoesRoomExist(x - 1, y))
         {
-            roomLeft = true;
+            loadedRooms.FirstOrDefault(room => room.X == x - 1 && room.Y == y)?.UnlockDoors();
         }
-        if (DoesRoomExist(itemRoom.X + 1, itemRoom.Y))
+        if (DoesRoomExist(x + 1, y))
         {
-            roomRight = true;
-        }
-
-        if (roomRight)
-        {
-            foreach (Room room in loadedRooms)
-            {
-                if (room.X == itemRoom.X + 1 && room.Y == itemRoom.Y)
-                {
-                    room.UnlockDoors();
-                }
-            }
-        }
-
-        if (roomLeft)
-        {
-            foreach (Room room in loadedRooms)
-            {
-                if (room.X == itemRoom.X - 1 && room.Y == itemRoom.Y)
-                {
-                    room.UnlockDoors();
-                }
-            }
-        }
-
-        if (roomUp)
-        {
-            foreach (Room room in loadedRooms)
-            {
-                if (room.X == itemRoom.X && room.Y == itemRoom.Y + 1)
-                {
-                    room.UnlockDoors();
-                }
-            }
-        }
-
-        if (roomDown)
-        {
-            foreach (Room room in loadedRooms)
-            {
-                if (room.X == itemRoom.X && room.Y == itemRoom.Y - 1)
-                {
-                    room.UnlockDoors();
-                }
-            }
+            loadedRooms.FirstOrDefault(room => room.X == x + 1 && room.Y == y)?.UnlockDoors();
         }
     }
 
+    // public void LoadRoom(string name, int x, int y)
+    // {
+    //     // Check if room already exists
+    //     if (DoesRoomExist(x, y))
+    //         return;
+
+    //     RoomInfo newRoomData = new RoomInfo();
+    //     newRoomData.name = name;
+    //     newRoomData.X = x;
+    //     newRoomData.Y = y;
+
+    //     loadRoomQueue.Enqueue(newRoomData);
+    // }
+
     public void LoadRoom(string name, int x, int y)
     {
-        // Check if room already exists
         if (DoesRoomExist(x, y))
+        {
             return;
+        }
 
-        RoomInfo newRoomData = new RoomInfo();
-        newRoomData.name = name;
-        newRoomData.X = x;
-        newRoomData.Y = y;
+        RoomInfo newRoomData = new RoomInfo
+        {
+            name = name,
+            X = x,
+            Y = y
+        };
 
         loadRoomQueue.Enqueue(newRoomData);
     }
@@ -277,7 +257,6 @@ public class RoomController : MonoBehaviour
     IEnumerator LoadRoomRoutine(RoomInfo roomInfo)
     {
         string roomName = currentLevelName + roomInfo.name;
-
         AsyncOperation loadRoom = SceneManager.LoadSceneAsync(roomName, LoadSceneMode.Additive);
 
         while (loadRoom.isDone == false)
@@ -298,9 +277,8 @@ public class RoomController : MonoBehaviour
 
             room.X = currentLoadRoomData.X;
             room.Y = currentLoadRoomData.Y;
-            room.name =
-                currentLevelName + "_" + currentLoadRoomData.name + " " + room.X + ", " + room.Y;
-            room.transform.parent = this.transform;
+            room.name = $"{currentLevelName}_{currentLoadRoomData.name} {room.X}, {room.Y}";
+            room.transform.parent = transform;
 
             isLoadingRoom = false;
 
@@ -310,7 +288,6 @@ public class RoomController : MonoBehaviour
             }
 
             loadedRooms.Add(room);
-            // room.RemoveUnusedDoors();
         }
         else
         {
@@ -350,65 +327,101 @@ public class RoomController : MonoBehaviour
         UpdateRooms();
     }
 
+    // public void UpdateRooms()
+    // {
+    //     foreach (Room room in loadedRooms)
+    //     {
+    //         if (room != currentRoom)
+    //         {
+    //             EnemyController[] enemies = room.GetComponentsInChildren<EnemyController>();
+
+    //             if (enemies != null)
+    //             {
+    //                 foreach (EnemyController enemy in enemies)
+    //                 {
+    //                     enemy.notInRoom = true;
+    //                 }
+
+    //                 foreach (Door door in room.GetComponentsInChildren<Door>())
+    //                 {
+    //                     door.Open();
+    //                 }
+    //             }
+    //             else
+    //             {
+    //                 foreach (Door door in room.GetComponentsInChildren<Door>())
+    //                 {
+    //                     door.Open();
+    //                 }
+    //             }
+    //         }
+    //         else
+    //         {
+    //             EnemyController[] enemies = room.GetComponentsInChildren<EnemyController>();
+
+    //             if (enemies.Length > 0)
+    //             {
+    //                 foreach (EnemyController enemy in enemies)
+    //                 {
+    //                     enemy.notInRoom = false;
+    //                 }
+
+    //                 foreach (Door door in room.GetComponentsInChildren<Door>())
+    //                 {
+    //                     door.Close();
+    //                 }
+    //             }
+    //             else
+    //             {
+    //                 foreach (Door door in room.GetComponentsInChildren<Door>())
+    //                 {
+    //                     door.Open();
+    //                 }
+    //             }
+    //         }
+    //         foreach (Door door in room.GetComponentsInChildren<Door>())
+    //         {
+    //             door.UpdateDoorData();
+    //         }
+    //     }
+    // }
+
     public void UpdateRooms()
     {
         foreach (Room room in loadedRooms)
         {
+            EnemyController[] enemies = room.GetComponentsInChildren<EnemyController>();
+
             if (room != currentRoom)
             {
-                EnemyController[] enemies = room.GetComponentsInChildren<EnemyController>();
-
-                if (enemies != null)
+                foreach (EnemyController enemy in enemies)
                 {
-                    foreach (EnemyController enemy in enemies)
-                    {
-                        enemy.notInRoom = true;
-                    }
-
-                    foreach (Door door in room.GetComponentsInChildren<Door>())
-                    {
-                        door.Open();
-                    }
-                }
-                else
-                {
-                    foreach (Door door in room.GetComponentsInChildren<Door>())
-                    {
-                        door.Open();
-                    }
+                    enemy.notInRoom = true;
                 }
             }
-            else
-            {
-                EnemyController[] enemies = room.GetComponentsInChildren<EnemyController>();
 
-                if (enemies.Length > 0)
-                {
-                    foreach (EnemyController enemy in enemies)
-                    {
-                        enemy.notInRoom = false;
-                    }
-
-                    foreach (Door door in room.GetComponentsInChildren<Door>())
-                    {
-                        door.Close();
-                    }
-                }
-                else
-                {
-                    foreach (Door door in room.GetComponentsInChildren<Door>())
-                    {
-                        door.Open();
-                    }
-                }
-            }
             foreach (Door door in room.GetComponentsInChildren<Door>())
             {
+                door.Open();
                 door.UpdateDoorData();
             }
-        }
 
+            if (room == currentRoom && enemies.Length > 0)
+            {
+                foreach (EnemyController enemy in enemies)
+                {
+                    enemy.notInRoom = false;
+                }
+
+                foreach (Door door in room.GetComponentsInChildren<Door>())
+                {
+                    door.Close();
+                    door.UpdateDoorData();
+                }
+            }
+        }
     }
+
 
     public void spawnItem(GameObject item, Vector3 position)
     {

@@ -320,6 +320,10 @@ MonoBehaviour:
   - {fileID: 1646756676, guid: c8e9371a0f93d48d1b46d8d5a3ee41ea, type: 3}
   - {fileID: 484130307, guid: c8e9371a0f93d48d1b46d8d5a3ee41ea, type: 3}
   keycardLocked: 0
+  open: 1
+  isShopDoor: 0
+  isItemRoomDoor: 0
+  isBossDoor: 0
 --- !u!1001 &283759019
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -382,6 +386,10 @@ PrefabInstance:
     - target: {fileID: 3495446618145352073, guid: 46fe1ea2784349548912c8919863dcd0, type: 3}
       propertyPath: m_Name
       value: EnergyDown
+      objectReference: {fileID: 0}
+    - target: {fileID: 3495446618145352073, guid: 46fe1ea2784349548912c8919863dcd0, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 46fe1ea2784349548912c8919863dcd0, type: 3}
@@ -471,6 +479,10 @@ MonoBehaviour:
   - {fileID: 1646756676, guid: c8e9371a0f93d48d1b46d8d5a3ee41ea, type: 3}
   - {fileID: 484130307, guid: c8e9371a0f93d48d1b46d8d5a3ee41ea, type: 3}
   keycardLocked: 0
+  open: 1
+  isShopDoor: 0
+  isItemRoomDoor: 0
+  isBossDoor: 0
 --- !u!1 &416940062
 GameObject:
   m_ObjectHideFlags: 0
@@ -678,6 +690,7 @@ GameObject:
   - component: {fileID: 546838473}
   - component: {fileID: 546838475}
   - component: {fileID: 546838476}
+  - component: {fileID: 546838477}
   m_Layer: 0
   m_Name: Room
   m_TagString: Untagged
@@ -712,6 +725,7 @@ Transform:
   - {fileID: 1878426928}
   - {fileID: 1182270856}
   - {fileID: 1392042233}
+  - {fileID: 1187525872}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -763,6 +777,22 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 13.341726, y: 7.302349}
   m_EdgeRadius: 0
+--- !u!114 &546838477
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 546838472}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6b25d600dabaf492b92182ff196a62ad, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  grid: {fileID: 1187525873}
+  spawners:
+  - name: Enemy1
+    spawnerData: {fileID: 11400000, guid: 36ec978856f283f4da80b7e1702f4cd7, type: 2}
 --- !u!1 &612299354
 GameObject:
   m_ObjectHideFlags: 0
@@ -936,6 +966,10 @@ PrefabInstance:
     - target: {fileID: 3495446618145352073, guid: 259ef162c5038d54dad5bf83d834f5f1, type: 3}
       propertyPath: m_Name
       value: HealthDown
+      objectReference: {fileID: 0}
+    - target: {fileID: 3495446618145352073, guid: 259ef162c5038d54dad5bf83d834f5f1, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8786737970721948768, guid: 259ef162c5038d54dad5bf83d834f5f1, type: 3}
       propertyPath: m_Size.x
@@ -1522,6 +1556,10 @@ MonoBehaviour:
   - {fileID: 1646756676, guid: c8e9371a0f93d48d1b46d8d5a3ee41ea, type: 3}
   - {fileID: 484130307, guid: c8e9371a0f93d48d1b46d8d5a3ee41ea, type: 3}
   keycardLocked: 0
+  open: 1
+  isShopDoor: 0
+  isItemRoomDoor: 0
+  isBossDoor: 0
 --- !u!1001 &936142419
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1584,6 +1622,10 @@ PrefabInstance:
     - target: {fileID: 3495446618145352073, guid: 72083360bbe8af6428abb397be473572, type: 3}
       propertyPath: m_Name
       value: HealthUp
+      objectReference: {fileID: 0}
+    - target: {fileID: 3495446618145352073, guid: 72083360bbe8af6428abb397be473572, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8786737970721948768, guid: 72083360bbe8af6428abb397be473572, type: 3}
       propertyPath: m_Size.x
@@ -1657,6 +1699,10 @@ PrefabInstance:
     - target: {fileID: 3495446618145352073, guid: 14c9895a6a76e1a4d847213d1854fdce, type: 3}
       propertyPath: m_Name
       value: MHealthUp
+      objectReference: {fileID: 0}
+    - target: {fileID: 3495446618145352073, guid: 14c9895a6a76e1a4d847213d1854fdce, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8786737970721948768, guid: 14c9895a6a76e1a4d847213d1854fdce, type: 3}
       propertyPath: m_Size.x
@@ -2856,6 +2902,58 @@ Tilemap:
     e31: 0
     e32: 0
     e33: 1
+--- !u!1 &1187525871
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1187525872}
+  - component: {fileID: 1187525873}
+  m_Layer: 0
+  m_Name: Grid
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1187525872
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1187525871}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 546838474}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1187525873
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1187525871}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3ba5f1a44dfb04d6c94314ed16ed0a2e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  room: {fileID: 0}
+  grid:
+    columns: 0
+    rows: 0
+    verticalOffset: 3.5
+    horizontalOffset: 6.5
+  gridTile: {fileID: 838477582645670028, guid: d860a6eb16d164065a373a93eac173f0, type: 3}
+  availablePositions: []
 --- !u!114 &1387975418
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3011,6 +3109,10 @@ MonoBehaviour:
   - {fileID: 1646756676, guid: c8e9371a0f93d48d1b46d8d5a3ee41ea, type: 3}
   - {fileID: 484130307, guid: c8e9371a0f93d48d1b46d8d5a3ee41ea, type: 3}
   keycardLocked: 0
+  open: 1
+  isShopDoor: 0
+  isItemRoomDoor: 0
+  isBossDoor: 0
 --- !u!1001 &1518295680
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3073,6 +3175,10 @@ PrefabInstance:
     - target: {fileID: 3495446618145352073, guid: 4203c8a1d98e8a34aa47c36c2a8c0a97, type: 3}
       propertyPath: m_Name
       value: EnergyUp
+      objectReference: {fileID: 0}
+    - target: {fileID: 3495446618145352073, guid: 4203c8a1d98e8a34aa47c36c2a8c0a97, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8786737970721948768, guid: 4203c8a1d98e8a34aa47c36c2a8c0a97, type: 3}
       propertyPath: m_Size.x
@@ -3559,6 +3665,10 @@ PrefabInstance:
     - target: {fileID: 1889267403222264391, guid: d11b87395b75d4650b7e18a492f09c5c, type: 3}
       propertyPath: m_Name
       value: ItemSpawner
+      objectReference: {fileID: 0}
+    - target: {fileID: 1889267403222264391, guid: d11b87395b75d4650b7e18a492f09c5c, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d11b87395b75d4650b7e18a492f09c5c, type: 3}
@@ -4245,6 +4355,10 @@ PrefabInstance:
     - target: {fileID: 3495446618145352073, guid: 3f5cdcbb46010b641b7b0c46d9485688, type: 3}
       propertyPath: m_Name
       value: MHealthDown
+      objectReference: {fileID: 0}
+    - target: {fileID: 3495446618145352073, guid: 3f5cdcbb46010b641b7b0c46d9485688, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8786737970721948768, guid: 3f5cdcbb46010b641b7b0c46d9485688, type: 3}
       propertyPath: m_Size.x

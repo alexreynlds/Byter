@@ -25,6 +25,10 @@ public class BulletController : MonoBehaviour
             // other.gameObject.GetComponent<EnemyController>().Die();
             Destroy(gameObject);
         }
+        if (other.gameObject.tag == "Player")
+        {
+            return;
+        }
         else
         {
             Destroy(gameObject);
@@ -33,7 +37,7 @@ public class BulletController : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if(other.gameObject.tag == "Door")
+        if (other.gameObject.tag == "Door")
         {
             Destroy(gameObject);
         }

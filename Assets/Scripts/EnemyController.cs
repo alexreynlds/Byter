@@ -2,10 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
 public enum EnemyState
 {
     Idle,
-    Wander,
     Follow,
     Die
 };
@@ -18,18 +18,20 @@ public class EnemyController : MonoBehaviour
     [SerializeField] private float range;
     [SerializeField] private float speed;
     [SerializeField] private float health;
+    [SerializeField] private int damage;
+    [SerializeField] private bool canMove = true;
+
+    public Rigidbody2D rb;
 
     public bool notInRoom = true;
 
     float totalWeight;
 
-    private bool chooseDir = false;
-    // private bool dead = false;
-    private Vector3 wanderTarget;
-
     public List<Spawnable> itemPool = new List<Spawnable>();
-    
-    private void Awake() {
+
+    private void Awake()
+    {
+        rb = GetComponent<Rigidbody2D>();
         totalWeight = 0;
         foreach (Spawnable spawnable in itemPool)
         {
@@ -53,10 +55,6 @@ public class EnemyController : MonoBehaviour
                 // Do nothing
                 // idle();
                 break;
-            case EnemyState.Wander:
-                // Wander
-                Wander();
-                break;
             case EnemyState.Follow:
                 // Follow
                 Follow();
@@ -71,6 +69,32 @@ public class EnemyController : MonoBehaviour
         {
             currentState = EnemyState.Follow;
         }
+    }
+
+    private void OnCollisionEnter2D(Collision2D other)
+    {
+        if (other.gameObject.CompareTag("Player"))
+        {
+            Debug.Log("hit");
+            other.gameObject.GetComponent<PlayerStats>().TakeDamage(damage);
+            canMove = false;
+            TakeKnockback();
+        }
+    }
+
+    public void TakeKnockback()
+    {
+        rb.velocity = Vector2.zero;
+        Vector2 direction = (transform.position - player.transform.position).normalized;
+        rb.AddForce(direction * 2.0f, ForceMode2D.Impulse);
+        StartCoroutine(StopKnockback());
+    }
+
+    private IEnumerator StopKnockback()
+    {
+        yield return new WaitForSeconds(0.5f);
+        rb.velocity = Vector2.zero;
+        canMove = true;
     }
 
     public void TakeDamage(float damage)
@@ -89,43 +113,21 @@ public class EnemyController : MonoBehaviour
         GetComponent<SpriteRenderer>().color = Color.white;
     }
 
-    private bool InRange()
-    {
-        return Vector3.Distance(transform.position, player.transform.position) <= range;
-    }
-
-    private IEnumerator ChooseDir()
-    {
-        chooseDir = true;
-        yield return new WaitForSeconds(Random.Range(2f, 8f));
-        wanderTarget = new Vector3(0, 0, Random.Range(0, 360));
-        Quaternion nextRot = Quaternion.Euler(wanderTarget);
-        transform.rotation = Quaternion.Lerp(transform.rotation, nextRot, Random.Range(0.5f, 2.5f));
-        chooseDir = false;
-    }
-
-    void Wander()
-    {
-        // Wander
-        if (!chooseDir)
-        {
-            StartCoroutine(ChooseDir());
-        }
-        transform.position += -transform.right * speed * Time.deltaTime;
-        if (InRange())
-        {
-            currentState = EnemyState.Follow;
-        }
-    }
-
     void Follow()
     {
         // Follow
-        transform.position = Vector3.MoveTowards(transform.position, player.transform.position, speed * Time.deltaTime);
-        if (!InRange())
+        if (canMove)
         {
-            currentState = EnemyState.Wander;
+            Vector3 direction = (player.transform.position - transform.position).normalized;
+            rb.velocity = direction * speed;
         }
+        LookAtPlayer();
+
+        // transform.position = Vector3.MoveTowards(transform.position, player.transform.position, speed * Time.deltaTime);
+        // if (!InRange())
+        // {
+        //     currentState = EnemyState.Wander;
+        // }
     }
 
     public void Die()
@@ -136,7 +138,20 @@ public class EnemyController : MonoBehaviour
         Destroy(gameObject);
     }
 
-    private void DropItem(){
+    private void LookAtPlayer()
+    {
+        Vector2 direction = player.transform.position - transform.position;
+
+        // calculate the angle between the object's forward direction and the direction to the player
+        float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg - 90f;
+
+        // use Quaternion.Slerp to rotate smoothly towards the player
+        Quaternion targetRotation = Quaternion.AngleAxis(angle, Vector3.forward);
+        transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, 5 * Time.deltaTime);
+    }
+
+    private void DropItem()
+    {
         float pick = Random.Range(0, totalWeight);
         int chosenIndex = 0;
         float cumulativeWeight = itemPool[0].weight;
@@ -146,10 +161,13 @@ public class EnemyController : MonoBehaviour
             chosenIndex++;
             cumulativeWeight += itemPool[chosenIndex].weight;
         }
-        
-        if(itemPool[chosenIndex].gameObject != null){
+
+        if (itemPool[chosenIndex].gameObject != null)
+        {
             RoomController.instance.spawnItem(itemPool[chosenIndex].gameObject, transform.position);
-        } else {
+        }
+        else
+        {
             return;
         }
     }

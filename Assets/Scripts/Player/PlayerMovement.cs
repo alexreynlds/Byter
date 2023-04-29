@@ -47,26 +47,28 @@ public class PlayerMovement : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        if (movementInput != Vector2.zero)
-        {
-            bool success = TryMove(movementInput);
-
-            if (!success)
-            {
-                success = TryMove(new Vector2(movementInput.x, 0));
-
-                if (!success)
-                {
-                    TryMove(new Vector2(0, movementInput.y));
-                }
-            }
-            UpdateSprite();
-        }
         // if (movementInput != Vector2.zero)
         // {
-        //     rb.MovePosition(rb.position + movementInput * moveSpeed * Time.deltaTime);
+        //     bool success = TryMove(movementInput);
+
+        //     if (!success)
+        //     {
+        //         success = TryMove(new Vector2(movementInput.x, 0));
+
+        //         if (!success)
+        //         {
+        //             TryMove(new Vector2(0, movementInput.y));
+        //         }
+        //     }
         //     UpdateSprite();
         // }
+        if (movementInput != Vector2.zero)
+        {
+            rb.MovePosition(rb.position + movementInput * moveSpeed * Time.deltaTime);
+            rb.velocity = Vector2.zero;
+            // rb.AddForce(movementInput * moveSpeed * Time.deltaTime);
+            UpdateSprite();
+        }
     }
 
     void Update()
