@@ -70,11 +70,6 @@ public class Room : MonoBehaviour
 
     void Update()
     {
-        // if (!updatedDoors)
-        // {
-        //     RemoveUnusedDoors();
-        //     updatedDoors = true;
-        // }
     }
 
     public void RemoveUnusedDoors()
@@ -89,18 +84,13 @@ public class Room : MonoBehaviour
                     {
                         // Disable the door
                         door.gameObject.transform.Find("Door").gameObject.SetActive(false);
-
-                        // if (GetRoom("d") != null)
-                        // {
                         // Enable the wall
                         door.gameObject.transform.Find("Wall").gameObject.SetActive(true);
-                        // }
                     }
                     else
                     {
                         if (GetRoom("u").name.Contains("ItemRoom"))
                         {
-                            Debug.Log("Epic");
                             door.gameObject.transform
                                 .Find("Door")
                                 .GetComponent<SpriteRenderer>()
@@ -109,7 +99,6 @@ public class Room : MonoBehaviour
                         }
                         else if (GetRoom("u").name.Contains("End"))
                         {
-                            Debug.Log("Epic");
                             door.gameObject.transform
                                 .Find("Door")
                                 .GetComponent<SpriteRenderer>()
@@ -122,18 +111,13 @@ public class Room : MonoBehaviour
                     {
                         // Disable the door
                         door.gameObject.transform.Find("Door").gameObject.SetActive(false);
-
-                        // if (GetRoom("u") != null)
-                        // {
                         // Enable the wall
                         door.gameObject.transform.Find("Wall").gameObject.SetActive(true);
-                        // }
                     }
                     else
                     {
                         if (GetRoom("d").name.Contains("ItemRoom"))
                         {
-                            Debug.Log("Epic");
                             door.gameObject.transform
                                 .Find("Door")
                                 .GetComponent<SpriteRenderer>()
@@ -142,7 +126,6 @@ public class Room : MonoBehaviour
                         }
                         else if (GetRoom("d").name.Contains("End"))
                         {
-                            Debug.Log("Epic");
                             door.gameObject.transform
                                 .Find("Door")
                                 .GetComponent<SpriteRenderer>()
@@ -155,18 +138,13 @@ public class Room : MonoBehaviour
                     {
                         // Disable the door
                         door.gameObject.transform.Find("Door").gameObject.SetActive(false);
-
-                        // if (GetRoom("r") != null)
-                        // {
                         // Enable the wall
                         door.gameObject.transform.Find("Wall").gameObject.SetActive(true);
-                        // }
                     }
                     else
                     {
                         if (GetRoom("l").name.Contains("ItemRoom"))
                         {
-                            Debug.Log("Epic");
                             door.gameObject.transform
                                 .Find("Door")
                                 .GetComponent<SpriteRenderer>()
@@ -175,7 +153,6 @@ public class Room : MonoBehaviour
                         }
                         else if (GetRoom("l").name.Contains("End"))
                         {
-                            Debug.Log("Epic");
                             door.gameObject.transform
                                 .Find("Door")
                                 .GetComponent<SpriteRenderer>()
@@ -189,17 +166,13 @@ public class Room : MonoBehaviour
                         // Disable the door
                         door.gameObject.transform.Find("Door").gameObject.SetActive(false);
 
-                        // if (GetRoom("l") != null)
-                        // {
                         // Enable the wall
                         door.gameObject.transform.Find("Wall").gameObject.SetActive(true);
-                        // }
                     }
                     else
                     {
                         if (GetRoom("r").name.Contains("ItemRoom"))
                         {
-                            Debug.Log("Epic");
                             door.gameObject.transform
                                 .Find("Door")
                                 .GetComponent<SpriteRenderer>()
@@ -208,7 +181,6 @@ public class Room : MonoBehaviour
                         }
                         else if (GetRoom("r").name.Contains("End"))
                         {
-                            Debug.Log("Epic");
                             door.gameObject.transform
                                 .Find("Door")
                                 .GetComponent<SpriteRenderer>()

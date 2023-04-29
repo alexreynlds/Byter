@@ -35,15 +35,26 @@ public class RoomController : MonoBehaviour
     bool spawnedShopRoom = false;
     bool spawnedItemRoom = false;
 
-    // bool finishedLoading = false;
+    private Vector2 u = new Vector2(0, 1);
+    private Vector2 d = new Vector2(0, -1);
+    private Vector2 l = new Vector2(-1, 0);
+    private Vector2 r = new Vector2(1, 0);
+
+    private List<Vector2> directions;
 
 
-    // bool spawnedShopRoom = false;
+
     bool updatedRooms = false;
 
     void Awake()
     {
         instance = this;
+        GameObject.Find("Player").GetComponent<PlayerInput>().enabled = false;
+        directions = new List<Vector2>();
+        directions.Add(u);
+        directions.Add(d);
+        directions.Add(l);
+        directions.Add(r);
     }
 
     void Update()
@@ -73,16 +84,10 @@ public class RoomController : MonoBehaviour
             }
             else if (spawnedBossRoom && !updatedRooms && spawnedShopRoom && spawnedItemRoom)
             {
-                // foreach (Room room in loadedRooms)
-                // {
-                //     room.RemoveUnusedDoors();
-                // }
+
                 StartCoroutine(test());
                 UpdateRooms();
                 updatedRooms = true;
-
-                GameObject.Find("Player").GetComponent<PlayerStats>().wipeInventory();
-                GameObject.Find("Player").GetComponent<PlayerInput>().enabled = true;
             }
             return;
         }
@@ -98,7 +103,10 @@ public class RoomController : MonoBehaviour
         foreach (Room room in loadedRooms)
         {
             room.RemoveUnusedDoors();
+
         }
+        GameObject.Find("Player").GetComponent<PlayerStats>().wipeInventory();
+        GameObject.Find("Player").GetComponent<PlayerInput>().enabled = true;
     }
 
     IEnumerator SpawnBossRoom()
@@ -153,93 +161,136 @@ public class RoomController : MonoBehaviour
     {
         spawnedShopRoom = true;
         yield return new WaitForSeconds(0.7f);
+        FindEmptyRoomSpace("Shop");
+        // int newX,
+        //     newY;
+        // bool roomFound = false;
+        // Room shopRoom = loadedRooms[Random.Range(0, loadedRooms.Count - 3)];
 
-        int newX,
-            newY;
-        bool roomFound = false;
-        Room shopRoom = loadedRooms[Random.Range(0, loadedRooms.Count - 3)];
+        // newX = shopRoom.X;
+        // newY = shopRoom.Y;
 
-        newX = shopRoom.X;
-        newY = shopRoom.Y;
-
-        while (!roomFound)
-        {
-            int tempX = Mathf.Abs(newX);
-            int tempY = Mathf.Abs(newY);
-            if (tempX > tempY)
-            {
-                if (newX > 0)
-                {
-                    newX++;
-                }
-                else
-                {
-                    newX--;
-                }
-            }
-            else
-            {
-                if (newY > 0)
-                {
-                    newY++;
-                }
-                else
-                {
-                    newY--;
-                }
-            }
-            if (!DoesRoomExist(newX, newY))
-            {
-                roomFound = true;
-            }
-        }
-        LoadRoom("Shop", newX, newY);
+        // while (!roomFound)
+        // {
+        //     int tempX = Mathf.Abs(newX);
+        //     int tempY = Mathf.Abs(newY);
+        //     if (tempX > tempY)
+        //     {
+        //         if (newX > 0)
+        //         {
+        //             newX++;
+        //         }
+        //         else
+        //         {
+        //             newX--;
+        //         }
+        //     }
+        //     else
+        //     {
+        //         if (newY > 0)
+        //         {
+        //             newY++;
+        //         }
+        //         else
+        //         {
+        //             newY--;
+        //         }
+        //     }
+        //     if (!DoesRoomExist(newX, newY))
+        //     {
+        //         roomFound = true;
+        //     }
+        // }
+        // LoadRoom("Shop", newX, newY);
     }
 
     IEnumerator SpawnItemRoom()
     {
         spawnedItemRoom = true;
         yield return new WaitForSeconds(0.6f);
+        FindEmptyRoomSpace("ItemRoom");
 
-        int newX,
-            newY;
+        // Room itemRoom = loadedRooms[Random.Range(0, loadedRooms.Count - 2)];
+        // int newX,
+        //     newY;
+        // bool roomFound = false;
+        // newX = itemRoom.X;
+        // newY = itemRoom.Y;
+        // while (!roomFound)
+        // {
+        //     int tempX = Mathf.Abs(newX);
+        //     int tempY = Mathf.Abs(newY);
+        //     if (tempX > tempY)
+        //     {
+        //         if (newX > 0)
+        //         {
+        //             newX++;
+        //         }
+        //         else
+        //         {
+        //             newX--;
+        //         }
+        //     }
+        //     else
+        //     {
+        //         if (newY > 0)
+        //         {
+        //             newY++;
+        //         }
+        //         else
+        //         {
+        //             newY--;
+        //         }
+        //     }
+        //     if (!DoesRoomExist(newX, newY))
+        //     {
+        //         roomFound = true;
+        //     }
+        // }
+        // LoadRoom("ItemRoom", newX, newY);
+    }
+
+    public void FindEmptyRoomSpace(string roomType)
+    {
         bool roomFound = false;
-        Room itemRoom = loadedRooms[Random.Range(0, loadedRooms.Count - 2)];
-        newX = itemRoom.X;
-        newY = itemRoom.Y;
+        int newX = 0;
+        int newY = 0;
+        int maxIterations = 50;
 
-        while (!roomFound)
+        while (!roomFound && maxIterations > 0)
         {
-            int tempX = Mathf.Abs(newX);
-            int tempY = Mathf.Abs(newY);
-            if (tempX > tempY)
+            Room randomRoom = loadedRooms[Random.Range(0, loadedRooms.Count - 1)];
+            newX = randomRoom.X;
+            newY = randomRoom.Y;
+
+            Debug.Log(directions.Count);
+
+            foreach (Vector2 direction in directions)
             {
-                if (newX > 0)
+                List<Vector2> tempDirections = new List<Vector2>(directions);
+                Vector2 tempDirection = tempDirections[Random.Range(0, tempDirections.Count)];
+
+                Debug.Log(tempDirection);
+                int checkX = newX + (int)tempDirection.x;
+                int checkY = newY + (int)tempDirection.y;
+
+                if (!DoesRoomExist(checkX, checkY))
                 {
-                    newX++;
+                    newX = checkX;
+                    newY = checkY;
+                    roomFound = true;
+                    break;
                 }
-                else
-                {
-                    newX--;
-                }
+
+                tempDirections.Remove(tempDirection);
             }
-            else
-            {
-                if (newY > 0)
-                {
-                    newY++;
-                }
-                else
-                {
-                    newY--;
-                }
-            }
-            if (!DoesRoomExist(newX, newY))
-            {
-                roomFound = true;
-            }
+            maxIterations--;
         }
-        LoadRoom("ItemRoom", newX, newY);
+        if (roomFound)
+        {
+            Debug.Log("Found empty room space. Iterations left: " + maxIterations + ".");
+            LoadRoom(roomType, newX, newY);
+        }
     }
 
     public void LoadRoom(string name, int x, int y)
