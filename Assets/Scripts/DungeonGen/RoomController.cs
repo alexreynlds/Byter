@@ -113,164 +113,48 @@ public class RoomController : MonoBehaviour
     {
         spawnedBossRoom = true;
         yield return new WaitForSeconds(0.5f);
-        if (loadRoomQueue.Count == 0)
-        {
-            int i = loadedRooms.Count - 1;
-            int newX,
-                newY;
-            bool roomFound = false;
-            Room bossRoom = loadedRooms[i];
-            newX = bossRoom.X;
-            newY = bossRoom.Y;
-            while (!roomFound)
-            {
-                int tempX = Mathf.Abs(newX);
-                int tempY = Mathf.Abs(newY);
-                if (tempX > tempY)
-                {
-                    if (newX > 0)
-                    {
-                        newX++;
-                    }
-                    else
-                    {
-                        newX--;
-                    }
-                }
-                else
-                {
-                    if (newY > 0)
-                    {
-                        newY++;
-                    }
-                    else
-                    {
-                        newY--;
-                    }
-                }
-                if (!DoesRoomExist(newX, newY))
-                {
-                    roomFound = true;
-                }
-            }
-            LoadRoom("End", newX, newY);
-        }
+        SpawnSpecialRoom("End");
     }
 
     IEnumerator SpawnShopRoom()
     {
         spawnedShopRoom = true;
         yield return new WaitForSeconds(0.7f);
-        FindEmptyRoomSpace("Shop");
-        // int newX,
-        //     newY;
-        // bool roomFound = false;
-        // Room shopRoom = loadedRooms[Random.Range(0, loadedRooms.Count - 3)];
-
-        // newX = shopRoom.X;
-        // newY = shopRoom.Y;
-
-        // while (!roomFound)
-        // {
-        //     int tempX = Mathf.Abs(newX);
-        //     int tempY = Mathf.Abs(newY);
-        //     if (tempX > tempY)
-        //     {
-        //         if (newX > 0)
-        //         {
-        //             newX++;
-        //         }
-        //         else
-        //         {
-        //             newX--;
-        //         }
-        //     }
-        //     else
-        //     {
-        //         if (newY > 0)
-        //         {
-        //             newY++;
-        //         }
-        //         else
-        //         {
-        //             newY--;
-        //         }
-        //     }
-        //     if (!DoesRoomExist(newX, newY))
-        //     {
-        //         roomFound = true;
-        //     }
-        // }
-        // LoadRoom("Shop", newX, newY);
+        SpawnSpecialRoom("Shop");
     }
 
     IEnumerator SpawnItemRoom()
     {
         spawnedItemRoom = true;
         yield return new WaitForSeconds(0.6f);
-        FindEmptyRoomSpace("ItemRoom");
-
-        // Room itemRoom = loadedRooms[Random.Range(0, loadedRooms.Count - 2)];
-        // int newX,
-        //     newY;
-        // bool roomFound = false;
-        // newX = itemRoom.X;
-        // newY = itemRoom.Y;
-        // while (!roomFound)
-        // {
-        //     int tempX = Mathf.Abs(newX);
-        //     int tempY = Mathf.Abs(newY);
-        //     if (tempX > tempY)
-        //     {
-        //         if (newX > 0)
-        //         {
-        //             newX++;
-        //         }
-        //         else
-        //         {
-        //             newX--;
-        //         }
-        //     }
-        //     else
-        //     {
-        //         if (newY > 0)
-        //         {
-        //             newY++;
-        //         }
-        //         else
-        //         {
-        //             newY--;
-        //         }
-        //     }
-        //     if (!DoesRoomExist(newX, newY))
-        //     {
-        //         roomFound = true;
-        //     }
-        // }
-        // LoadRoom("ItemRoom", newX, newY);
+        SpawnSpecialRoom("ItemRoom");
     }
 
-    public void FindEmptyRoomSpace(string roomType)
+    public void SpawnSpecialRoom(string roomType)
     {
         bool roomFound = false;
         int newX = 0;
         int newY = 0;
         int maxIterations = 50;
+        int minimum = 0;
+
+        if (roomType == "end") minimum = loadedRooms.Count - 1;
 
         while (!roomFound && maxIterations > 0)
         {
             Room randomRoom = loadedRooms[Random.Range(0, loadedRooms.Count - 1)];
+            while (randomRoom.name.Contains("End") || randomRoom.name.Contains("Shop") || randomRoom.name.Contains("ItemRoom"))
+            {
+                randomRoom = loadedRooms[Random.Range(0, loadedRooms.Count - 1)];
+            }
             newX = randomRoom.X;
             newY = randomRoom.Y;
-
-            Debug.Log(directions.Count);
 
             foreach (Vector2 direction in directions)
             {
                 List<Vector2> tempDirections = new List<Vector2>(directions);
                 Vector2 tempDirection = tempDirections[Random.Range(0, tempDirections.Count)];
 
-                Debug.Log(tempDirection);
                 int checkX = newX + (int)tempDirection.x;
                 int checkY = newY + (int)tempDirection.y;
 
@@ -288,7 +172,6 @@ public class RoomController : MonoBehaviour
         }
         if (roomFound)
         {
-            Debug.Log("Found empty room space. Iterations left: " + maxIterations + ".");
             LoadRoom(roomType, newX, newY);
         }
     }
