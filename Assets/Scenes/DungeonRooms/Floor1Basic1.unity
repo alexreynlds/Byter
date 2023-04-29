@@ -225,6 +225,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   doorDir: 1
   doorCollider: {fileID: 218634759}
+  keycardCollider: {fileID: 0}
+  door: {fileID: 0}
+  doorSprites:
+  - {fileID: -668146625, guid: c8e9371a0f93d48d1b46d8d5a3ee41ea, type: 3}
+  - {fileID: -38598675, guid: c8e9371a0f93d48d1b46d8d5a3ee41ea, type: 3}
+  - {fileID: 248441675, guid: c8e9371a0f93d48d1b46d8d5a3ee41ea, type: 3}
+  - {fileID: -1636105844, guid: c8e9371a0f93d48d1b46d8d5a3ee41ea, type: 3}
+  - {fileID: 1646756676, guid: c8e9371a0f93d48d1b46d8d5a3ee41ea, type: 3}
+  - {fileID: 484130307, guid: c8e9371a0f93d48d1b46d8d5a3ee41ea, type: 3}
+  keycardLocked: 0
 --- !u!61 &108455570
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -332,7 +342,7 @@ SpriteRenderer:
   m_Size: {x: 1, y: 1}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!1 &218634759
@@ -1228,6 +1238,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   doorDir: 0
   doorCollider: {fileID: 445656176}
+  keycardCollider: {fileID: 0}
+  door: {fileID: 0}
+  doorSprites:
+  - {fileID: -668146625, guid: c8e9371a0f93d48d1b46d8d5a3ee41ea, type: 3}
+  - {fileID: -38598675, guid: c8e9371a0f93d48d1b46d8d5a3ee41ea, type: 3}
+  - {fileID: 248441675, guid: c8e9371a0f93d48d1b46d8d5a3ee41ea, type: 3}
+  - {fileID: -1636105844, guid: c8e9371a0f93d48d1b46d8d5a3ee41ea, type: 3}
+  - {fileID: 1646756676, guid: c8e9371a0f93d48d1b46d8d5a3ee41ea, type: 3}
+  - {fileID: 484130307, guid: c8e9371a0f93d48d1b46d8d5a3ee41ea, type: 3}
+  keycardLocked: 0
 --- !u!61 &287500379
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -1252,7 +1272,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1, y: 0.24069381}
+  m_Size: {x: 1, y: 0.24}
   m_EdgeRadius: 0
 --- !u!1 &377297501
 GameObject:
@@ -1708,7 +1728,7 @@ SpriteRenderer:
   m_Size: {x: 1, y: 1}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!1 &814427008
@@ -1983,6 +2003,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   doorDir: 3
   doorCollider: {fileID: 1019574932}
+  keycardCollider: {fileID: 0}
+  door: {fileID: 0}
+  doorSprites:
+  - {fileID: -668146625, guid: c8e9371a0f93d48d1b46d8d5a3ee41ea, type: 3}
+  - {fileID: -38598675, guid: c8e9371a0f93d48d1b46d8d5a3ee41ea, type: 3}
+  - {fileID: 248441675, guid: c8e9371a0f93d48d1b46d8d5a3ee41ea, type: 3}
+  - {fileID: -1636105844, guid: c8e9371a0f93d48d1b46d8d5a3ee41ea, type: 3}
+  - {fileID: 1646756676, guid: c8e9371a0f93d48d1b46d8d5a3ee41ea, type: 3}
+  - {fileID: 484130307, guid: c8e9371a0f93d48d1b46d8d5a3ee41ea, type: 3}
+  keycardLocked: 0
 --- !u!61 &1073539024
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -3746,7 +3776,7 @@ SpriteRenderer:
   m_Size: {x: 1, y: 1}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!1 &1700446842
@@ -3910,6 +3940,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   doorDir: 2
   doorCollider: {fileID: 2113144654}
+  keycardCollider: {fileID: 0}
+  door: {fileID: 0}
+  doorSprites:
+  - {fileID: -668146625, guid: c8e9371a0f93d48d1b46d8d5a3ee41ea, type: 3}
+  - {fileID: -38598675, guid: c8e9371a0f93d48d1b46d8d5a3ee41ea, type: 3}
+  - {fileID: 248441675, guid: c8e9371a0f93d48d1b46d8d5a3ee41ea, type: 3}
+  - {fileID: -1636105844, guid: c8e9371a0f93d48d1b46d8d5a3ee41ea, type: 3}
+  - {fileID: 1646756676, guid: c8e9371a0f93d48d1b46d8d5a3ee41ea, type: 3}
+  - {fileID: 484130307, guid: c8e9371a0f93d48d1b46d8d5a3ee41ea, type: 3}
+  keycardLocked: 0
 --- !u!61 &1754360787
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -4017,7 +4057,7 @@ SpriteRenderer:
   m_Size: {x: 1, y: 1}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!1 &2113144654

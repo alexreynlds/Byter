@@ -72,6 +72,14 @@ public class Room : MonoBehaviour
     {
     }
 
+    public void UnlockDoors()
+    {
+        foreach (Door door in doors)
+        {
+            door.keycardLocked = false;
+        }
+    }
+
     public void RemoveUnusedDoors()
     {
         // Remove unused doors
@@ -91,18 +99,22 @@ public class Room : MonoBehaviour
                     {
                         if (GetRoom("u").name.Contains("ItemRoom"))
                         {
-                            door.gameObject.transform
-                                .Find("Door")
-                                .GetComponent<SpriteRenderer>()
-                                .color = Color.yellow;
+                            // door.GetComponent<Door>().KeycardClose();
+                            door.GetComponent<Door>().isItemRoomDoor = true;
                             door.GetComponent<Door>().keycardLocked = true;
+                            door.GetComponent<Door>().UpdateDoorData();
                         }
                         else if (GetRoom("u").name.Contains("End"))
                         {
-                            door.gameObject.transform
-                                .Find("Door")
-                                .GetComponent<SpriteRenderer>()
-                                .color = Color.black;
+                            // door.GetComponent<Door>().BossRoom();
+                            door.GetComponent<Door>().isBossDoor = true;
+                            door.GetComponent<Door>().UpdateDoorData();
+                        }
+                        else if (GetRoom("u").name.Contains("Shop"))
+                        {
+                            // door.GetComponent<Door>().ShopRoom();
+                            door.GetComponent<Door>().isShopDoor = true;
+                            door.GetComponent<Door>().UpdateDoorData();
                         }
                     }
                     break;
@@ -118,18 +130,22 @@ public class Room : MonoBehaviour
                     {
                         if (GetRoom("d").name.Contains("ItemRoom"))
                         {
-                            door.gameObject.transform
-                                .Find("Door")
-                                .GetComponent<SpriteRenderer>()
-                                .color = Color.yellow;
+                            // door.GetComponent<Door>().KeycardClose();
+                            door.GetComponent<Door>().isItemRoomDoor = true;
                             door.GetComponent<Door>().keycardLocked = true;
+                            door.GetComponent<Door>().UpdateDoorData();
                         }
                         else if (GetRoom("d").name.Contains("End"))
                         {
-                            door.gameObject.transform
-                                .Find("Door")
-                                .GetComponent<SpriteRenderer>()
-                                .color = Color.black;
+                            // door.GetComponent<Door>().BossRoom();
+                            door.GetComponent<Door>().isBossDoor = true;
+                            door.GetComponent<Door>().UpdateDoorData();
+                        }
+                        else if (GetRoom("d").name.Contains("Shop"))
+                        {
+                            // door.GetComponent<Door>().ShopRoom();
+                            door.GetComponent<Door>().isShopDoor = true;
+                            door.GetComponent<Door>().UpdateDoorData();
                         }
                     }
                     break;
@@ -145,18 +161,23 @@ public class Room : MonoBehaviour
                     {
                         if (GetRoom("l").name.Contains("ItemRoom"))
                         {
-                            door.gameObject.transform
-                                .Find("Door")
-                                .GetComponent<SpriteRenderer>()
-                                .color = Color.yellow;
+                            // door.GetComponent<Door>().KeycardClose();
+                            door.GetComponent<Door>().isItemRoomDoor = true;
                             door.GetComponent<Door>().keycardLocked = true;
+                            door.GetComponent<Door>().UpdateDoorData();
+
                         }
                         else if (GetRoom("l").name.Contains("End"))
                         {
-                            door.gameObject.transform
-                                .Find("Door")
-                                .GetComponent<SpriteRenderer>()
-                                .color = Color.black;
+                            // door.GetComponent<Door>().BossRoom();
+                            door.GetComponent<Door>().isBossDoor = true;
+                            door.GetComponent<Door>().UpdateDoorData();
+                        }
+                        else if (GetRoom("l").name.Contains("Shop"))
+                        {
+                            // door.GetComponent<Door>().ShopRoom();
+                            door.GetComponent<Door>().isShopDoor = true;
+                            door.GetComponent<Door>().UpdateDoorData();
                         }
                     }
                     break;
@@ -173,18 +194,23 @@ public class Room : MonoBehaviour
                     {
                         if (GetRoom("r").name.Contains("ItemRoom"))
                         {
-                            door.gameObject.transform
-                                .Find("Door")
-                                .GetComponent<SpriteRenderer>()
-                                .color = Color.yellow;
+                            // door.GetComponent<Door>().KeycardClose();
+                            door.GetComponent<Door>().isItemRoomDoor = true;
                             door.GetComponent<Door>().keycardLocked = true;
+                            door.GetComponent<Door>().UpdateDoorData();
+
                         }
                         else if (GetRoom("r").name.Contains("End"))
                         {
-                            door.gameObject.transform
-                                .Find("Door")
-                                .GetComponent<SpriteRenderer>()
-                                .color = Color.black;
+                            // door.GetComponent<Door>().BossRoom();
+                            door.GetComponent<Door>().isBossDoor = true;
+                            door.GetComponent<Door>().UpdateDoorData();
+                        }
+                        else if (GetRoom("r").name.Contains("Shop"))
+                        {
+                            // door.GetComponent<Door>().ShopRoom();
+                            door.GetComponent<Door>().isShopDoor = true;
+                            door.GetComponent<Door>().UpdateDoorData();
                         }
                     }
                     break;

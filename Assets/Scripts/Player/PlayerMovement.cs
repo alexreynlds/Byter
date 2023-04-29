@@ -62,6 +62,11 @@ public class PlayerMovement : MonoBehaviour
             }
             UpdateSprite();
         }
+        // if (movementInput != Vector2.zero)
+        // {
+        //     rb.MovePosition(rb.position + movementInput * moveSpeed * Time.deltaTime);
+        //     UpdateSprite();
+        // }
     }
 
     void Update()
@@ -99,6 +104,8 @@ public class PlayerMovement : MonoBehaviour
 
     void OnMove(InputValue movementValue)
     {
+        // movementInput = movementValue.Get<Vector2>();
+
         movementInput = movementValue.Get<Vector2>();
     }
 

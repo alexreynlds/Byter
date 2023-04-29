@@ -143,10 +143,16 @@ public class RoomController : MonoBehaviour
         while (!roomFound && maxIterations > 0)
         {
             Room randomRoom = loadedRooms[Random.Range(0, loadedRooms.Count - 1)];
-            while (randomRoom.name.Contains("End") || randomRoom.name.Contains("Shop") || randomRoom.name.Contains("ItemRoom"))
+
+            while (randomRoom.name.Contains("Shop") || randomRoom.name.Contains("ItemRoom"))
             {
                 randomRoom = loadedRooms[Random.Range(0, loadedRooms.Count - 1)];
             }
+            while (randomRoom.name.Contains("End"))
+            {
+                randomRoom = loadedRooms[Random.Range(loadedRooms.Count / 2, loadedRooms.Count - 1)];
+            }
+
             newX = randomRoom.X;
             newY = randomRoom.Y;
 
@@ -173,6 +179,84 @@ public class RoomController : MonoBehaviour
         if (roomFound)
         {
             LoadRoom(roomType, newX, newY);
+        }
+    }
+
+    public void ItemRoomUnlockDoorTest()
+    {
+        Room itemRoom = null;
+        bool roomUp = false;
+        bool roomDown = false;
+        bool roomLeft = false;
+        bool roomRight = false;
+
+        foreach (Room room in loadedRooms)
+        {
+            if (room.name.Contains("ItemRoom"))
+            {
+                itemRoom = room;
+            }
+        }
+
+        if (DoesRoomExist(itemRoom.X, itemRoom.Y + 1))
+        {
+            roomUp = true;
+        }
+        if (DoesRoomExist(itemRoom.X, itemRoom.Y - 1))
+        {
+            roomDown = true;
+        }
+        if (DoesRoomExist(itemRoom.X - 1, itemRoom.Y))
+        {
+            roomLeft = true;
+        }
+        if (DoesRoomExist(itemRoom.X + 1, itemRoom.Y))
+        {
+            roomRight = true;
+        }
+
+        if (roomRight)
+        {
+            foreach (Room room in loadedRooms)
+            {
+                if (room.X == itemRoom.X + 1 && room.Y == itemRoom.Y)
+                {
+                    room.UnlockDoors();
+                }
+            }
+        }
+
+        if (roomLeft)
+        {
+            foreach (Room room in loadedRooms)
+            {
+                if (room.X == itemRoom.X - 1 && room.Y == itemRoom.Y)
+                {
+                    room.UnlockDoors();
+                }
+            }
+        }
+
+        if (roomUp)
+        {
+            foreach (Room room in loadedRooms)
+            {
+                if (room.X == itemRoom.X && room.Y == itemRoom.Y + 1)
+                {
+                    room.UnlockDoors();
+                }
+            }
+        }
+
+        if (roomDown)
+        {
+            foreach (Room room in loadedRooms)
+            {
+                if (room.X == itemRoom.X && room.Y == itemRoom.Y - 1)
+                {
+                    room.UnlockDoors();
+                }
+            }
         }
     }
 
@@ -318,7 +402,12 @@ public class RoomController : MonoBehaviour
                     }
                 }
             }
+            foreach (Door door in room.GetComponentsInChildren<Door>())
+            {
+                door.UpdateDoorData();
+            }
         }
+
     }
 
     public void spawnItem(GameObject item, Vector3 position)
