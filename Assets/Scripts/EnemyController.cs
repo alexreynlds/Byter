@@ -9,11 +9,17 @@ public enum EnemyState
     Follow,
     Die
 };
+
+public enum EnemyType
+{
+    Basic,
+    Ranged,
+    Tank,
+    Small,
+}
+
 public class EnemyController : MonoBehaviour
 {
-    GameObject player;
-    public EnemyState currentState = EnemyState.Idle;
-
     [Header("Enemy Stats")]
     [SerializeField] private float range;
     [SerializeField] private float speed;
@@ -21,7 +27,11 @@ public class EnemyController : MonoBehaviour
     [SerializeField] private int damage;
     [SerializeField] private bool canMove = true;
 
-    public Rigidbody2D rb;
+    private GameObject player;
+    private Rigidbody2D rb;
+
+    public EnemyState currentState = EnemyState.Idle;
+    public EnemyType enemyType;
 
     public bool notInRoom = true;
 
@@ -33,6 +43,7 @@ public class EnemyController : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
         totalWeight = 0;
+
         foreach (Spawnable spawnable in itemPool)
         {
             totalWeight += spawnable.weight;
@@ -53,21 +64,24 @@ public class EnemyController : MonoBehaviour
         {
             case EnemyState.Idle:
                 // Do nothing
-                // idle();
                 break;
+
             case EnemyState.Follow:
-                // Follow
-                Follow();
+                BasicFollow();
                 break;
+
             case EnemyState.Die:
-                // Die
                 Die();
                 break;
         }
 
         if (!notInRoom)
         {
-            currentState = EnemyState.Follow;
+            if (enemyType == EnemyType.Basic)
+            {
+                currentState = EnemyState.Follow;
+            }
+
         }
     }
 
@@ -113,7 +127,7 @@ public class EnemyController : MonoBehaviour
         GetComponent<SpriteRenderer>().color = Color.white;
     }
 
-    void Follow()
+    void BasicFollow()
     {
         // Follow
         if (canMove)
@@ -122,12 +136,6 @@ public class EnemyController : MonoBehaviour
             rb.velocity = direction * speed;
         }
         LookAtPlayer();
-
-        // transform.position = Vector3.MoveTowards(transform.position, player.transform.position, speed * Time.deltaTime);
-        // if (!InRange())
-        // {
-        //     currentState = EnemyState.Wander;
-        // }
     }
 
     public void Die()
@@ -142,10 +150,8 @@ public class EnemyController : MonoBehaviour
     {
         Vector2 direction = player.transform.position - transform.position;
 
-        // calculate the angle between the object's forward direction and the direction to the player
         float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg - 90f;
 
-        // use Quaternion.Slerp to rotate smoothly towards the player
         Quaternion targetRotation = Quaternion.AngleAxis(angle, Vector3.forward);
         transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, 5 * Time.deltaTime);
     }

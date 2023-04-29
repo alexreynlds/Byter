@@ -146,12 +146,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b4eb73021f982c547811d2ca491dc93d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentState: 0
   range: 10
   speed: 1
   health: 1
   damage: 1
-  rb: {fileID: 0}
+  canMove: 1
+  currentState: 0
+  enemyType: 0
   notInRoom: 0
   itemPool:
   - gameObject: {fileID: 0}
