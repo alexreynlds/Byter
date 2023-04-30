@@ -38,14 +38,12 @@ public class EnemyController : MonoBehaviour
     [SerializeField] private float projectileSpeed;
     [SerializeField] private float projectileRange;
     [SerializeField] private GameObject projectile;
+    [SerializeField] private GameObject firePoint;
     private float timeBetweenShots;
-
 
     private GameObject player;
     private Vector3 playerPos;
     private Rigidbody2D rb;
-
-
 
     public bool notInRoom = true;
 
@@ -57,6 +55,7 @@ public class EnemyController : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
         totalWeight = 0;
+        Physics2D.queriesStartInColliders = false;
 
         foreach (Spawnable spawnable in itemPool)
         {
@@ -182,22 +181,46 @@ public class EnemyController : MonoBehaviour
     void RangedActive()
     {
         playerPos = new Vector3(player.transform.position.x, player.transform.position.y + 0.5f, 0);
-        LookAtPlayer();
-        if (timeBetweenShots <= 0)
-        {
-            GameObject bullet = Instantiate(projectile, transform.position, Quaternion.identity);
-            bullet.GetComponent<EnemyBulletController>().parent = this.gameObject;
-            bullet.GetComponent<EnemyBulletController>().damage = damage;
-            bullet.GetComponent<EnemyBulletController>().range = projectileRange;
-            bullet.AddComponent<Rigidbody2D>().gravityScale = 0;
-            bullet.GetComponent<Rigidbody2D>().velocity = (playerPos - transform.position).normalized * projectileSpeed;
-            timeBetweenShots = startTimeBetweenShots;
 
-        }
-        else
+        if (CheckLOS())
         {
-            timeBetweenShots -= Time.deltaTime;
+            LookAtPlayer();
+            if (timeBetweenShots <= 0)
+            {
+                GameObject bullet = Instantiate(projectile, transform.position, Quaternion.identity);
+                bullet.GetComponent<EnemyBulletController>().parent = this.gameObject;
+                bullet.GetComponent<EnemyBulletController>().damage = damage;
+                bullet.GetComponent<EnemyBulletController>().range = projectileRange;
+                bullet.AddComponent<Rigidbody2D>().gravityScale = 0;
+                bullet.GetComponent<Rigidbody2D>().velocity = (playerPos - transform.position).normalized * projectileSpeed;
+                timeBetweenShots = startTimeBetweenShots;
+
+            }
+            else
+            {
+                timeBetweenShots -= Time.deltaTime;
+            }
         }
+
+    }
+
+    private bool CheckLOS()
+    {
+        GameObject player = GameObject.FindWithTag("Player");
+        if (player == null) return false;
+
+        Vector3 direction = player.transform.position - firePoint.transform.position;
+        float distance = direction.magnitude;
+
+        RaycastHit2D hit = Physics2D.Raycast(firePoint.transform.position, direction.normalized, distance);
+        if (hit.collider == null) return false;
+
+        if (hit.collider.gameObject.CompareTag("Player") || hit.collider.gameObject.CompareTag("PlayerBody"))
+        {
+            return true;
+        }
+
+        return false;
     }
 
     public void Die()

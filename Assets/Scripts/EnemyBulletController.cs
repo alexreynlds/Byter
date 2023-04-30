@@ -10,8 +10,8 @@ public class EnemyBulletController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        Collider2D collider1 = gameObject.GetComponent<CircleCollider2D>();
-        Collider2D collider2 = parent.GetComponent<BoxCollider2D>();
+        Collider2D collider1 = gameObject.GetComponent<Collider2D>();
+        Collider2D collider2 = parent.GetComponent<Collider2D>();
         Physics2D.IgnoreCollision(collider1, collider2);
         StartCoroutine(DestroyBullet());
     }
@@ -22,17 +22,18 @@ public class EnemyBulletController : MonoBehaviour
         Destroy(gameObject);
     }
 
-    // private void OnCollisionEnter2D(Collision2D other)
-    // {
-    //     if (other.gameObject.tag == "Bullet")
-    //     {
-    //         Debug.Log("test");
-    //         // Collider2D otherCollider = other.gameObject.GetComponent<CircleCollider2D>();
-    //         Collider2D otherCollider = other.gameObject.GetComponent<Collider2D>();
-    //         Collider2D thisCollider = transform.GetComponent<CircleCollider2D>();
-    //         Physics2D.IgnoreCollision(otherCollider, thisCollider);
-    //     }
-    // }
+    private void OnCollisionEnter2D(Collision2D other)
+    {
+        if (other.gameObject.tag == "Player")
+        {
+            other.gameObject.GetComponentInParent<PlayerStats>().TakeDamage(damage);
+            Destroy(gameObject);
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+    }
 
     private void OnTriggerEnter2D(Collider2D other)
     {
