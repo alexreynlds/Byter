@@ -6,7 +6,7 @@ using UnityEngine;
 public enum EnemyState
 {
     Idle,
-    Follow,
+    Active,
     Die
 };
 
@@ -20,18 +20,32 @@ public enum EnemyType
 
 public class EnemyController : MonoBehaviour
 {
+    [Header("Enemy Info")]
+    public EnemyType enemyType;
+    public EnemyState currentState = EnemyState.Idle;
+
     [Header("Enemy Stats")]
     [SerializeField] private float range;
-    [SerializeField] private float speed;
     [SerializeField] private float health;
     [SerializeField] private int damage;
+
+    [Header("Basic Enemy Stats")]
+    [SerializeField] private float speed;
     [SerializeField] private bool canMove = true;
 
+    [Header("Ranged Enemy Stats")]
+    [SerializeField] private float startTimeBetweenShots;
+    [SerializeField] private float projectileSpeed;
+    [SerializeField] private float projectileRange;
+    [SerializeField] private GameObject projectile;
+    private float timeBetweenShots;
+
+
     private GameObject player;
+    private Vector3 playerPos;
     private Rigidbody2D rb;
 
-    public EnemyState currentState = EnemyState.Idle;
-    public EnemyType enemyType;
+
 
     public bool notInRoom = true;
 
@@ -55,31 +69,58 @@ public class EnemyController : MonoBehaviour
     {
         player = GameObject.Find("Player");
         notInRoom = true;
+
+        // Set up enemy stats for ranged
+        if (enemyType == EnemyType.Ranged)
+        {
+            timeBetweenShots = startTimeBetweenShots;
+        }
     }
 
     // Update is called once per frame
     void Update()
     {
-        switch (currentState)
+        if (enemyType == EnemyType.Basic)
         {
-            case EnemyState.Idle:
-                // Do nothing
-                break;
+            switch (currentState)
+            {
+                case EnemyState.Idle:
+                    // Do nothing
+                    break;
 
-            case EnemyState.Follow:
-                BasicFollow();
-                break;
+                case EnemyState.Active:
+                    BasicActive();
+                    break;
 
-            case EnemyState.Die:
-                Die();
-                break;
+                case EnemyState.Die:
+                    Die();
+                    break;
+            }
         }
+        else if (enemyType == EnemyType.Ranged)
+        {
+            switch (currentState)
+            {
+                case EnemyState.Idle:
+                    // Do nothing
+                    break;
+
+                case EnemyState.Active:
+                    RangedActive();
+                    break;
+
+                case EnemyState.Die:
+                    Die();
+                    break;
+            }
+        }
+
 
         if (!notInRoom)
         {
             if (enemyType == EnemyType.Basic)
             {
-                currentState = EnemyState.Follow;
+                currentState = EnemyState.Active;
             }
 
         }
@@ -127,7 +168,7 @@ public class EnemyController : MonoBehaviour
         GetComponent<SpriteRenderer>().color = Color.white;
     }
 
-    void BasicFollow()
+    void BasicActive()
     {
         // Follow
         if (canMove)
@@ -138,17 +179,39 @@ public class EnemyController : MonoBehaviour
         LookAtPlayer();
     }
 
+    void RangedActive()
+    {
+        playerPos = new Vector3(player.transform.position.x, player.transform.position.y + 0.5f, 0);
+        LookAtPlayer();
+        if (timeBetweenShots <= 0)
+        {
+            GameObject bullet = Instantiate(projectile, transform.position, Quaternion.identity);
+            bullet.GetComponent<EnemyBulletController>().parent = this.gameObject;
+            bullet.GetComponent<EnemyBulletController>().damage = damage;
+            bullet.GetComponent<EnemyBulletController>().range = projectileRange;
+            bullet.AddComponent<Rigidbody2D>().gravityScale = 0;
+            bullet.GetComponent<Rigidbody2D>().velocity = (playerPos - transform.position).normalized * projectileSpeed;
+            timeBetweenShots = startTimeBetweenShots;
+
+        }
+        else
+        {
+            timeBetweenShots -= Time.deltaTime;
+        }
+    }
+
     public void Die()
     {
         // Die
         DropItem();
-        RoomController.instance.StartCoroutine(RoomController.instance.RoomCoroutine());
+        // RoomController.instance.StartCoroutine(RoomController.instance.RoomCoroutine());
         Destroy(gameObject);
     }
 
     private void LookAtPlayer()
     {
-        Vector2 direction = player.transform.position - transform.position;
+
+        Vector2 direction = playerPos - transform.position;
 
         float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg - 90f;
 

@@ -68,5 +68,20 @@ public class PlayerStats : MonoBehaviour
     public void TakeDamage(int damage)
     {
         currentHealth -= damage;
+
+        foreach (Transform child in transform)
+        {
+            child.gameObject.GetComponent<SpriteRenderer>().color = Color.red;
+        }
+
+        Invoke("ResetColor", 0.1f);
+    }
+
+    public void ResetColor()
+    {
+        foreach (Transform child in transform)
+        {
+            child.gameObject.GetComponent<SpriteRenderer>().color = Color.white;
+        }
     }
 }

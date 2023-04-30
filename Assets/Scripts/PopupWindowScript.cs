@@ -21,7 +21,7 @@ public class PopupWindowScript : MonoBehaviour
     private Animator popupAni;
 
     private Queue<popupItem> popupQueue;
-    private bool isActive = false;
+    // private bool isActive = false;
     private Coroutine queueChecker;
 
     private void Start()
@@ -43,7 +43,7 @@ public class PopupWindowScript : MonoBehaviour
 
     private void ShowPopup(popupItem popupItem)
     {
-        isActive = true;
+        // isActive = true;
         window.SetActive(true);
         popupHeading.text = popupItem.headingText;
         popupText.text = popupItem.text;
@@ -60,7 +60,7 @@ public class PopupWindowScript : MonoBehaviour
                 yield return null;
             } while (!popupAni.GetCurrentAnimatorStateInfo(0).IsTag("Idle"));
         } while (popupQueue.Count > 0);
-        isActive = false;
+        // isActive = false;
         window.SetActive(false);
         queueChecker = null;
     }

@@ -4,10 +4,14 @@ using UnityEngine;
 
 public class BulletController : MonoBehaviour
 {
-    public float damage;
+    private float damage;
     // Start is called before the first frame update
     void Start()
     {
+        Collider2D collider1 = gameObject.GetComponent<CircleCollider2D>();
+        Collider2D collider2 = GameObject.Find("Player").GetComponent<BoxCollider2D>();
+        damage = GameObject.Find("Player").GetComponent<PlayerStats>().attackDamage;
+        Physics2D.IgnoreCollision(collider1, collider2);
         StartCoroutine(DestroyBullet());
     }
 
@@ -22,7 +26,6 @@ public class BulletController : MonoBehaviour
         if (other.gameObject.tag == "Enemy")
         {
             other.gameObject.GetComponent<EnemyController>().TakeDamage(damage);
-            // other.gameObject.GetComponent<EnemyController>().Die();
             Destroy(gameObject);
         }
         if (other.gameObject.tag == "Player")
