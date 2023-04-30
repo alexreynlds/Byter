@@ -121,7 +121,9 @@ public class RoomController : MonoBehaviour
     {
         spawnedBossRoom = true;
         yield return new WaitForSeconds(0.5f);
-        SpawnSpecialRoom("End");
+        string bossRoom = "End" + Random.Range(0, 2).ToString();
+        Debug.Log(bossRoom);
+        SpawnSpecialRoom(bossRoom);
     }
 
     IEnumerator SpawnShopRoom()
@@ -222,20 +224,6 @@ public class RoomController : MonoBehaviour
             loadedRooms.FirstOrDefault(room => room.X == x + 1 && room.Y == y)?.UnlockDoors();
         }
     }
-
-    // public void LoadRoom(string name, int x, int y)
-    // {
-    //     // Check if room already exists
-    //     if (DoesRoomExist(x, y))
-    //         return;
-
-    //     RoomInfo newRoomData = new RoomInfo();
-    //     newRoomData.name = name;
-    //     newRoomData.X = x;
-    //     newRoomData.Y = y;
-
-    //     loadRoomQueue.Enqueue(newRoomData);
-    // }
 
     public void LoadRoom(string name, int x, int y)
     {

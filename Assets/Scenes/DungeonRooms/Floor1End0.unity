@@ -925,6 +925,10 @@ MonoBehaviour:
   - {fileID: 1646756676, guid: c8e9371a0f93d48d1b46d8d5a3ee41ea, type: 3}
   - {fileID: 484130307, guid: c8e9371a0f93d48d1b46d8d5a3ee41ea, type: 3}
   keycardLocked: 0
+  open: 1
+  isShopDoor: 0
+  isItemRoomDoor: 0
+  isBossDoor: 0
 --- !u!1 &473029547
 GameObject:
   m_ObjectHideFlags: 0
@@ -1095,6 +1099,10 @@ MonoBehaviour:
   - {fileID: 1646756676, guid: c8e9371a0f93d48d1b46d8d5a3ee41ea, type: 3}
   - {fileID: 484130307, guid: c8e9371a0f93d48d1b46d8d5a3ee41ea, type: 3}
   keycardLocked: 0
+  open: 1
+  isShopDoor: 0
+  isItemRoomDoor: 0
+  isBossDoor: 0
 --- !u!1 &546838472
 GameObject:
   m_ObjectHideFlags: 0
@@ -1535,6 +1543,10 @@ MonoBehaviour:
   - {fileID: 1646756676, guid: c8e9371a0f93d48d1b46d8d5a3ee41ea, type: 3}
   - {fileID: 484130307, guid: c8e9371a0f93d48d1b46d8d5a3ee41ea, type: 3}
   keycardLocked: 0
+  open: 1
+  isShopDoor: 0
+  isItemRoomDoor: 0
+  isBossDoor: 0
 --- !u!1 &908841671
 GameObject:
   m_ObjectHideFlags: 0
@@ -3886,6 +3898,10 @@ MonoBehaviour:
   - {fileID: 1646756676, guid: c8e9371a0f93d48d1b46d8d5a3ee41ea, type: 3}
   - {fileID: 484130307, guid: c8e9371a0f93d48d1b46d8d5a3ee41ea, type: 3}
   keycardLocked: 0
+  open: 1
+  isShopDoor: 0
+  isItemRoomDoor: 0
+  isBossDoor: 0
 --- !u!1 &2082617514
 GameObject:
   m_ObjectHideFlags: 0
