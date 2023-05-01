@@ -124,8 +124,8 @@ public class UIScript : MonoBehaviour
         }
         else
         {
-            SetSFXVolume(-40);
-            sfxVolumeSlider.value = -40;
+            SetSFXVolume(-30);
+            sfxVolumeSlider.value = -30;
         }
         if (PlayerPrefs.HasKey("musicVol"))
         {
@@ -134,8 +134,8 @@ public class UIScript : MonoBehaviour
         }
         else
         {
-            SetMusicVolume(-40);
-            musicVolumeSlider.value = -40;
+            SetMusicVolume(-30);
+            musicVolumeSlider.value = -30;
         }
     }
 
@@ -243,8 +243,8 @@ public class UIScript : MonoBehaviour
     public void ResetAudio()
     {
         Debug.Log("Resetting Audio");
-        musicVolumeSlider.value = -40;
-        sfxVolumeSlider.value = -40;
+        musicVolumeSlider.value = -30;
+        sfxVolumeSlider.value = -30;
     }
 
     public void ResetGraphics()

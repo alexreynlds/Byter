@@ -63,8 +63,9 @@ public class EnemyController : MonoBehaviour
     private LayerMask Mask;
     private float timeBetweenShots;
 
-    [Header("Ranged Enemy Stats")]
+    [Header("Worm Boss Stats")]
     public GameObject bodyPart;
+    public GameObject endPortal;
 
     private List<GameObject> bodyParts = new List<GameObject>();
     private List<Vector2> directions = new List<Vector2>
@@ -76,7 +77,6 @@ public class EnemyController : MonoBehaviour
     };
     private Vector3 targetPos;
 
-    // private bool atTarget = false;
     private bool hasTarget = false;
     public int bodyLength = 5;
     private List<Vector3> previousPos = new List<Vector3>();
@@ -200,10 +200,13 @@ public class EnemyController : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Player"))
         {
-            Debug.Log("hit");
-            other.gameObject.GetComponent<PlayerStats>().TakeDamage(damage);
-            canMove = false;
-            TakeKnockback();
+            if (enemyType == EnemyType.Basic)
+            {
+                Debug.Log("hit");
+                other.gameObject.GetComponent<PlayerStats>().TakeDamage(damage);
+                canMove = false;
+                TakeKnockback();
+            }
         }
     }
 
@@ -443,8 +446,15 @@ public class EnemyController : MonoBehaviour
 
     public void Die()
     {
-        // Die
-        DropItem();
+        if (enemyType == EnemyType.WormBoss)
+        {
+            Instantiate(endPortal, transform.position, Quaternion.identity);
+        }
+        else
+        {
+            DropItem();
+        }
+
         player.GetComponent<PlayerAudioManager>().DeathSound();
         RoomController.instance.StartCoroutine(RoomController.instance.RoomCoroutine());
         Destroy(gameObject);

@@ -141,13 +141,13 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 0
   bodyPart: {fileID: 5179162077349591640, guid: 3a7ca0a2a7f55464992691a17e0907d9, type: 3}
+  endPortal: {fileID: 9129162683690285045, guid: 98a0c6a88996c4de8be74b44379d65a1, type: 3}
   bodyLength: 5
   wormBossMovementSpeed: 0.05
   notInRoom: 1
   itemPool:
   - gameObject: {fileID: 0}
     weight: 1
-  deathSound: {fileID: 8300000, guid: e5ae0a14d88294333984aacb4d9fe619, type: 3}
   takeDamageSound: {fileID: 8300000, guid: ff6a460dd45a6473d848185966a1407c, type: 3}
 --- !u!82 &293722287892171971
 AudioSource:
