@@ -21,6 +21,7 @@ public class ItemPickupScript : MonoBehaviour
 
     public void ItemPickup(GameObject other)
     {
+        Debug.Log("Picked up");
         if (itemType != BasicItemType.None)
         {
             if (itemType == BasicItemType.Coin)
@@ -46,8 +47,9 @@ public class ItemPickupScript : MonoBehaviour
         else
         {
             string tempName = gameObject.name;
+            Debug.Log(tempName);
 
-            if (tempName == "MHealthUp" || tempName == "MHealthDown")
+            if (tempName.Contains("MHealthUp") || tempName.Contains("MHealthDown"))
             {
                 if (changeAmount < 0)
                 {
