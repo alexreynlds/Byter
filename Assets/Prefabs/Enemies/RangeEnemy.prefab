@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8653619592015214143}
   - component: {fileID: 7904576684733470397}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: FirePoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -97,7 +97,7 @@ GameObject:
   - component: {fileID: 3876005864570392796}
   - component: {fileID: 3876005864570392799}
   - component: {fileID: 3507873784510734014}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: RangeEnemy
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -182,7 +182,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 1843439546, guid: e70b17ab34393402982c0d24ba96225e, type: 3}
+  m_Sprite: {fileID: -1195845726, guid: e70b17ab34393402982c0d24ba96225e, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -206,9 +206,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyType: 1
-  currentState: 1
+  currentState: 0
   range: 10
-  health: 1
+  health: 5
   damage: 1
   speed: 1
   canMove: 1
@@ -217,6 +217,12 @@ MonoBehaviour:
   projectileRange: 3
   projectile: {fileID: 7639679029451292464, guid: 11ae97ec70484744f982862735eacf2d, type: 3}
   firePoint: {fileID: 368297513110116606}
+  Mask:
+    serializedVersion: 2
+    m_Bits: 0
+  bodyPart: {fileID: 0}
+  bodyLength: 5
+  wormBossMovementSpeed: 0.01
   notInRoom: 0
   itemPool:
   - gameObject: {fileID: 0}

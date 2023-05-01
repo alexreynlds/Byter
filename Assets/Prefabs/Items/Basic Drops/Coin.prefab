@@ -100,6 +100,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemType: 3
   changeAmount: 0
+  itemName: 
+  itemDescription: 
 --- !u!61 &8786737970721948768
 BoxCollider2D:
   m_ObjectHideFlags: 0

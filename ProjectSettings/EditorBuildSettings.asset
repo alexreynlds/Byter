@@ -25,11 +25,29 @@ EditorBuildSettings:
     guid: 7e7899b0b063a0546bcc0796a47d043c
   - enabled: 1
     path: Assets/Scenes/DungeonRooms/Floor1Basic1.unity
+    guid: f61a7524df47cd44aaf11d1da6946e52
+  - enabled: 1
+    path: Assets/Scenes/DungeonRooms/Floor1RangeCross1.unity
     guid: dfc60b67402b14ca49579479ba72b50b
+  - enabled: 1
+    path: Assets/Scenes/DungeonRooms/Floor1RangeCross2.unity
+    guid: 5f0fe5def619ece42ac7b824d230f953
+  - enabled: 1
+    path: Assets/Scenes/DungeonRooms/Floor1RangeCross3.unity
+    guid: 17bd5a5046e725b4ba18d1b85a2019f6
+  - enabled: 1
+    path: Assets/Scenes/DungeonRooms/Floor1RangeCross4.unity
+    guid: bb59eafa050f6a94a823bde48103dfa2
+  - enabled: 1
+    path: Assets/Scenes/DungeonRooms/Floor1Big.unity
+    guid: 2d715e2612097a94fae0a8bbbc94fe2f
   - enabled: 1
     path: Assets/Scenes/DungeonRooms/Floor1Shop.unity
     guid: 10643e22f185d3d44a757e9ecb3eaa48
   - enabled: 1
     path: Assets/Scenes/DungeonRooms/Floor1ItemRoom.unity
     guid: 131808e08267e4e4d9fed83caa27cdc7
+  - enabled: 1
+    path: Assets/Scenes/DungeonRooms/Floor1Arena1.unity
+    guid: 19fd1a1b9fe7fcf4da7ffc50bf51f969
   m_configObjects: {}

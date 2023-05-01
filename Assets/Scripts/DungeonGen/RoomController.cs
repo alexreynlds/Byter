@@ -12,40 +12,14 @@ public class RoomInfo
     public int X;
 
     public int Y;
+
+    public int Width;
+
+    public int Height;
 }
 
 public class RoomController : MonoBehaviour
 {
-    // public static RoomController instance;
-
-    // string currentLevelName = "Floor1";
-
-    // RoomInfo currentLoadRoomData;
-
-    // Room currentRoom;
-
-    // Queue<RoomInfo> loadRoomQueue = new Queue<RoomInfo>();
-
-    // public List<Room> loadedRooms = new List<Room>();
-
-    // bool isLoadingRoom = false;
-
-    // // Special Rooms
-    // bool spawnedBossRoom = false;
-    // bool spawnedShopRoom = false;
-    // bool spawnedItemRoom = false;
-
-    // private Vector2 u = new Vector2(0, 1);
-    // private Vector2 d = new Vector2(0, -1);
-    // private Vector2 l = new Vector2(-1, 0);
-    // private Vector2 r = new Vector2(1, 0);
-
-    // private List<Vector2> directions;
-
-
-
-    // bool updatedRooms = false;
-
     public static RoomController instance;
     private string currentLevelName = "Floor1";
     private RoomInfo currentLoadRoomData;
@@ -262,10 +236,14 @@ public class RoomController : MonoBehaviour
                 0
             );
 
+
+
             room.X = currentLoadRoomData.X;
             room.Y = currentLoadRoomData.Y;
             room.name = $"{currentLevelName}_{currentLoadRoomData.name} {room.X}, {room.Y}";
             room.transform.parent = transform;
+
+            // Debug.Log(room.name + room.transform.position);
 
             isLoadingRoom = false;
 
@@ -295,7 +273,7 @@ public class RoomController : MonoBehaviour
 
     public string GetRandomRoomName()
     {
-        string[] possibleRooms = new string[] { "Empty", "Basic1" };
+        string[] possibleRooms = new string[] { "Empty", "Basic1", "RangeCross1", "RangeCross2", "RangeCross3", "RangeCross4", "Arena1" };
 
         return possibleRooms[Random.Range(0, possibleRooms.Length)];
     }

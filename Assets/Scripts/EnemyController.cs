@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
+
 
 
 public enum EnemyState
@@ -40,6 +42,7 @@ public class EnemyController : MonoBehaviour
     [SerializeField] private float projectileRange;
     [SerializeField] private GameObject projectile;
     [SerializeField] private GameObject firePoint;
+    [SerializeField] private LayerMask Mask;
     private float timeBetweenShots;
 
     [Header("Ranged Enemy Stats")]
@@ -247,6 +250,11 @@ public class EnemyController : MonoBehaviour
     {
         playerPos = new Vector3(player.transform.position.x, player.transform.position.y + 0.5f, 0);
 
+        if (rb.velocity.magnitude > 0)
+        {
+            rb.velocity = Vector2.zero;
+        }
+
         if (CheckLOS())
         {
             LookAtPlayer();
@@ -277,14 +285,15 @@ public class EnemyController : MonoBehaviour
         Vector3 direction = player.transform.position - firePoint.transform.position;
         float distance = direction.magnitude;
 
-        RaycastHit2D hit = Physics2D.Raycast(firePoint.transform.position, direction.normalized, distance);
+        RaycastHit2D hit = Physics2D.Raycast(firePoint.transform.position, direction.normalized, Mathf.Infinity, Mask);
         if (hit.collider == null) return false;
+        // Debug.DrawRay(firePoint.transform.position, direction.normalized * distance, Color.red);
 
         if (hit.collider.gameObject.CompareTag("Player") || hit.collider.gameObject.CompareTag("PlayerBody"))
         {
             return true;
         }
-
+        Debug.Log("No LOS");
         return false;
     }
 

@@ -62,7 +62,6 @@ public class ItemRoomItemScript : MonoBehaviour
     {
         if (!itemTaken && other.CompareTag("Player"))
         {
-            Debug.Log("Taken");
             storedItem.GetComponent<ItemPickupScript>().ItemPickup(player);
             itemTaken = true;
         }

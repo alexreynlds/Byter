@@ -9,7 +9,7 @@ public class BulletController : MonoBehaviour
     void Start()
     {
         Collider2D collider1 = gameObject.GetComponent<CircleCollider2D>();
-        Collider2D collider2 = GameObject.Find("Player").GetComponent<BoxCollider2D>();
+        Collider2D collider2 = GameObject.Find("Player").GetComponent<Collider2D>();
         damage = GameObject.Find("Player").GetComponent<PlayerStats>().attackDamage;
         Physics2D.IgnoreCollision(collider1, collider2);
         StartCoroutine(DestroyBullet());

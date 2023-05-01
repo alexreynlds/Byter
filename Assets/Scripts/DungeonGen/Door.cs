@@ -23,7 +23,7 @@ public class Door : MonoBehaviour
     // private bool playerCanMove = true;
 
     private float widthOffset = 3.7f;
-    private float heightOffset = 3.5f;
+    private float heightOffset = 3.7f;
     public bool keycardLocked = false;
 
     public bool open = true;
