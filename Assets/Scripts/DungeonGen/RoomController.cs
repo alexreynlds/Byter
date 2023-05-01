@@ -122,7 +122,6 @@ public class RoomController : MonoBehaviour
         spawnedBossRoom = true;
         yield return new WaitForSeconds(0.5f);
         string bossRoom = "End" + Random.Range(1, 2).ToString();
-        // Debug.Log(bossRoom);
         SpawnSpecialRoom(bossRoom);
     }
 
@@ -338,7 +337,6 @@ public class RoomController : MonoBehaviour
 
             if (room == currentRoom && enemies.Length > 0)
             {
-                Debug.Log("Enemies in roomLL: " + enemies.Length);
                 foreach (EnemyController enemy in enemies)
                 {
                     enemy.notInRoom = false;
