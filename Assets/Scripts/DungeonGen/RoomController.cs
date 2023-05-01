@@ -373,8 +373,20 @@ public class RoomController : MonoBehaviour
 
         // SceneManager.LoadScene(currentLevelName, LoadSceneMode.Additive);
 
+        int numLoadedScene = SceneManager.sceneCount;
+
+        for (int i = 0; i < numLoadedScene; i++)
+        {
+            Scene loadedScene = SceneManager.GetSceneAt(i);
+            if (loadedScene.name != "MainScene")
+            {
+                SceneManager.UnloadSceneAsync(loadedScene);
+            }
+        }
+
         foreach (Room room in loadedRooms)
         {
+            // SceneManager.UnloadSceneAsync(room.name);
             Destroy(room.gameObject);
         }
 
@@ -386,11 +398,9 @@ public class RoomController : MonoBehaviour
         updatedRooms = false;
 
         currentLevelName = "Floor2";
-
+        GameObject.Find("Player").transform.position = new Vector3(-0.5f, -0.5f, 0);
         Destroy(transform.GetComponent<DungeonGenerator>());
         DungeonGenerator dungeonGenerator = transform.gameObject.AddComponent<DungeonGenerator>();
-        dungeonGenerator.dungeonData = dungeonData;
-
     }
 
 }

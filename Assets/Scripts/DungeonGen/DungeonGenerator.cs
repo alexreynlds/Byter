@@ -21,6 +21,7 @@ public class DungeonGenerator : MonoBehaviour
         }
         else
         {
+            dungeonData = Resources.Load<DungeonGenerationData>("DungeonGenerationData");
             dungeonRooms = DungeonCrawlerController.GenerateDungeon(dungeonData);
             SpawnRooms(dungeonRooms);
         }
