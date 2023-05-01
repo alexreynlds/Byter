@@ -12,42 +12,60 @@ EditorBuildSettings:
     path: Assets/Scenes/DungeonRooms/Floor1Main.unity
     guid: 6cda1396a44d146ada6f38ab546c0672
   - enabled: 1
-    path: Assets/Scenes/DungeonRooms/Floor1Start.unity
+    path: Assets/Scenes/DungeonRooms/Floor1/Floor1Start.unity
     guid: 024c0d34bfbf548a2b6594ea674c923f
   - enabled: 1
-    path: Assets/Scenes/DungeonRooms/Floor1Empty.unity
+    path: Assets/Scenes/DungeonRooms/Floor1/Floor1Empty.unity
     guid: 8e241ad248ee0464a8d7f251c4270d9c
   - enabled: 1
-    path: Assets/Scenes/DungeonRooms/Floor1End0.unity
+    path: Assets/Scenes/DungeonRooms/Floor1/Floor1End0.unity
     guid: c74d06b747dc64f63837957b8b0cdb00
   - enabled: 1
-    path: Assets/Scenes/DungeonRooms/Floor1End1.unity
+    path: Assets/Scenes/DungeonRooms/Floor1/Floor1End1.unity
     guid: 7e7899b0b063a0546bcc0796a47d043c
   - enabled: 1
-    path: Assets/Scenes/DungeonRooms/Floor1Basic1.unity
+    path: Assets/Scenes/DungeonRooms/Floor1/Floor1Basic1.unity
     guid: f61a7524df47cd44aaf11d1da6946e52
   - enabled: 1
-    path: Assets/Scenes/DungeonRooms/Floor1RangeCross1.unity
+    path: Assets/Scenes/DungeonRooms/Floor2/Floor2Basic1.unity
+    guid: 6a784292782d767458b50c387b35b4b4
+  - enabled: 1
+    path: Assets/Scenes/DungeonRooms/Floor2/Floor2End0.unity
+    guid: 4fe51d815ee6c754daa4a5bc366bc0f1
+  - enabled: 1
+    path: Assets/Scenes/DungeonRooms/Floor2/Floor2End1.unity
+    guid: 2cacecf43d0d74e43a3dd053908466c7
+  - enabled: 1
+    path: Assets/Scenes/DungeonRooms/Floor2/Floor2ItemRoom.unity
+    guid: 6ccfa3b311e346649ace96da0f5caa5b
+  - enabled: 1
+    path: Assets/Scenes/DungeonRooms/Floor2/Floor2Shop.unity
+    guid: b50dac5a57ba38943b14f73059ede5b6
+  - enabled: 1
+    path: Assets/Scenes/DungeonRooms/Floor1/Floor1RangeCross1.unity
     guid: dfc60b67402b14ca49579479ba72b50b
   - enabled: 1
-    path: Assets/Scenes/DungeonRooms/Floor1RangeCross2.unity
+    path: Assets/Scenes/DungeonRooms/Floor1/Floor1RangeCross2.unity
     guid: 5f0fe5def619ece42ac7b824d230f953
   - enabled: 1
-    path: Assets/Scenes/DungeonRooms/Floor1RangeCross3.unity
+    path: Assets/Scenes/DungeonRooms/Floor1/Floor1RangeCross3.unity
     guid: 17bd5a5046e725b4ba18d1b85a2019f6
   - enabled: 1
-    path: Assets/Scenes/DungeonRooms/Floor1RangeCross4.unity
+    path: Assets/Scenes/DungeonRooms/Floor1/Floor1RangeCross4.unity
     guid: bb59eafa050f6a94a823bde48103dfa2
   - enabled: 1
-    path: Assets/Scenes/DungeonRooms/Floor1Big.unity
+    path: Assets/Scenes/DungeonRooms/Floor1/Floor1Big.unity
     guid: 2d715e2612097a94fae0a8bbbc94fe2f
   - enabled: 1
-    path: Assets/Scenes/DungeonRooms/Floor1Shop.unity
+    path: Assets/Scenes/DungeonRooms/Floor1/Floor1Shop.unity
     guid: 10643e22f185d3d44a757e9ecb3eaa48
   - enabled: 1
-    path: Assets/Scenes/DungeonRooms/Floor1ItemRoom.unity
+    path: Assets/Scenes/DungeonRooms/Floor1/Floor1ItemRoom.unity
     guid: 131808e08267e4e4d9fed83caa27cdc7
   - enabled: 1
-    path: Assets/Scenes/DungeonRooms/Floor1Arena1.unity
+    path: Assets/Scenes/DungeonRooms/Floor1/Floor1Arena1.unity
     guid: 19fd1a1b9fe7fcf4da7ffc50bf51f969
+  - enabled: 1
+    path: Assets/Scenes/DungeonRooms/Floor2/Floor2Start.unity
+    guid: 5cf37c9f3e3212140851c957ced75f00
   m_configObjects: {}

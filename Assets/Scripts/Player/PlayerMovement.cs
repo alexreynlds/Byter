@@ -143,4 +143,9 @@ public class PlayerMovement : MonoBehaviour
 
         bottom.GetComponent<SpriteRenderer>().sprite = bottomSprites[currentBottomSprite];
     }
+
+    void OnTest()
+    {
+        RoomController.instance.LoadNextLevel();
+    }
 }

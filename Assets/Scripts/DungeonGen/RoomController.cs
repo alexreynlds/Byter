@@ -12,10 +12,6 @@ public class RoomInfo
     public int X;
 
     public int Y;
-
-    public int Width;
-
-    public int Height;
 }
 
 public class RoomController : MonoBehaviour
@@ -32,6 +28,8 @@ public class RoomController : MonoBehaviour
     private bool spawnedItemRoom = false;
     private List<Vector2> directions = new List<Vector2> { new Vector2(0, 1), new Vector2(0, -1), new Vector2(-1, 0), new Vector2(1, 0) };
     private bool updatedRooms = false;
+
+    public DungeonGenerationData dungeonData;
 
     void Awake()
     {
@@ -273,8 +271,15 @@ public class RoomController : MonoBehaviour
 
     public string GetRandomRoomName()
     {
-        string[] possibleRooms = new string[] { "Empty", "Basic1", "RangeCross1", "RangeCross2", "RangeCross3", "RangeCross4", "Arena1" };
-
+        string[] possibleRooms = null;
+        if (currentLevelName == "Floor1")
+        {
+            possibleRooms = new string[] { "Empty", "Basic1", "RangeCross1", "RangeCross2", "RangeCross3", "RangeCross4", "Arena1" };
+        }
+        else if (currentLevelName == "Floor2")
+        {
+            possibleRooms = new string[] { "Basic1" };
+        }
         return possibleRooms[Random.Range(0, possibleRooms.Length)];
     }
 
@@ -334,4 +339,58 @@ public class RoomController : MonoBehaviour
     {
         Instantiate(item, position, Quaternion.identity);
     }
+
+    public void LoadNextLevel()
+    {
+        // Reset the current level
+        // SceneManager.LoadScene(currentLevelName);
+
+        // // Reset the state of the room controller
+        // loadRoomQueue.Clear();
+        // loadedRooms.Clear();
+        // spawnedBossRoom = false;
+        // spawnedShopRoom = false;
+        // spawnedItemRoom = false;
+        // updatedRooms = false;
+
+        // // Load the next level
+        // if (currentLevelName == "Floor1")
+        // {
+        //     currentLevelName = "Floor2";
+        // }
+        // else if (currentLevelName == "Floor2")
+        // {
+        //     currentLevelName = "Floor3";
+        // }
+        // else if (currentLevelName == "Floor3")
+        // {
+        //     currentLevelName = "Floor4";
+        // }
+        // else if (currentLevelName == "Floor4")
+        // {
+        //     currentLevelName = "Floor5";
+        // }
+
+        // SceneManager.LoadScene(currentLevelName, LoadSceneMode.Additive);
+
+        foreach (Room room in loadedRooms)
+        {
+            Destroy(room.gameObject);
+        }
+
+        loadRoomQueue.Clear();
+        loadedRooms.Clear();
+        spawnedBossRoom = false;
+        spawnedShopRoom = false;
+        spawnedItemRoom = false;
+        updatedRooms = false;
+
+        currentLevelName = "Floor2";
+
+        Destroy(transform.GetComponent<DungeonGenerator>());
+        DungeonGenerator dungeonGenerator = transform.gameObject.AddComponent<DungeonGenerator>();
+        dungeonGenerator.dungeonData = dungeonData;
+
+    }
+
 }

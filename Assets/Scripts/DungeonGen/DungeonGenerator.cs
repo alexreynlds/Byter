@@ -13,8 +13,18 @@ public class DungeonGenerator : MonoBehaviour
     {
         Random.InitState(System.DateTime.Now.Millisecond);
 
-        dungeonRooms = DungeonCrawlerController.GenerateDungeon(dungeonData);
-        SpawnRooms(dungeonRooms);
+        if (dungeonData == null)
+        {
+            dungeonData = Resources.Load<DungeonGenerationData>("DungeonGenerationData");
+            dungeonRooms = DungeonCrawlerController.GenerateDungeon(dungeonData);
+            SpawnRooms(dungeonRooms);
+        }
+        else
+        {
+            dungeonRooms = DungeonCrawlerController.GenerateDungeon(dungeonData);
+            SpawnRooms(dungeonRooms);
+        }
+
     }
 
     private void SpawnRooms(IEnumerable<Vector2Int> rooms)
