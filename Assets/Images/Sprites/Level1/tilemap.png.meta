@@ -2615,6 +2615,27 @@ TextureImporter:
       indices: 
       edges: []
       weights: []
+    - serializedVersion: 2
+      name: tilemap_119
+      rect:
+        serializedVersion: 2
+        x: 16
+        y: 16
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 15aee335177cf174bb43c6fa1ecaf279
+      internalID: -1699584006
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []
@@ -2649,6 +2670,7 @@ TextureImporter:
       tilemap_116: -525535914
       tilemap_117: 1021123530
       tilemap_118: -1179943164
+      tilemap_119: -1699584006
       tilemap_12: -850635303
       tilemap_13: 941157066
       tilemap_14: 1749234285

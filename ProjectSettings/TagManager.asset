@@ -8,6 +8,7 @@ TagManager:
   - Door
   - PlayerBody
   - Bullet
+  - WormBoss
   layers:
   - Default
   - TransparentFX

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class BulletController : MonoBehaviour
 {
-    private float damage;
+    private int damage;
     // Start is called before the first frame update
     void Start()
     {
@@ -31,6 +31,18 @@ public class BulletController : MonoBehaviour
         if (other.gameObject.tag == "Player")
         {
             return;
+        }
+        if (other.gameObject.tag == "WormBoss")
+        {
+            if (other.gameObject.name == "WormBossHead")
+            {
+                other.gameObject.GetComponent<WormBossScript>().TakeDamage(damage);
+            }
+            else
+            {
+                other.transform.parent.gameObject.GetComponent<WormBossScript>().TakeDamage(damage);
+            }
+            Destroy(gameObject);
         }
         else
         {

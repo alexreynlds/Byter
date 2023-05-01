@@ -114,14 +114,16 @@ public class EnemyController : MonoBehaviour
             }
         }
 
-
         if (!notInRoom)
         {
             if (enemyType == EnemyType.Basic)
             {
                 currentState = EnemyState.Active;
             }
-
+            else if (enemyType == EnemyType.Ranged)
+            {
+                currentState = EnemyState.Active;
+            }
         }
     }
 
@@ -227,7 +229,7 @@ public class EnemyController : MonoBehaviour
     {
         // Die
         DropItem();
-        // RoomController.instance.StartCoroutine(RoomController.instance.RoomCoroutine());
+        RoomController.instance.StartCoroutine(RoomController.instance.RoomCoroutine());
         Destroy(gameObject);
     }
 

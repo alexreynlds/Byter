@@ -121,8 +121,8 @@ public class RoomController : MonoBehaviour
     {
         spawnedBossRoom = true;
         yield return new WaitForSeconds(0.5f);
-        string bossRoom = "End" + Random.Range(0, 2).ToString();
-        Debug.Log(bossRoom);
+        string bossRoom = "End" + Random.Range(0, 1).ToString();
+        // Debug.Log(bossRoom);
         SpawnSpecialRoom(bossRoom);
     }
 
@@ -315,64 +315,6 @@ public class RoomController : MonoBehaviour
         UpdateRooms();
     }
 
-    // public void UpdateRooms()
-    // {
-    //     foreach (Room room in loadedRooms)
-    //     {
-    //         if (room != currentRoom)
-    //         {
-    //             EnemyController[] enemies = room.GetComponentsInChildren<EnemyController>();
-
-    //             if (enemies != null)
-    //             {
-    //                 foreach (EnemyController enemy in enemies)
-    //                 {
-    //                     enemy.notInRoom = true;
-    //                 }
-
-    //                 foreach (Door door in room.GetComponentsInChildren<Door>())
-    //                 {
-    //                     door.Open();
-    //                 }
-    //             }
-    //             else
-    //             {
-    //                 foreach (Door door in room.GetComponentsInChildren<Door>())
-    //                 {
-    //                     door.Open();
-    //                 }
-    //             }
-    //         }
-    //         else
-    //         {
-    //             EnemyController[] enemies = room.GetComponentsInChildren<EnemyController>();
-
-    //             if (enemies.Length > 0)
-    //             {
-    //                 foreach (EnemyController enemy in enemies)
-    //                 {
-    //                     enemy.notInRoom = false;
-    //                 }
-
-    //                 foreach (Door door in room.GetComponentsInChildren<Door>())
-    //                 {
-    //                     door.Close();
-    //                 }
-    //             }
-    //             else
-    //             {
-    //                 foreach (Door door in room.GetComponentsInChildren<Door>())
-    //                 {
-    //                     door.Open();
-    //                 }
-    //             }
-    //         }
-    //         foreach (Door door in room.GetComponentsInChildren<Door>())
-    //         {
-    //             door.UpdateDoorData();
-    //         }
-    //     }
-    // }
 
     public void UpdateRooms()
     {
@@ -396,6 +338,7 @@ public class RoomController : MonoBehaviour
 
             if (room == currentRoom && enemies.Length > 0)
             {
+                Debug.Log("Enemies in roomLL: " + enemies.Length);
                 foreach (EnemyController enemy in enemies)
                 {
                     enemy.notInRoom = false;

@@ -11,7 +11,7 @@ public class PlayerStats : MonoBehaviour
 
     public float projectileSpeed = 1f;
     public float attackSpeed = 0.5f;
-    public float attackDamage = 1f;
+    public int attackDamage = 1;
 
     // Range controls the amount of time before the bullet is destroyed
     // Lower float means lower range
