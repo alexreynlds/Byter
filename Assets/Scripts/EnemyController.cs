@@ -2,8 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-
-
+using UnityEngine.Audio;
 
 public enum EnemyState
 {
@@ -28,36 +27,60 @@ public class EnemyController : MonoBehaviour
     public EnemyState currentState = EnemyState.Idle;
 
     [Header("Enemy Stats")]
-    [SerializeField] private float range;
-    [SerializeField] private float health;
-    [SerializeField] private int damage;
+    [SerializeField]
+    private float range;
+
+    [SerializeField]
+    private float health;
+
+    [SerializeField]
+    private int damage;
 
     [Header("Basic Enemy Stats")]
-    [SerializeField] private float speed;
-    [SerializeField] private bool canMove = true;
+    [SerializeField]
+    private float speed;
+
+    [SerializeField]
+    private bool canMove = true;
 
     [Header("Ranged Enemy Stats")]
-    [SerializeField] private float startTimeBetweenShots;
-    [SerializeField] private float projectileSpeed;
-    [SerializeField] private float projectileRange;
-    [SerializeField] private GameObject projectile;
-    [SerializeField] private GameObject firePoint;
-    [SerializeField] private LayerMask Mask;
+    [SerializeField]
+    private float startTimeBetweenShots;
+
+    [SerializeField]
+    private float projectileSpeed;
+
+    [SerializeField]
+    private float projectileRange;
+
+    [SerializeField]
+    private GameObject projectile;
+
+    [SerializeField]
+    private GameObject firePoint;
+
+    [SerializeField]
+    private LayerMask Mask;
     private float timeBetweenShots;
 
     [Header("Ranged Enemy Stats")]
     public GameObject bodyPart;
 
     private List<GameObject> bodyParts = new List<GameObject>();
-    private List<Vector2> directions = new List<Vector2> { new Vector2(0, 1), new Vector2(0, -1), new Vector2(-1, 0), new Vector2(1, 0) };
+    private List<Vector2> directions = new List<Vector2>
+    {
+        new Vector2(0, 1),
+        new Vector2(0, -1),
+        new Vector2(-1, 0),
+        new Vector2(1, 0)
+    };
     private Vector3 targetPos;
+
     // private bool atTarget = false;
     private bool hasTarget = false;
     public int bodyLength = 5;
     private List<Vector3> previousPos = new List<Vector3>();
     public float wormBossMovementSpeed = 0.01f; // the movement speed of the boss
-
-
 
     private GameObject player;
     private Vector3 playerPos;
@@ -69,12 +92,17 @@ public class EnemyController : MonoBehaviour
 
     public List<Spawnable> itemPool = new List<Spawnable>();
 
+    private AudioSource audioSource;
+
+    [SerializeField]
+    private AudioClip takeDamageSound;
+
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
         totalWeight = 0;
         Physics2D.queriesStartInColliders = false;
-
+        audioSource = GetComponent<AudioSource>();
         foreach (Spawnable spawnable in itemPool)
         {
             totalWeight += spawnable.weight;
@@ -96,7 +124,12 @@ public class EnemyController : MonoBehaviour
         {
             for (int i = 0; i < bodyLength; i++)
             {
-                GameObject temp = Instantiate(bodyPart, new Vector3(transform.position.x, transform.position.y, 0), Quaternion.identity, transform);
+                GameObject temp = Instantiate(
+                    bodyPart,
+                    new Vector3(transform.position.x, transform.position.y, 0),
+                    Quaternion.identity,
+                    transform
+                );
                 bodyParts.Add(temp);
             }
         }
@@ -191,32 +224,41 @@ public class EnemyController : MonoBehaviour
 
     public void TakeDamage(float damage)
     {
-        if (!enemyType.Equals(EnemyType.WormBoss))
+        // if (!enemyType.Equals(EnemyType.WormBoss))
+        // {
+        //     audioSource.PlayOneShot(takeDamageSound);
+        //     health--;
+        //     GetComponent<SpriteRenderer>().color = Color.red;
+        //     Invoke("ResetColor", 0.1f);
+        //     if (health <= 0)
+        //     {
+        //         currentState = EnemyState.Die;
+        //     }
+        // }
+        // else
+        // {
+        audioSource.PlayOneShot(takeDamageSound);
+        health -= damage;
+        GetComponent<SpriteRenderer>().color = Color.red;
+
+        if (enemyType.Equals(EnemyType.WormBoss))
         {
-            health--;
-            GetComponent<SpriteRenderer>().color = Color.red;
-            Invoke("ResetColor", 0.1f);
-            if (health <= 0)
-            {
-                currentState = EnemyState.Die;
-            }
-        }
-        else
-        {
-            health -= damage;
-            transform.GetComponent<SpriteRenderer>().color = Color.red;
             foreach (Transform child in transform)
             {
                 child.gameObject.GetComponent<SpriteRenderer>().color = Color.red;
             }
-
-            Invoke("ResetColor", 0.1f);
-            if (health <= 0)
-            {
-                currentState = EnemyState.Die;
-            }
+        }
+        else
+        {
+            transform.GetComponent<SpriteRenderer>().color = Color.red;
         }
 
+        Invoke("ResetColor", 0.1f);
+        if (health <= 0)
+        {
+            currentState = EnemyState.Die;
+        }
+        // }
     }
 
     private void ResetColor()
@@ -260,36 +302,49 @@ public class EnemyController : MonoBehaviour
             LookAtPlayer();
             if (timeBetweenShots <= 0)
             {
-                GameObject bullet = Instantiate(projectile, transform.position, Quaternion.identity);
+                GameObject bullet = Instantiate(
+                    projectile,
+                    transform.position,
+                    Quaternion.identity
+                );
                 bullet.GetComponent<EnemyBulletController>().parent = this.gameObject;
                 bullet.GetComponent<EnemyBulletController>().damage = damage;
                 bullet.GetComponent<EnemyBulletController>().range = projectileRange;
                 bullet.AddComponent<Rigidbody2D>().gravityScale = 0;
-                bullet.GetComponent<Rigidbody2D>().velocity = (playerPos - transform.position).normalized * projectileSpeed;
+                bullet.GetComponent<Rigidbody2D>().velocity =
+                    (playerPos - transform.position).normalized * projectileSpeed;
                 timeBetweenShots = startTimeBetweenShots;
-
             }
             else
             {
                 timeBetweenShots -= Time.deltaTime;
             }
         }
-
     }
 
     private bool CheckLOS()
     {
         GameObject player = GameObject.FindWithTag("Player");
-        if (player == null) return false;
+        if (player == null)
+            return false;
 
         Vector3 direction = player.transform.position - firePoint.transform.position;
         float distance = direction.magnitude;
 
-        RaycastHit2D hit = Physics2D.Raycast(firePoint.transform.position, direction.normalized, Mathf.Infinity, Mask);
-        if (hit.collider == null) return false;
+        RaycastHit2D hit = Physics2D.Raycast(
+            firePoint.transform.position,
+            direction.normalized,
+            Mathf.Infinity,
+            Mask
+        );
+        if (hit.collider == null)
+            return false;
         // Debug.DrawRay(firePoint.transform.position, direction.normalized * distance, Color.red);
 
-        if (hit.collider.gameObject.CompareTag("Player") || hit.collider.gameObject.CompareTag("PlayerBody"))
+        if (
+            hit.collider.gameObject.CompareTag("Player")
+            || hit.collider.gameObject.CompareTag("PlayerBody")
+        )
         {
             return true;
         }
@@ -344,15 +399,30 @@ public class EnemyController : MonoBehaviour
         {
             Vector2 tempDir = directions[Random.Range(0, directions.Count)];
             RaycastHit2D hit = Physics2D.Raycast(transform.position, tempDir, 1f);
-            if (hit.collider == null || hit.collider.gameObject.CompareTag("Player") || hit.collider.gameObject.CompareTag("PlayerBody"))
+            if (
+                hit.collider == null
+                || hit.collider.gameObject.CompareTag("Player")
+                || hit.collider.gameObject.CompareTag("PlayerBody")
+            )
             {
                 bool foundBody = false;
                 for (int i = 0; i < bodyParts.Count; i++)
                 {
                     Vector3 bodyPos = bodyParts[i].transform.position;
-                    if (Vector3.Distance(bodyPos, transform.position + new Vector3(tempDir.x, tempDir.y, 0)) < 0.1f ||
-                        Vector3.Distance(bodyPos, transform.position + new Vector3(tempDir.x * 2, tempDir.y * 2, 0)) < 0.1f ||
-                        Vector3.Distance(bodyPos, transform.position + new Vector3(tempDir.x * 3, tempDir.y * 3, 0)) < 0.1f)
+                    if (
+                        Vector3.Distance(
+                            bodyPos,
+                            transform.position + new Vector3(tempDir.x, tempDir.y, 0)
+                        ) < 0.1f
+                        || Vector3.Distance(
+                            bodyPos,
+                            transform.position + new Vector3(tempDir.x * 2, tempDir.y * 2, 0)
+                        ) < 0.1f
+                        || Vector3.Distance(
+                            bodyPos,
+                            transform.position + new Vector3(tempDir.x * 3, tempDir.y * 3, 0)
+                        ) < 0.1f
+                    )
                     {
                         Debug.Log("Found body");
                         foundBody = true;
@@ -375,19 +445,23 @@ public class EnemyController : MonoBehaviour
     {
         // Die
         DropItem();
+        player.GetComponent<PlayerAudioManager>().DeathSound();
         RoomController.instance.StartCoroutine(RoomController.instance.RoomCoroutine());
         Destroy(gameObject);
     }
 
     private void LookAtPlayer()
     {
-
         Vector2 direction = playerPos - transform.position;
 
         float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg - 90f;
 
         Quaternion targetRotation = Quaternion.AngleAxis(angle, Vector3.forward);
-        transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, 5 * Time.deltaTime);
+        transform.rotation = Quaternion.Slerp(
+            transform.rotation,
+            targetRotation,
+            5 * Time.deltaTime
+        );
     }
 
     private void DropItem()

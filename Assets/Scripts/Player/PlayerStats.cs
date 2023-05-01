@@ -28,6 +28,8 @@ public class PlayerStats : MonoBehaviour
     public int coins;
     public int keycards;
 
+    private bool canTakeDamage = true;
+
     // Start is called before the first frame update
     void Awake()
     {
@@ -67,14 +69,26 @@ public class PlayerStats : MonoBehaviour
 
     public void TakeDamage(int damage)
     {
-        currentHealth -= damage;
-
-        foreach (Transform child in transform)
+        if (canTakeDamage)
         {
-            child.gameObject.GetComponent<SpriteRenderer>().color = Color.red;
-        }
+            currentHealth -= damage;
 
-        Invoke("ResetColor", 0.1f);
+            foreach (Transform child in transform)
+            {
+                child.gameObject.GetComponent<SpriteRenderer>().color = Color.red;
+            }
+
+            Invoke("ResetColor", 0.1f);
+            GetComponent<PlayerAudioManager>().TakeDamageSound();
+            StartCoroutine(InvincibilityFrames());
+        }
+    }
+
+    IEnumerator InvincibilityFrames()
+    {
+        canTakeDamage = false;
+        yield return new WaitForSeconds(1f);
+        canTakeDamage = true;
     }
 
     public void ResetColor()

@@ -4,12 +4,26 @@ using UnityEngine;
 
 public class ItemPickupScript : MonoBehaviour
 {
-    [SerializeField] private enum BasicItemType { None, Health, Energy, Coin };
-    [SerializeField] private BasicItemType itemType;
+    [SerializeField]
+    private enum BasicItemType
+    {
+        None,
+        Health,
+        Energy,
+        Coin
+    };
 
-    [SerializeField] private int changeAmount = 0;
-    [SerializeField] private string itemName;
-    [SerializeField] private string itemDescription;
+    [SerializeField]
+    private BasicItemType itemType;
+
+    [SerializeField]
+    private int changeAmount = 0;
+
+    [SerializeField]
+    private string itemName;
+
+    [SerializeField]
+    private string itemDescription;
 
     private void OnTriggerEnter2D(Collider2D other)
     {
@@ -54,20 +68,25 @@ public class ItemPickupScript : MonoBehaviour
                     // If max health is above 4, decrease it, 4 is the least it can be
                     if (other.GetComponent<PlayerStats>().maxHealth > 4)
                     {
-                        FindObjectOfType<PopupWindowScript>().AddToQueue(itemName, "Decreased Max Health!");
+                        FindObjectOfType<PopupWindowScript>()
+                            .AddToQueue(itemName, "Decreased Max Health!");
                         other.GetComponent<PlayerStats>().maxHealth += changeAmount;
                     }
-                    else return;
+                    else
+                        return;
                 }
                 // Increase the player's max health
                 else if (changeAmount > 0)
                 {
-                    FindObjectOfType<PopupWindowScript>().AddToQueue(itemName, "Increased Max Health!");
+                    FindObjectOfType<PopupWindowScript>()
+                        .AddToQueue(itemName, "Increased Max Health!");
                     other.GetComponent<PlayerStats>().maxHealth += changeAmount;
                 }
-                else return;
+                else
+                    return;
             }
         }
+        other.GetComponent<PlayerAudioManager>().ItemPickupSound();
         Destroy(gameObject);
     }
 }

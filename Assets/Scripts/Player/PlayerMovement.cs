@@ -146,6 +146,8 @@ public class PlayerMovement : MonoBehaviour
 
     void OnTest()
     {
-        RoomController.instance.LoadNextLevel();
+        // RoomController.instance.LoadNextLevel();
+        GetComponent<PlayerAudioManager>()
+            .TakeDamageSound();
     }
 }

@@ -6,17 +6,23 @@ using UnityEngine.InputSystem;
 public class PlayerShooting : MonoBehaviour
 {
     Vector2 shootInput;
-    [SerializeField] private Sprite[] headSprites;
-    [SerializeField] private GameObject head;
-    [SerializeField] private GameObject bulletPrefab;
+
+    [SerializeField]
+    private Sprite[] headSprites;
+
+    [SerializeField]
+    private GameObject head;
+
+    [SerializeField]
+    private GameObject bulletPrefab;
 
     private float attackDamage;
     private float lastFire;
     private float fireDelay;
     private float projectileSpeed;
 
-    [SerializeField] private bool isShooting = false;
-
+    [SerializeField]
+    private bool isShooting = false;
 
     private void Awake()
     {
@@ -110,9 +116,14 @@ public class PlayerShooting : MonoBehaviour
 
     private void ShootBullet(float x, float y)
     {
-        GameObject bullet = Instantiate(bulletPrefab, new Vector2(transform.position.x, transform.position.y + 0.5f), Quaternion.identity);
+        GameObject bullet = Instantiate(
+            bulletPrefab,
+            new Vector2(transform.position.x, transform.position.y + 0.5f),
+            Quaternion.identity
+        );
         bullet.AddComponent<Rigidbody2D>().gravityScale = 0;
         bullet.GetComponent<Rigidbody2D>().velocity = new Vector2(x, y) * projectileSpeed;
+        GetComponent<PlayerAudioManager>().PlayShootSound();
     }
 
     private void UpdateStats()
