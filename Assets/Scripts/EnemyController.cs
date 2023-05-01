@@ -16,6 +16,7 @@ public enum EnemyType
     Ranged,
     Tank,
     Small,
+    WormBoss
 }
 
 public class EnemyController : MonoBehaviour
@@ -40,6 +41,20 @@ public class EnemyController : MonoBehaviour
     [SerializeField] private GameObject projectile;
     [SerializeField] private GameObject firePoint;
     private float timeBetweenShots;
+
+    [Header("Ranged Enemy Stats")]
+    public GameObject bodyPart;
+
+    private List<GameObject> bodyParts = new List<GameObject>();
+    private List<Vector2> directions = new List<Vector2> { new Vector2(0, 1), new Vector2(0, -1), new Vector2(-1, 0), new Vector2(1, 0) };
+    private Vector3 targetPos;
+    // private bool atTarget = false;
+    private bool hasTarget = false;
+    public int bodyLength = 5;
+    private List<Vector3> previousPos = new List<Vector3>();
+    public float wormBossMovementSpeed = 0.01f; // the movement speed of the boss
+
+
 
     private GameObject player;
     private Vector3 playerPos;
@@ -73,6 +88,14 @@ public class EnemyController : MonoBehaviour
         if (enemyType == EnemyType.Ranged)
         {
             timeBetweenShots = startTimeBetweenShots;
+        }
+        else if (enemyType == EnemyType.WormBoss)
+        {
+            for (int i = 0; i < bodyLength; i++)
+            {
+                GameObject temp = Instantiate(bodyPart, new Vector3(transform.position.x, transform.position.y, 0), Quaternion.identity, transform);
+                bodyParts.Add(temp);
+            }
         }
     }
 
@@ -113,17 +136,27 @@ public class EnemyController : MonoBehaviour
                     break;
             }
         }
+        else if (enemyType == EnemyType.WormBoss)
+        {
+            switch (currentState)
+            {
+                case EnemyState.Idle:
+                    // Do nothing
+                    break;
+
+                case EnemyState.Active:
+                    WormBossActive();
+                    break;
+
+                case EnemyState.Die:
+                    Die();
+                    break;
+            }
+        }
 
         if (!notInRoom)
         {
-            if (enemyType == EnemyType.Basic)
-            {
-                currentState = EnemyState.Active;
-            }
-            else if (enemyType == EnemyType.Ranged)
-            {
-                currentState = EnemyState.Active;
-            }
+            currentState = EnemyState.Active;
         }
     }
 
@@ -155,18 +188,48 @@ public class EnemyController : MonoBehaviour
 
     public void TakeDamage(float damage)
     {
-        health--;
-        GetComponent<SpriteRenderer>().color = Color.red;
-        Invoke("ResetColor", 0.1f);
-        if (health <= 0)
+        if (!enemyType.Equals(EnemyType.WormBoss))
         {
-            currentState = EnemyState.Die;
+            health--;
+            GetComponent<SpriteRenderer>().color = Color.red;
+            Invoke("ResetColor", 0.1f);
+            if (health <= 0)
+            {
+                currentState = EnemyState.Die;
+            }
         }
+        else
+        {
+            health -= damage;
+            transform.GetComponent<SpriteRenderer>().color = Color.red;
+            foreach (Transform child in transform)
+            {
+                child.gameObject.GetComponent<SpriteRenderer>().color = Color.red;
+            }
+
+            Invoke("ResetColor", 0.1f);
+            if (health <= 0)
+            {
+                currentState = EnemyState.Die;
+            }
+        }
+
     }
 
     private void ResetColor()
     {
-        GetComponent<SpriteRenderer>().color = Color.white;
+        if (!enemyType.Equals(EnemyType.WormBoss))
+        {
+            GetComponent<SpriteRenderer>().color = Color.white;
+        }
+        else
+        {
+            transform.GetComponent<SpriteRenderer>().color = Color.white;
+            foreach (Transform child in transform)
+            {
+                child.gameObject.GetComponent<SpriteRenderer>().color = Color.white;
+            }
+        }
     }
 
     void BasicActive()
@@ -223,6 +286,80 @@ public class EnemyController : MonoBehaviour
         }
 
         return false;
+    }
+
+    private void WormBossActive()
+    {
+        if (!hasTarget)
+        {
+            findNextPos();
+        }
+        else
+        {
+            transform.position = Vector3.Lerp(transform.position, targetPos, wormBossMovementSpeed);
+            for (int i = 0; i < bodyParts.Count; i++)
+            {
+                if (i == 0)
+                {
+                    if (previousPos.Count > 0)
+                    {
+                        bodyParts[i].transform.position = previousPos[previousPos.Count - 1];
+                    }
+                }
+                else
+                {
+                    if (previousPos.Count > i - 1)
+                    {
+                        bodyParts[i].transform.position = previousPos[previousPos.Count - i];
+                    }
+                }
+            }
+            if (Vector3.Distance(transform.position, targetPos) < 0.001f)
+            {
+                hasTarget = false;
+                previousPos.Add(transform.position);
+            }
+        }
+
+        if (previousPos.Count > bodyLength)
+        {
+            previousPos.RemoveAt(0);
+        }
+    }
+
+    private void findNextPos()
+    {
+        bool foundPos = false;
+        int iterations = 0;
+        while (!foundPos && iterations < 100)
+        {
+            Vector2 tempDir = directions[Random.Range(0, directions.Count)];
+            RaycastHit2D hit = Physics2D.Raycast(transform.position, tempDir, 1f);
+            if (hit.collider == null || hit.collider.gameObject.CompareTag("Player") || hit.collider.gameObject.CompareTag("PlayerBody"))
+            {
+                bool foundBody = false;
+                for (int i = 0; i < bodyParts.Count; i++)
+                {
+                    Vector3 bodyPos = bodyParts[i].transform.position;
+                    if (Vector3.Distance(bodyPos, transform.position + new Vector3(tempDir.x, tempDir.y, 0)) < 0.1f ||
+                        Vector3.Distance(bodyPos, transform.position + new Vector3(tempDir.x * 2, tempDir.y * 2, 0)) < 0.1f ||
+                        Vector3.Distance(bodyPos, transform.position + new Vector3(tempDir.x * 3, tempDir.y * 3, 0)) < 0.1f)
+                    {
+                        Debug.Log("Found body");
+                        foundBody = true;
+                        break;
+                    }
+                }
+
+                if (!foundBody)
+                {
+                    foundPos = true;
+                    targetPos = transform.position + new Vector3(tempDir.x, tempDir.y, 0);
+                }
+            }
+            iterations++;
+        }
+        hasTarget = true;
     }
 
     public void Die()

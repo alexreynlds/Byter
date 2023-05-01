@@ -25,28 +25,42 @@ public class ObjectRoomSpawner : MonoBehaviour
     {
         foreach (RandomSpawner data in spawners)
         {
-            SpawnObjects (data);
+            SpawnObjects(data);
         }
     }
 
     void SpawnObjects(RandomSpawner data)
     {
-        int randomIteration =
-            Random
-                .Range(data.spawnerData.minSpawn,
-                data.spawnerData.maxSpawn + 1);
-
-        for (int i = 0; i < randomIteration; i++)
+        if (grid.availablePositions.Count > 1)
         {
-            int randomPos = Random.Range(0, grid.availablePositions.Count - 1);
-            GameObject go =
-                Instantiate(data.spawnerData.itemToSpawn,
-                grid.availablePositions[randomPos],
-                Quaternion.identity,
-                transform) as
-                GameObject;
 
-            grid.availablePositions.RemoveAt (randomPos);
+
+            int randomIteration =
+                Random
+                    .Range(data.spawnerData.minSpawn,
+                    data.spawnerData.maxSpawn + 1);
+
+            for (int i = 0; i < randomIteration; i++)
+            {
+                int randomPos = Random.Range(0, grid.availablePositions.Count - 1);
+                GameObject go =
+                    Instantiate(data.spawnerData.itemToSpawn,
+                    grid.availablePositions[randomPos],
+                    Quaternion.identity,
+                    transform) as
+                    GameObject;
+
+                grid.availablePositions.RemoveAt(randomPos);
+            }
+        }
+        else
+        {
+            GameObject go =
+                   Instantiate(data.spawnerData.itemToSpawn,
+                   grid.availablePositions[0],
+                   Quaternion.identity,
+                   transform) as
+                   GameObject;
         }
     }
 }

@@ -24,6 +24,8 @@ public class GridController : MonoBehaviour
 
     public GameObject gridTile;
 
+    public bool isBossRoom = false;
+
     public List<Vector2> availablePositions = new List<Vector2>();
 
     void Awake()
@@ -36,22 +38,38 @@ public class GridController : MonoBehaviour
 
     public void GenerateGrid()
     {
-        grid.verticalOffset += room.transform.localPosition.y;
-        grid.horizontalOffset += room.transform.localPosition.x;
-
-        for (int y = 0; y < grid.rows; y++)
+        if (!isBossRoom)
         {
-            for (int x = 0; x < grid.columns; x++)
+            grid.verticalOffset += room.transform.localPosition.y;
+            grid.horizontalOffset += room.transform.localPosition.x;
+
+            for (int y = 0; y < grid.rows; y++)
             {
-                GameObject go = Instantiate(gridTile, transform);
-                go.transform.position =
-                    new Vector2(x - (grid.columns - grid.horizontalOffset),
-                        y - (grid.rows - grid.verticalOffset));
-                go.name = "X: " + x + ", Y: " + y;
-                availablePositions.Add(go.transform.position);
-                go.SetActive(false);
+                for (int x = 0; x < grid.columns; x++)
+                {
+                    GameObject go = Instantiate(gridTile, transform);
+                    go.transform.position =
+                        new Vector2(x - (grid.columns - grid.horizontalOffset),
+                            y - (grid.rows - grid.verticalOffset));
+                    go.name = "X: " + x + ", Y: " + y;
+                    availablePositions.Add(go.transform.position);
+                    go.SetActive(false);
+                }
             }
+            GetComponentInParent<ObjectRoomSpawner>().InitialiseObjectSpawning();
         }
-        GetComponentInParent<ObjectRoomSpawner>().InitialiseObjectSpawning();
+        else
+        {
+            grid.verticalOffset += room.transform.localPosition.y;
+            grid.horizontalOffset += room.transform.localPosition.x;
+
+            GameObject go = Instantiate(gridTile, transform);
+            go.transform.position = new Vector2(transform.position.x, transform.position.y);
+            go.name = "X: " + 0 + ", Y: " + 0;
+            go.SetActive(false);
+            availablePositions.Add(go.transform.position);
+            GetComponentInParent<ObjectRoomSpawner>().InitialiseObjectSpawning();
+        }
+
     }
 }

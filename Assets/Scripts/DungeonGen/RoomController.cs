@@ -121,7 +121,7 @@ public class RoomController : MonoBehaviour
     {
         spawnedBossRoom = true;
         yield return new WaitForSeconds(0.5f);
-        string bossRoom = "End" + Random.Range(0, 1).ToString();
+        string bossRoom = "End" + Random.Range(1, 2).ToString();
         // Debug.Log(bossRoom);
         SpawnSpecialRoom(bossRoom);
     }

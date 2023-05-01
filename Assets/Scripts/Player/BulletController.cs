@@ -34,13 +34,13 @@ public class BulletController : MonoBehaviour
         }
         if (other.gameObject.tag == "WormBoss")
         {
-            if (other.gameObject.name == "WormBossHead")
+            if (other.gameObject.name.Contains("WormBossHead"))
             {
-                other.gameObject.GetComponent<WormBossScript>().TakeDamage(damage);
+                other.gameObject.GetComponent<EnemyController>().TakeDamage(damage);
             }
             else
             {
-                other.transform.parent.gameObject.GetComponent<WormBossScript>().TakeDamage(damage);
+                other.transform.parent.gameObject.GetComponent<EnemyController>().TakeDamage(damage);
             }
             Destroy(gameObject);
         }
