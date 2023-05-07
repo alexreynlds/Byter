@@ -9,13 +9,13 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3876005864570392798}
-  - component: {fileID: 3876005864570392797}
   - component: {fileID: 919187866495303074}
   - component: {fileID: 3876005864570392796}
   - component: {fileID: 3876005864570392799}
   - component: {fileID: 8208873612353842412}
+  - component: {fileID: 7159562150744209913}
   m_Layer: 0
-  m_Name: Enemy
+  m_Name: BasicEnemy
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -36,32 +36,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!61 &3876005864570392797
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3876005864570392803}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1, y: 1}
-    newSize: {x: 1, y: 1}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1}
-  m_EdgeRadius: 0
 --- !u!50 &919187866495303074
 Rigidbody2D:
   serializedVersion: 4
@@ -123,7 +97,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_Sprite: {fileID: -483289150, guid: e70b17ab34393402982c0d24ba96225e, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -151,7 +125,7 @@ MonoBehaviour:
   currentState: 0
   range: 10
   health: 3
-  damage: 1
+  damage: 2
   speed: 1
   canMove: 1
   startTimeBetweenShots: 0
@@ -163,6 +137,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 0
   bodyPart: {fileID: 0}
+  endPortal: {fileID: 0}
   bodyLength: 5
   wormBossMovementSpeed: 0.01
   notInRoom: 0
@@ -173,7 +148,8 @@ MonoBehaviour:
     weight: 0.2
   - gameObject: {fileID: 3495446618145352073, guid: 4203c8a1d98e8a34aa47c36c2a8c0a97, type: 3}
     weight: 0.1
-  deathSound: {fileID: 8300000, guid: e5ae0a14d88294333984aacb4d9fe619, type: 3}
+  - gameObject: {fileID: 3495446618145352073, guid: 10ea8d8f09a9140328af22e02e252f00, type: 3}
+    weight: 0.1
   takeDamageSound: {fileID: 8300000, guid: ff6a460dd45a6473d848185966a1407c, type: 3}
 --- !u!82 &8208873612353842412
 AudioSource:
@@ -271,3 +247,19 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!58 &7159562150744209913
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3876005864570392803}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 0.3084524

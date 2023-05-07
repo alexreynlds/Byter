@@ -202,7 +202,7 @@ public class EnemyController : MonoBehaviour
         {
             if (enemyType == EnemyType.Basic)
             {
-                Debug.Log("hit");
+                // Debug.Log("hit");
                 other.gameObject.GetComponent<PlayerStats>().TakeDamage(damage);
                 canMove = false;
                 TakeKnockback();
@@ -293,7 +293,7 @@ public class EnemyController : MonoBehaviour
 
     void RangedActive()
     {
-        playerPos = new Vector3(player.transform.position.x, player.transform.position.y + 0.5f, 0);
+        playerPos = new Vector3(player.transform.position.x, player.transform.position.y, 0);
 
         if (rb.velocity.magnitude > 0)
         {
@@ -351,7 +351,7 @@ public class EnemyController : MonoBehaviour
         {
             return true;
         }
-        Debug.Log("No LOS");
+        // Debug.Log("No LOS");
         return false;
     }
 
@@ -427,7 +427,7 @@ public class EnemyController : MonoBehaviour
                         ) < 0.1f
                     )
                     {
-                        Debug.Log("Found body");
+                        // Debug.Log("Found body");
                         foundBody = true;
                         break;
                     }

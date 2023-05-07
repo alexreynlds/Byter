@@ -5,6 +5,11 @@ using UnityEngine.Audio;
 
 public class PlayerAudioManager : MonoBehaviour
 {
+    
+    [Range(0.1f, 0.5f)]
+    public float volumeChangeMultiplier = 0.2f;
+    [Range(0.1f, 0.5f)]
+    public float pitchChangeMultiplier = 0.2f;
     [SerializeField]
     private AudioMixer audioMixer;
 
@@ -23,10 +28,14 @@ public class PlayerAudioManager : MonoBehaviour
     [SerializeField]
     private AudioClip laserShootSound;
 
+
+
     private void Start() { }
 
     public void TakeDamageSound()
     {
+        audioSource.volume = Random.Range(1 - volumeChangeMultiplier, 1);
+        audioSource.pitch = Random.Range(1 - pitchChangeMultiplier, 1);
         audioSource.PlayOneShot(takeDamageSound);
     }
 
@@ -42,6 +51,8 @@ public class PlayerAudioManager : MonoBehaviour
 
     public void PlayShootSound()
     {
+        audioSource.volume = Random.Range(1 - volumeChangeMultiplier, 1);
+        audioSource.pitch = Random.Range(1 - pitchChangeMultiplier, 1);
         audioSource.PlayOneShot(laserShootSound);
     }
 }

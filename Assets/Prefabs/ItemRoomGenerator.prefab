@@ -104,6 +104,7 @@ MonoBehaviour:
     weight: 0.5
   - gameObject: {fileID: 3495446618145352073, guid: 3f5cdcbb46010b641b7b0c46d9485688, type: 3}
     weight: 0.5
+  itemPoolData: {fileID: 11400000, guid: ac809abbe1c17e049a36b1f0e468de30, type: 2}
 --- !u!61 &1866445795565183203
 BoxCollider2D:
   m_ObjectHideFlags: 0

@@ -20,6 +20,8 @@ public class ItemRoomItemScript : MonoBehaviour
     [SerializeField]
     private List<Spawnable> itemPool = new List<Spawnable>();
 
+    public ItemPoolData itemPoolData;
+
     private Spawnable chosenItem;
     private GameObject storedItem;
     private GameObject player;
@@ -29,9 +31,14 @@ public class ItemRoomItemScript : MonoBehaviour
     {
         player = GameObject.FindGameObjectWithTag("Player");
         totalWeight = 0;
-        foreach (Spawnable item in itemPool)
+        // foreach (Spawnable item in itemPool)
+        // {
+        //     totalWeight += item.weight;
+        // }
+
+        foreach (Spawnable spawnable in itemPoolData.itemPool)
         {
-            totalWeight += item.weight;
+            totalWeight += spawnable.weight;
         }
     }
 
@@ -40,17 +47,18 @@ public class ItemRoomItemScript : MonoBehaviour
     {
         float pick = Random.Range(0, totalWeight);
         int chosenIndex = 0;
-        float cumulativeWeight = itemPool[0].weight;
+        // float cumulativeWeight = itemPool[0].weight;
+        float cumulativeWeight = itemPoolData.itemPool[0].weight;
 
-        while (pick > cumulativeWeight && chosenIndex < itemPool.Count - 1)
+        while (pick > cumulativeWeight && chosenIndex < itemPoolData.itemPool.Count - 1)
         {
             chosenIndex++;
-            cumulativeWeight += itemPool[chosenIndex].weight;
+            cumulativeWeight += itemPoolData.itemPool[chosenIndex].weight;
         }
 
-        chosenItem = itemPool[chosenIndex];
+        chosenItem = itemPoolData.itemPool[chosenIndex];
         storedItem = Instantiate(
-            itemPool[chosenIndex].gameObject,
+            itemPoolData.itemPool[chosenIndex].gameObject,
             new Vector2(transform.position.x, transform.position.y + 0.5f),
             Quaternion.identity
         );

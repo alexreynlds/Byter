@@ -10,7 +10,8 @@ public class ItemPickupScript : MonoBehaviour
         None,
         Health,
         Energy,
-        Coin
+        Coin,
+        Keycard
     };
 
     [SerializeField]
@@ -48,6 +49,17 @@ public class ItemPickupScript : MonoBehaviour
                     return;
                 }
             }
+            else if (itemType == BasicItemType.Keycard)
+            {
+                if (other.GetComponent<PlayerStats>().keycards < 10)
+                {
+                    other.GetComponent<PlayerStats>().keycards += 1;
+                }
+                else
+                {
+                    return;
+                }
+            }
             else if (itemType == BasicItemType.Health)
             {
                 other.GetComponent<PlayerStats>().currentHealth += changeAmount;
@@ -61,7 +73,7 @@ public class ItemPickupScript : MonoBehaviour
         {
             string tempName = gameObject.name;
 
-            if (tempName.Contains("MHealthUp") || tempName.Contains("MHealthDown"))
+            if (tempName.Contains("MHealth"))
             {
                 if (changeAmount < 0)
                 {
@@ -73,7 +85,8 @@ public class ItemPickupScript : MonoBehaviour
                         other.GetComponent<PlayerStats>().maxHealth += changeAmount;
                     }
                     else
-                        return;
+                        Destroy(gameObject);
+
                 }
                 // Increase the player's max health
                 else if (changeAmount > 0)

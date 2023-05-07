@@ -9012,6 +9012,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bb6f68b6157ef459994693ed95d2782c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  volumeChangeMultiplier: 0.3
+  pitchChangeMultiplier: 0.3
   audioMixer: {fileID: 24100000, guid: 427d4d30923467542bfbda6bf78302d4, type: 2}
   audioSource: {fileID: 1751143397}
   takeDamageSound: {fileID: 8300000, guid: 1ee2f83ac225b404a8c5961a68c92c11, type: 3}

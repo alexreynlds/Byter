@@ -118,7 +118,7 @@ public class PlayerShooting : MonoBehaviour
     {
         GameObject bullet = Instantiate(
             bulletPrefab,
-            new Vector2(transform.position.x, transform.position.y + 0.5f),
+            new Vector2(transform.position.x, transform.position.y + 0.3f),
             Quaternion.identity
         );
         bullet.AddComponent<Rigidbody2D>().gravityScale = 0;
