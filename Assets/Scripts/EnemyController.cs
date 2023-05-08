@@ -22,6 +22,8 @@ public enum EnemyType
 
 public class EnemyController : MonoBehaviour
 {
+    public ItemPoolData itemPoolData;
+
     [Header("Enemy Info")]
     public EnemyType enemyType;
     public EnemyState currentState = EnemyState.Idle;
@@ -31,7 +33,7 @@ public class EnemyController : MonoBehaviour
     private float range;
 
     [SerializeField]
-    private float health;
+    public float health;
 
     [SerializeField]
     private int damage;
@@ -90,12 +92,17 @@ public class EnemyController : MonoBehaviour
 
     float totalWeight;
 
-    public List<Spawnable> itemPool = new List<Spawnable>();
-
     private AudioSource audioSource;
 
     [SerializeField]
     private AudioClip takeDamageSound;
+
+    [SerializeField]
+    private GameObject healthBarPrefab;
+
+    private GameObject healthBar;
+
+    private bool spawnedHealthBar = false;
 
     private void Awake()
     {
@@ -103,9 +110,16 @@ public class EnemyController : MonoBehaviour
         totalWeight = 0;
         Physics2D.queriesStartInColliders = false;
         audioSource = GetComponent<AudioSource>();
-        foreach (Spawnable spawnable in itemPool)
+        // foreach (Spawnable spawnable in itemPool)
+        // {
+        //     totalWeight += spawnable.weight;
+        // }
+        if (itemPoolData != null)
         {
-            totalWeight += spawnable.weight;
+            foreach (Spawnable spawnable in itemPoolData.itemPool)
+            {
+                totalWeight += spawnable.weight;
+            }
         }
     }
 
@@ -227,19 +241,6 @@ public class EnemyController : MonoBehaviour
 
     public void TakeDamage(float damage)
     {
-        // if (!enemyType.Equals(EnemyType.WormBoss))
-        // {
-        //     audioSource.PlayOneShot(takeDamageSound);
-        //     health--;
-        //     GetComponent<SpriteRenderer>().color = Color.red;
-        //     Invoke("ResetColor", 0.1f);
-        //     if (health <= 0)
-        //     {
-        //         currentState = EnemyState.Die;
-        //     }
-        // }
-        // else
-        // {
         audioSource.PlayOneShot(takeDamageSound);
         health -= damage;
         GetComponent<SpriteRenderer>().color = Color.red;
@@ -261,7 +262,6 @@ public class EnemyController : MonoBehaviour
         {
             currentState = EnemyState.Die;
         }
-        // }
     }
 
     private void ResetColor()
@@ -357,6 +357,19 @@ public class EnemyController : MonoBehaviour
 
     private void WormBossActive()
     {
+        if (!spawnedHealthBar)
+        {
+            spawnedHealthBar = true;
+
+            healthBar = Instantiate(
+                       healthBarPrefab,
+                       new Vector3(0, -30.0f, 0),
+                       Quaternion.identity
+                   );
+            healthBar.transform.SetParent(GameObject.Find("InGameUI").transform, false);
+            healthBar.GetComponent<BossHealthBarScript>().SetBoss(this.gameObject);
+        }
+
         if (!hasTarget)
         {
             findNextPos();
@@ -448,6 +461,7 @@ public class EnemyController : MonoBehaviour
     {
         if (enemyType == EnemyType.WormBoss)
         {
+            Destroy(healthBar);
             Instantiate(endPortal, transform.position, Quaternion.identity);
         }
         else
@@ -478,17 +492,17 @@ public class EnemyController : MonoBehaviour
     {
         float pick = Random.Range(0, totalWeight);
         int chosenIndex = 0;
-        float cumulativeWeight = itemPool[0].weight;
+        float cumulativeWeight = itemPoolData.itemPool[0].weight;
 
-        while (pick > cumulativeWeight && chosenIndex < itemPool.Count - 1)
+        while (pick > cumulativeWeight && chosenIndex < itemPoolData.itemPool.Count - 1)
         {
             chosenIndex++;
-            cumulativeWeight += itemPool[chosenIndex].weight;
+            cumulativeWeight += itemPoolData.itemPool[chosenIndex].weight;
         }
 
-        if (itemPool[chosenIndex].gameObject != null)
+        if (itemPoolData.itemPool[chosenIndex].gameObject != null)
         {
-            RoomController.instance.spawnItem(itemPool[chosenIndex].gameObject, transform.position);
+            RoomController.instance.spawnItem(itemPoolData.itemPool[chosenIndex].gameObject, transform.position);
         }
         else
         {

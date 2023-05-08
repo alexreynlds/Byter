@@ -25,6 +25,7 @@ public class Door : MonoBehaviour
     private float widthOffset = 3.7f;
     private float heightOffset = 3.7f;
     public bool keycardLocked = false;
+    public bool bossKeycardLocked = false;
 
     public bool open = true;
     public bool isShopDoor;
@@ -68,15 +69,19 @@ public class Door : MonoBehaviour
         {
             ShopRoom();
         }
-        else if (open && !keycardLocked && !isShopDoor && !isItemRoomDoor && isBossDoor)
+        else if (open && !keycardLocked && !isShopDoor && !isItemRoomDoor && isBossDoor && !bossKeycardLocked)
         {
-            BossRoom();
+            BossRoomUnlocked();
+        }
+        else if (open && !keycardLocked && !isShopDoor && !isItemRoomDoor && isBossDoor && bossKeycardLocked)
+        {
+            BossRoomLocked();
         }
     }
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.gameObject.tag == ("Player") && !keycardLocked && open)
+        if (other.gameObject.tag == ("Player") && !keycardLocked && !bossKeycardLocked && open)
         {
             switch (doorDir)
             {
@@ -119,11 +124,35 @@ public class Door : MonoBehaviour
                 return;
             }
         }
+        if (other.gameObject.tag == ("Player") && bossKeycardLocked)
+        {
+            if (other.gameObject.GetComponent<PlayerStats>().bossKeycard == true)
+            {
+                BossRoomUnlocked();
+            }
+            else
+            {
+                return;
+            }
+        }
     }
 
-    public void BossRoom()
+    public void BossRoomLocked()
     {
+        bossKeycardLocked = true;
+        doorCollider.SetActive(true);
+        // transform.GetComponent<BoxCollider2D>().isTrigger = false;
+        door.GetComponent<SpriteRenderer>().sprite = doorSprites[6];
+        transform.GetComponent<BoxCollider2D>().size = new Vector2(1.0f, 1.0f);
+    }
+
+    public void BossRoomUnlocked()
+    {
+        bossKeycardLocked = false;
+        doorCollider.SetActive(false);
         door.GetComponent<SpriteRenderer>().sprite = doorSprites[5];
+        transform.GetComponent<BoxCollider2D>().size = doorColliderSize;
+        RoomController.instance.BossRomUnlockDoors();
     }
 
     public void ShopRoom()

@@ -121,6 +121,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b4eb73021f982c547811d2ca491dc93d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  itemPoolData: {fileID: 11400000, guid: 57dc56c7252b50e498cf75bcf949b0aa, type: 2}
   enemyType: 0
   currentState: 0
   range: 10

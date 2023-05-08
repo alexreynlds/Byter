@@ -27,6 +27,7 @@ public class PlayerStats : MonoBehaviour
 
     public int coins;
     public int keycards;
+    public bool bossKeycard = false;
 
     private bool canTakeDamage = true;
 

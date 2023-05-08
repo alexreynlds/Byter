@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &8937153011508277638
+--- !u!1 &3495446618145352073
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,39 +8,39 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 8937153011508277642}
-  - component: {fileID: 8937153011508277643}
-  - component: {fileID: 8937153011508277636}
-  - component: {fileID: 8937153011508277637}
+  - component: {fileID: 2487795656875682458}
+  - component: {fileID: 3703227418213785331}
+  - component: {fileID: 8946186298040356175}
+  - component: {fileID: 8786737970721948768}
   m_Layer: 0
-  m_Name: BreakableBlock
+  m_Name: bossKeycard
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &8937153011508277642
+--- !u!4 &2487795656875682458
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8937153011508277638}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -2.5, y: 0.5, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_GameObject: {fileID: 3495446618145352073}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 0.75, y: 0.75, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!212 &8937153011508277643
+--- !u!212 &3703227418213785331
 SpriteRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8937153011508277638}
+  m_GameObject: {fileID: 3495446618145352073}
   m_Enabled: 1
   m_CastShadows: 0
   m_ReceiveShadows: 0
@@ -75,28 +75,44 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 1371873352, guid: 102440dd1c1824290b59658aefb395fa, type: 3}
+  m_Sprite: {fileID: 1082278266, guid: e70b17ab34393402982c0d24ba96225e, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 0.2, y: 0.2}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!61 &8937153011508277636
+--- !u!114 &8946186298040356175
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3495446618145352073}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9587defe5b4e94974af0ef28e97c0d1f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemType: 5
+  changeAmount: 0
+  itemName: 
+  itemDescription: 
+--- !u!61 &8786737970721948768
 BoxCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8937153011508277638}
+  m_GameObject: {fileID: 3495446618145352073}
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -104,7 +120,7 @@ BoxCollider2D:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
     oldSize: {x: 1, y: 1}
-    newSize: {x: 1, y: 1}
+    newSize: {x: 0.2, y: 0.2}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
@@ -112,29 +128,3 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
---- !u!114 &8937153011508277637
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8937153011508277638}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4cf8e0b0341d79846b2a753f8c659a49, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  health: 4
-  purpleSprites:
-  - {fileID: 848422966, guid: 102440dd1c1824290b59658aefb395fa, type: 3}
-  - {fileID: -1309853747, guid: 102440dd1c1824290b59658aefb395fa, type: 3}
-  - {fileID: 284637223, guid: 102440dd1c1824290b59658aefb395fa, type: 3}
-  - {fileID: 1371873352, guid: 102440dd1c1824290b59658aefb395fa, type: 3}
-  goldSprites:
-  - {fileID: 83686030, guid: 102440dd1c1824290b59658aefb395fa, type: 3}
-  - {fileID: -2032108353, guid: 102440dd1c1824290b59658aefb395fa, type: 3}
-  - {fileID: -2065942069, guid: 102440dd1c1824290b59658aefb395fa, type: 3}
-  - {fileID: 1176467099, guid: 102440dd1c1824290b59658aefb395fa, type: 3}
-  blockType: 0
-  spriteRenderer: {fileID: 8937153011508277643}
-  itemPool: {fileID: 11400000, guid: ac809abbe1c17e049a36b1f0e468de30, type: 2}

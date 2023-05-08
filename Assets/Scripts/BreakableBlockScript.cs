@@ -17,7 +17,10 @@ public class BreakableBlockScript : MonoBehaviour
     [SerializeField] private Sprite[] goldSprites;
     [SerializeField] private BreakableType blockType;
 
-    private SpriteRenderer spriteRenderer;
+    [SerializeField] private SpriteRenderer spriteRenderer;
+    float totalWeight;
+    public ItemPoolData itemPool;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -29,6 +32,10 @@ public class BreakableBlockScript : MonoBehaviour
         else
         {
             spriteRenderer.sprite = goldSprites[health - 1];
+            foreach (Spawnable spawnable in itemPool.itemPool)
+            {
+                totalWeight += spawnable.weight;
+            }
         }
     }
 
@@ -40,6 +47,10 @@ public class BreakableBlockScript : MonoBehaviour
             health--;
             if (health <= 0)
             {
+                if (blockType == BreakableType.Item)
+                {
+                    DropItem();
+                }
                 Destroy(gameObject);
             }
             else
@@ -52,8 +63,29 @@ public class BreakableBlockScript : MonoBehaviour
                 {
                     GetComponent<SpriteRenderer>().sprite = goldSprites[health - 1];
                 }
-
             }
+        }
+    }
+
+    private void DropItem()
+    {
+        float pick = Random.Range(0, totalWeight);
+        int chosenIndex = 0;
+        float cumulativeWeight = itemPool.itemPool[0].weight;
+
+        while (pick > cumulativeWeight && chosenIndex < itemPool.itemPool.Count - 1)
+        {
+            chosenIndex++;
+            cumulativeWeight += itemPool.itemPool[chosenIndex].weight;
+        }
+
+        if (itemPool.itemPool[chosenIndex].gameObject != null)
+        {
+            RoomController.instance.spawnItem(itemPool.itemPool[chosenIndex].gameObject, transform.position);
+        }
+        else
+        {
+            return;
         }
     }
 }

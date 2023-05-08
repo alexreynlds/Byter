@@ -108,6 +108,7 @@ public class Room : MonoBehaviour
                         {
                             // door.GetComponent<Door>().BossRoom();
                             door.GetComponent<Door>().isBossDoor = true;
+                            door.GetComponent<Door>().bossKeycardLocked = true;
                             door.GetComponent<Door>().UpdateDoorData();
                         }
                         else if (GetRoom("u").name.Contains("Shop"))
@@ -139,6 +140,7 @@ public class Room : MonoBehaviour
                         {
                             // door.GetComponent<Door>().BossRoom();
                             door.GetComponent<Door>().isBossDoor = true;
+                            door.GetComponent<Door>().bossKeycardLocked = true;
                             door.GetComponent<Door>().UpdateDoorData();
                         }
                         else if (GetRoom("d").name.Contains("Shop"))
@@ -171,6 +173,7 @@ public class Room : MonoBehaviour
                         {
                             // door.GetComponent<Door>().BossRoom();
                             door.GetComponent<Door>().isBossDoor = true;
+                            door.GetComponent<Door>().bossKeycardLocked = true;
                             door.GetComponent<Door>().UpdateDoorData();
                         }
                         else if (GetRoom("l").name.Contains("Shop"))
@@ -204,6 +207,7 @@ public class Room : MonoBehaviour
                         {
                             // door.GetComponent<Door>().BossRoom();
                             door.GetComponent<Door>().isBossDoor = true;
+                            door.GetComponent<Door>().bossKeycardLocked = true;
                             door.GetComponent<Door>().UpdateDoorData();
                         }
                         else if (GetRoom("r").name.Contains("Shop"))

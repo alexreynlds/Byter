@@ -206,6 +206,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b4eb73021f982c547811d2ca491dc93d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  itemPoolData: {fileID: 11400000, guid: 57dc56c7252b50e498cf75bcf949b0aa, type: 2}
   enemyType: 1
   currentState: 0
   range: 10
@@ -259,8 +260,8 @@ AudioSource:
   m_GameObject: {fileID: 3876005864570392803}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: -4693494870528043638, guid: 427d4d30923467542bfbda6bf78302d4, type: 2}
+  m_audioClip: {fileID: 8300000, guid: ff6a460dd45a6473d848185966a1407c, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1

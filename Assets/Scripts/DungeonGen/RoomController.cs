@@ -28,6 +28,7 @@ public class RoomController : MonoBehaviour
     private bool spawnedItemRoom = false;
     private List<Vector2> directions = new List<Vector2> { new Vector2(0, 1), new Vector2(0, -1), new Vector2(-1, 0), new Vector2(1, 0) };
     private bool updatedRooms = false;
+    public GameObject bossHealthbar;
 
     public DungeonGenerationData dungeonData;
 
@@ -35,6 +36,7 @@ public class RoomController : MonoBehaviour
     {
         instance = this;
         GameObject.Find("Player").GetComponent<PlayerInput>().enabled = false;
+        // bossHealthbar.SetActive(false);
     }
 
     void Update()
@@ -169,6 +171,31 @@ public class RoomController : MonoBehaviour
         }
     }
 
+    public void BossRomUnlockDoors()
+    {
+        Room bossRoom = loadedRooms.FirstOrDefault(room => room.name.Contains("End"));
+        if (bossRoom == null) return;
+
+        int x = bossRoom.X;
+        int y = bossRoom.Y;
+
+        if (DoesRoomExist(x, y + 1))
+        {
+            loadedRooms.FirstOrDefault(room => room.X == x && room.Y == y + 1)?.UnlockDoors();
+        }
+        if (DoesRoomExist(x, y - 1))
+        {
+            loadedRooms.FirstOrDefault(room => room.X == x && room.Y == y - 1)?.UnlockDoors();
+        }
+        if (DoesRoomExist(x - 1, y))
+        {
+            loadedRooms.FirstOrDefault(room => room.X == x - 1 && room.Y == y)?.UnlockDoors();
+        }
+        if (DoesRoomExist(x + 1, y))
+        {
+            loadedRooms.FirstOrDefault(room => room.X == x + 1 && room.Y == y)?.UnlockDoors();
+        }
+    }
 
     public void ItemRoomUnlockDoors()
     {
@@ -274,7 +301,7 @@ public class RoomController : MonoBehaviour
         string[] possibleRooms = null;
         if (currentLevelName == "Floor1")
         {
-            possibleRooms = new string[] { "Empty", "Basic1", "RangeCross1", "RangeCross2", "RangeCross3", "RangeCross4", "Arena1" };
+            possibleRooms = new string[] { "Empty", "Basic1", "RangeCross1", "RangeCross2", "RangeCross3", "RangeCross4", "Arena1", "Empty2", "Empty3" };
         }
         else if (currentLevelName == "Floor2")
         {
@@ -323,6 +350,11 @@ public class RoomController : MonoBehaviour
                 foreach (EnemyController enemy in enemies)
                 {
                     enemy.notInRoom = false;
+                    // if (enemy.GetComponent<EnemyController>().enemyType == EnemyType.WormBoss)
+                    // {
+                    //     bossHealthbar.SetActive(true);
+                    //     bossHealthbar.GetComponent<BossHealthBarScript>().SetBoss(enemy.gameObject);
+                    // }
                 }
 
                 foreach (Door door in room.GetComponentsInChildren<Door>())
@@ -342,37 +374,6 @@ public class RoomController : MonoBehaviour
 
     public void LoadNextLevel()
     {
-        // Reset the current level
-        // SceneManager.LoadScene(currentLevelName);
-
-        // // Reset the state of the room controller
-        // loadRoomQueue.Clear();
-        // loadedRooms.Clear();
-        // spawnedBossRoom = false;
-        // spawnedShopRoom = false;
-        // spawnedItemRoom = false;
-        // updatedRooms = false;
-
-        // // Load the next level
-        // if (currentLevelName == "Floor1")
-        // {
-        //     currentLevelName = "Floor2";
-        // }
-        // else if (currentLevelName == "Floor2")
-        // {
-        //     currentLevelName = "Floor3";
-        // }
-        // else if (currentLevelName == "Floor3")
-        // {
-        //     currentLevelName = "Floor4";
-        // }
-        // else if (currentLevelName == "Floor4")
-        // {
-        //     currentLevelName = "Floor5";
-        // }
-
-        // SceneManager.LoadScene(currentLevelName, LoadSceneMode.Additive);
-
         int numLoadedScene = SceneManager.sceneCount;
 
         for (int i = 0; i < numLoadedScene; i++)
@@ -386,7 +387,6 @@ public class RoomController : MonoBehaviour
 
         foreach (Room room in loadedRooms)
         {
-            // SceneManager.UnloadSceneAsync(room.name);
             Destroy(room.gameObject);
         }
 

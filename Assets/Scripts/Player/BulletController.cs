@@ -32,9 +32,9 @@ public class BulletController : MonoBehaviour
         {
             return;
         }
-        if (other.gameObject.tag == "WormBoss")
+        if (other.gameObject.tag == "Boss")
         {
-            if (other.gameObject.name.Contains("WormBossHead"))
+            if (other.gameObject.name.Contains("WormBoss"))
             {
                 other.gameObject.GetComponent<EnemyController>().TakeDamage(damage);
             }

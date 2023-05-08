@@ -9,6 +9,7 @@ TagManager:
   - PlayerBody
   - Bullet
   - WormBoss
+  - Boss
   layers:
   - Default
   - TransparentFX

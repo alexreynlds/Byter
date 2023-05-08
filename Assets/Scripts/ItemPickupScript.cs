@@ -11,7 +11,8 @@ public class ItemPickupScript : MonoBehaviour
         Health,
         Energy,
         Coin,
-        Keycard
+        Keycard,
+        bossKeycard
     };
 
     [SerializeField]
@@ -59,6 +60,12 @@ public class ItemPickupScript : MonoBehaviour
                 {
                     return;
                 }
+            }
+            else if (itemType == BasicItemType.bossKeycard)
+            {
+                other.GetComponent<PlayerStats>().bossKeycard = true;
+                FindObjectOfType<PopupWindowScript>()
+                            .AddToQueue("Boss Keycard", "You can now enter the boss room!");
             }
             else if (itemType == BasicItemType.Health)
             {

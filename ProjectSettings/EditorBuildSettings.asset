@@ -18,6 +18,9 @@ EditorBuildSettings:
     path: Assets/Scenes/DungeonRooms/Floor1/Floor1Empty.unity
     guid: 8e241ad248ee0464a8d7f251c4270d9c
   - enabled: 1
+    path: Assets/Scenes/DungeonRooms/Floor1/Floor1Empty2.unity
+    guid: 2ef711b71044c3247b5cf2db303cadd2
+  - enabled: 1
     path: Assets/Scenes/DungeonRooms/Floor1/Floor1End0.unity
     guid: c74d06b747dc64f63837957b8b0cdb00
   - enabled: 1
@@ -54,9 +57,6 @@ EditorBuildSettings:
     path: Assets/Scenes/DungeonRooms/Floor1/Floor1RangeCross4.unity
     guid: bb59eafa050f6a94a823bde48103dfa2
   - enabled: 1
-    path: Assets/Scenes/DungeonRooms/Floor1/Floor1Big.unity
-    guid: 2d715e2612097a94fae0a8bbbc94fe2f
-  - enabled: 1
     path: Assets/Scenes/DungeonRooms/Floor1/Floor1Shop.unity
     guid: 10643e22f185d3d44a757e9ecb3eaa48
   - enabled: 1
@@ -68,4 +68,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/DungeonRooms/Floor2/Floor2Start.unity
     guid: 5cf37c9f3e3212140851c957ced75f00
+  - enabled: 1
+    path: Assets/Scenes/DungeonRooms/Floor1/Floor1Empty3.unity
+    guid: 6f2431b5d3bf04240a8ff7b8183b81ba
   m_configObjects: {}
