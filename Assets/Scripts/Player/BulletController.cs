@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class BulletController : MonoBehaviour
 {
-    private int damage;
+    private float damage;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -17,7 +18,9 @@ public class BulletController : MonoBehaviour
 
     IEnumerator DestroyBullet()
     {
-        yield return new WaitForSeconds(GameObject.Find("Player").GetComponent<PlayerStats>().attackRange);
+        yield return new WaitForSeconds(
+            GameObject.Find("Player").GetComponent<PlayerStats>().attackRange
+        );
         Destroy(gameObject);
     }
 
@@ -40,7 +43,9 @@ public class BulletController : MonoBehaviour
             }
             else
             {
-                other.transform.parent.gameObject.GetComponent<EnemyController>().TakeDamage(damage);
+                other.transform.parent.gameObject
+                    .GetComponent<EnemyController>()
+                    .TakeDamage(damage);
             }
             Destroy(gameObject);
         }
@@ -59,8 +64,5 @@ public class BulletController : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
-    {
-
-    }
+    void Update() { }
 }

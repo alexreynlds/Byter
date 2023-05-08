@@ -20,6 +20,7 @@ public class Door : MonoBehaviour
     public Sprite[] doorSprites;
 
     private GameObject player;
+
     // private bool playerCanMove = true;
 
     private float widthOffset = 3.7f;
@@ -42,10 +43,7 @@ public class Door : MonoBehaviour
         doorColliderSize = transform.GetComponent<BoxCollider2D>().size;
     }
 
-    private void Update()
-    {
-
-    }
+    private void Update() { }
 
     public void UpdateDoorData()
     {
@@ -69,11 +67,25 @@ public class Door : MonoBehaviour
         {
             ShopRoom();
         }
-        else if (open && !keycardLocked && !isShopDoor && !isItemRoomDoor && isBossDoor && !bossKeycardLocked)
+        else if (
+            open
+            && !keycardLocked
+            && !isShopDoor
+            && !isItemRoomDoor
+            && isBossDoor
+            && !bossKeycardLocked
+        )
         {
             BossRoomUnlocked();
         }
-        else if (open && !keycardLocked && !isShopDoor && !isItemRoomDoor && isBossDoor && bossKeycardLocked)
+        else if (
+            open
+            && !keycardLocked
+            && !isShopDoor
+            && !isItemRoomDoor
+            && isBossDoor
+            && bossKeycardLocked
+        )
         {
             BossRoomLocked();
         }
@@ -121,6 +133,7 @@ public class Door : MonoBehaviour
             }
             else
             {
+                FindObjectOfType<PopupWindowScript>().AddToQueue("Room Locked!", "Find the key!");
                 return;
             }
         }
@@ -132,6 +145,7 @@ public class Door : MonoBehaviour
             }
             else
             {
+                FindObjectOfType<PopupWindowScript>().AddToQueue("Room Locked!", "Find the key!");
                 return;
             }
         }

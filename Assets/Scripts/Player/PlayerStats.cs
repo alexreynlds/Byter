@@ -11,7 +11,7 @@ public class PlayerStats : MonoBehaviour
 
     public float projectileSpeed = 1f;
     public float attackSpeed = 0.5f;
-    public int attackDamage = 1;
+    public float attackDamage = 1f;
 
     // Range controls the amount of time before the bullet is destroyed
     // Lower float means lower range
@@ -30,6 +30,10 @@ public class PlayerStats : MonoBehaviour
     public bool bossKeycard = false;
 
     private bool canTakeDamage = true;
+
+    public bool isSuper = false;
+    private float normalDamage;
+    private float normalAttackRange;
 
     // Start is called before the first frame update
     void Awake()
@@ -58,6 +62,33 @@ public class PlayerStats : MonoBehaviour
         else if (currentEnergy < 0)
         {
             currentEnergy = 0;
+        }
+    }
+
+    public void StartSuper()
+    {
+        normalAttackRange = attackRange;
+        normalDamage = attackDamage;
+        attackDamage = attackDamage * 1.5f;
+        attackRange = attackRange * 1.5f;
+        isSuper = true;
+        currentEnergy = 0;
+        foreach (Transform child in transform)
+        {
+            child.gameObject.GetComponent<SpriteRenderer>().color = Color.green;
+        }
+
+        Invoke("StopSuper", 5f);
+    }
+
+    public void StopSuper()
+    {
+        attackRange = normalAttackRange;
+        attackDamage = normalDamage;
+        isSuper = false;
+        foreach (Transform child in transform)
+        {
+            child.gameObject.GetComponent<SpriteRenderer>().color = Color.white;
         }
     }
 

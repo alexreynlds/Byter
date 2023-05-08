@@ -8978,6 +8978,7 @@ MonoBehaviour:
   coins: 0
   keycards: 0
   bossKeycard: 0
+  isSuper: 0
 --- !u!114 &1751143393
 MonoBehaviour:
   m_ObjectHideFlags: 0

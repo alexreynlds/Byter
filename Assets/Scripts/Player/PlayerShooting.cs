@@ -116,14 +116,30 @@ public class PlayerShooting : MonoBehaviour
 
     private void ShootBullet(float x, float y)
     {
-        GameObject bullet = Instantiate(
-            bulletPrefab,
-            new Vector2(transform.position.x, transform.position.y + 0.3f),
-            Quaternion.identity
-        );
-        bullet.AddComponent<Rigidbody2D>().gravityScale = 0;
-        bullet.GetComponent<Rigidbody2D>().velocity = new Vector2(x, y) * projectileSpeed;
-        GetComponent<PlayerAudioManager>().PlayShootSound();
+        if (transform.GetComponent<PlayerStats>().isSuper)
+        {
+            GameObject bullet = Instantiate(
+                bulletPrefab,
+                new Vector2(transform.position.x, transform.position.y + 0.3f),
+                Quaternion.identity
+            );
+            bullet.GetComponent<SpriteRenderer>().color = Color.green;
+            bullet.transform.localScale = new Vector2(0.5f, 0.5f);
+            bullet.AddComponent<Rigidbody2D>().gravityScale = 0;
+            bullet.GetComponent<Rigidbody2D>().velocity = new Vector2(x, y) * projectileSpeed;
+            GetComponent<PlayerAudioManager>().PlayShootSound();
+        }
+        else
+        {
+            GameObject bullet = Instantiate(
+                bulletPrefab,
+                new Vector2(transform.position.x, transform.position.y + 0.3f),
+                Quaternion.identity
+            );
+            bullet.AddComponent<Rigidbody2D>().gravityScale = 0;
+            bullet.GetComponent<Rigidbody2D>().velocity = new Vector2(x, y) * projectileSpeed;
+            GetComponent<PlayerAudioManager>().PlayShootSound();
+        }
     }
 
     private void UpdateStats()

@@ -482,7 +482,7 @@ TextureImporter:
         width: 16
         height: 16
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -490,6 +490,27 @@ TextureImporter:
       bones: []
       spriteID: e0f05804aed786e4eaa910480653fbbf
       internalID: 1082278266
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Collectables_18
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 48
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: de147c16b07e74dc786ce24e02f71128
+      internalID: -1552187943
       vertices: []
       indices: 
       edges: []
@@ -515,6 +536,7 @@ TextureImporter:
       Collectables_15: -1195845726
       Collectables_16: 850372009
       Collectables_17: 1082278266
+      Collectables_18: -499809299
       Collectables_2: -2066669924
       Collectables_3: -1332076771
       Collectables_4: 1086119850

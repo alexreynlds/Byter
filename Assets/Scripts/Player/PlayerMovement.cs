@@ -47,21 +47,6 @@ public class PlayerMovement : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        // if (movementInput != Vector2.zero)
-        // {
-        //     bool success = TryMove(movementInput);
-
-        //     if (!success)
-        //     {
-        //         success = TryMove(new Vector2(movementInput.x, 0));
-
-        //         if (!success)
-        //         {
-        //             TryMove(new Vector2(0, movementInput.y));
-        //         }
-        //     }
-        //     UpdateSprite();
-        // }
         if (movementInput != Vector2.zero)
         {
             rb.MovePosition(rb.position + movementInput * moveSpeed * Time.deltaTime);
@@ -149,5 +134,15 @@ public class PlayerMovement : MonoBehaviour
         // RoomController.instance.LoadNextLevel();
         GetComponent<PlayerAudioManager>()
             .TakeDamageSound();
+    }
+
+    void OnSuper()
+    {
+        if (GetComponent<PlayerStats>().currentEnergy == 4)
+        {
+            GetComponent<PlayerStats>().StartSuper();
+        }
+        else
+            return;
     }
 }
