@@ -77,7 +77,7 @@ public class PlayerStats : MonoBehaviour
         {
             child.gameObject.GetComponent<SpriteRenderer>().color = Color.green;
         }
-
+        GameObject.Find("RoomController").GetComponent<DDASystem>().timesSupered++;
         Invoke("StopSuper", 5f);
     }
 
@@ -99,11 +99,11 @@ public class PlayerStats : MonoBehaviour
         keycards = 0;
     }
 
-    public void TakeDamage(int damage)
+    public void TakeDamage(float damage)
     {
         if (canTakeDamage)
         {
-            currentHealth -= damage;
+            currentHealth -= (int)damage;
 
             foreach (Transform child in transform)
             {
@@ -113,6 +113,7 @@ public class PlayerStats : MonoBehaviour
             Invoke("ResetColor", 0.1f);
             GetComponent<PlayerAudioManager>().TakeDamageSound();
             StartCoroutine(InvincibilityFrames());
+            GameObject.Find("RoomController").GetComponent<DDASystem>().damageTaken += damage;
         }
     }
 

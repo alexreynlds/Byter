@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 968def10d477e7c48bbaf817d63a137d, type: 3}
-  m_Name: EnemyItemPool
+  m_Name: EnemyNormal
   m_EditorClassIdentifier: 
   itemPool:
   - gameObject: {fileID: 3495446618145352073, guid: 10ea8d8f09a9140328af22e02e252f00, type: 3}

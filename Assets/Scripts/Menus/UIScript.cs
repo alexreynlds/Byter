@@ -16,6 +16,7 @@ public class UIScript : MonoBehaviour
     [SerializeField]
     private GameObject pauseMenu;
 
+    // private bool isPaused = true;
     private bool isPaused = false;
 
     [SerializeField]
@@ -47,6 +48,7 @@ public class UIScript : MonoBehaviour
     {
         player = GameObject.Find("Player");
         Application.targetFrameRate = -1;
+        // Time.timeScale = 0;
     }
 
     // Start is called before the first frame update
@@ -259,5 +261,16 @@ public class UIScript : MonoBehaviour
         graphicsDropdown.value = 3;
         graphicsDropdown.RefreshShownValue();
         SetQuality(3);
+    }
+
+    public void chosenFixedDiff()
+    {
+        GameObject.Find("RoomController").GetComponent<DDASystem>().enabled = false;
+        OnPause();
+    }
+
+    public void chosenDynamicDiff()
+    {
+        OnPause();
     }
 }

@@ -362,10 +362,10 @@ public class EnemyController : MonoBehaviour
             spawnedHealthBar = true;
 
             healthBar = Instantiate(
-                       healthBarPrefab,
-                       new Vector3(0, -30.0f, 0),
-                       Quaternion.identity
-                   );
+                healthBarPrefab,
+                new Vector3(0, -30.0f, 0),
+                Quaternion.identity
+            );
             healthBar.transform.SetParent(GameObject.Find("InGameUI").transform, false);
             healthBar.GetComponent<BossHealthBarScript>().SetBoss(this.gameObject);
         }
@@ -469,6 +469,8 @@ public class EnemyController : MonoBehaviour
             DropItem();
         }
 
+        GameObject.Find("RoomController").GetComponent<DDASystem>().enemiesKilled++;
+
         player.GetComponent<PlayerAudioManager>().DeathSound();
         RoomController.instance.StartCoroutine(RoomController.instance.RoomCoroutine());
         Destroy(gameObject);
@@ -502,7 +504,10 @@ public class EnemyController : MonoBehaviour
 
         if (itemPoolData.itemPool[chosenIndex].gameObject != null)
         {
-            RoomController.instance.spawnItem(itemPoolData.itemPool[chosenIndex].gameObject, transform.position);
+            RoomController.instance.spawnItem(
+                itemPoolData.itemPool[chosenIndex].gameObject,
+                transform.position
+            );
         }
         else
         {

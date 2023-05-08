@@ -26,7 +26,13 @@ public class RoomController : MonoBehaviour
     private bool spawnedBossRoom = false;
     private bool spawnedShopRoom = false;
     private bool spawnedItemRoom = false;
-    private List<Vector2> directions = new List<Vector2> { new Vector2(0, 1), new Vector2(0, -1), new Vector2(-1, 0), new Vector2(1, 0) };
+    private List<Vector2> directions = new List<Vector2>
+    {
+        new Vector2(0, 1),
+        new Vector2(0, -1),
+        new Vector2(-1, 0),
+        new Vector2(1, 0)
+    };
     private bool updatedRooms = false;
     public GameObject bossHealthbar;
 
@@ -66,7 +72,6 @@ public class RoomController : MonoBehaviour
             }
             else if (spawnedBossRoom && !updatedRooms && spawnedShopRoom && spawnedItemRoom)
             {
-
                 StartCoroutine(FinishUp());
                 UpdateRooms();
                 updatedRooms = true;
@@ -85,7 +90,6 @@ public class RoomController : MonoBehaviour
         foreach (Room room in loadedRooms)
         {
             room.RemoveUnusedDoors();
-
         }
         GameObject.Find("Player").GetComponent<PlayerStats>().wipeInventory();
         GameObject.Find("Player").GetComponent<PlayerInput>().enabled = true;
@@ -137,7 +141,9 @@ public class RoomController : MonoBehaviour
 
             while (randomRoom.name.Contains("End"))
             {
-                randomRoom = loadedRooms[Random.Range(loadedRooms.Count / 2, loadedRooms.Count - 1)];
+                randomRoom = loadedRooms[
+                    Random.Range(loadedRooms.Count / 2, loadedRooms.Count - 1)
+                ];
             }
 
             newX = randomRoom.X;
@@ -174,7 +180,8 @@ public class RoomController : MonoBehaviour
     public void BossRomUnlockDoors()
     {
         Room bossRoom = loadedRooms.FirstOrDefault(room => room.name.Contains("End"));
-        if (bossRoom == null) return;
+        if (bossRoom == null)
+            return;
 
         int x = bossRoom.X;
         int y = bossRoom.Y;
@@ -200,7 +207,8 @@ public class RoomController : MonoBehaviour
     public void ItemRoomUnlockDoors()
     {
         Room itemRoom = loadedRooms.FirstOrDefault(room => room.name.Contains("ItemRoom"));
-        if (itemRoom == null) return;
+        if (itemRoom == null)
+            return;
 
         int x = itemRoom.X;
         int y = itemRoom.Y;
@@ -261,8 +269,6 @@ public class RoomController : MonoBehaviour
                 0
             );
 
-
-
             room.X = currentLoadRoomData.X;
             room.Y = currentLoadRoomData.Y;
             room.name = $"{currentLevelName}_{currentLoadRoomData.name} {room.X}, {room.Y}";
@@ -301,7 +307,18 @@ public class RoomController : MonoBehaviour
         string[] possibleRooms = null;
         if (currentLevelName == "Floor1")
         {
-            possibleRooms = new string[] { "Empty", "Basic1", "RangeCross1", "RangeCross2", "RangeCross3", "RangeCross4", "Arena1", "Empty2", "Empty3" };
+            possibleRooms = new string[]
+            {
+                "Empty",
+                "Basic1",
+                "RangeCross1",
+                "RangeCross2",
+                "RangeCross3",
+                "RangeCross4",
+                "Arena1",
+                "Empty2",
+                "Empty3"
+            };
         }
         else if (currentLevelName == "Floor2")
         {
@@ -323,7 +340,6 @@ public class RoomController : MonoBehaviour
         yield return new WaitForSeconds(0.2f);
         UpdateRooms();
     }
-
 
     public void UpdateRooms()
     {
@@ -350,11 +366,6 @@ public class RoomController : MonoBehaviour
                 foreach (EnemyController enemy in enemies)
                 {
                     enemy.notInRoom = false;
-                    // if (enemy.GetComponent<EnemyController>().enemyType == EnemyType.WormBoss)
-                    // {
-                    //     bossHealthbar.SetActive(true);
-                    //     bossHealthbar.GetComponent<BossHealthBarScript>().SetBoss(enemy.gameObject);
-                    // }
                 }
 
                 foreach (Door door in room.GetComponentsInChildren<Door>())
@@ -365,7 +376,6 @@ public class RoomController : MonoBehaviour
             }
         }
     }
-
 
     public void spawnItem(GameObject item, Vector3 position)
     {
@@ -402,5 +412,4 @@ public class RoomController : MonoBehaviour
         Destroy(transform.GetComponent<DungeonGenerator>());
         DungeonGenerator dungeonGenerator = transform.gameObject.AddComponent<DungeonGenerator>();
     }
-
 }
