@@ -698,64 +698,69 @@ public class EnemyController : MonoBehaviour
 
     private void DropItem()
     {
-        float pick = Random.Range(0, totalWeight);
-        int chosenIndex = 0;
-        float cumulativeWeight = itemPoolData.itemPool[0].weight;
+        if (itemPoolData != null)
+        {
 
-        while (pick > cumulativeWeight && chosenIndex < itemPoolData.itemPool.Count - 1)
-        {
-            chosenIndex++;
-            cumulativeWeight += itemPoolData.itemPool[chosenIndex].weight;
-        }
 
-        if (itemPoolData.itemPool[chosenIndex].gameObject != null)
-        {
-            RoomController.instance.spawnItem(
-                itemPoolData.itemPool[chosenIndex].gameObject,
-                transform.position
-            );
-        }
-        else
-        {
-            return;
-        }
+            float pick = Random.Range(0, totalWeight);
+            int chosenIndex = 0;
+            float cumulativeWeight = itemPoolData.itemPool[0].weight;
 
-        if (DDASystem.instance)
-        {
-            if (DDASystem.instance.currentDifficulty < 1)
+            while (pick > cumulativeWeight && chosenIndex < itemPoolData.itemPool.Count - 1)
             {
-                int extraDrops = Random.Range(0, 2);
-                if (extraDrops == 1)
+                chosenIndex++;
+                cumulativeWeight += itemPoolData.itemPool[chosenIndex].weight;
+            }
+
+            if (itemPoolData.itemPool[chosenIndex].gameObject != null)
+            {
+                RoomController.instance.spawnItem(
+                    itemPoolData.itemPool[chosenIndex].gameObject,
+                    transform.position
+                );
+            }
+            else
+            {
+                return;
+            }
+
+            if (DDASystem.instance)
+            {
+                if (DDASystem.instance.currentDifficulty < 1)
                 {
-                    bool itemFound = false;
-                    while (!itemFound)
+                    int extraDrops = Random.Range(0, 2);
+                    if (extraDrops == 1)
                     {
-                        pick = Random.Range(0, totalWeight);
-                        chosenIndex = 0;
-                        cumulativeWeight = itemPoolData.itemPool[0].weight;
+                        bool itemFound = false;
+                        while (!itemFound)
+                        {
+                            pick = Random.Range(0, totalWeight);
+                            chosenIndex = 0;
+                            cumulativeWeight = itemPoolData.itemPool[0].weight;
 
-                        while (pick > cumulativeWeight && chosenIndex < itemPoolData.itemPool.Count - 1)
-                        {
-                            chosenIndex++;
-                            cumulativeWeight += itemPoolData.itemPool[chosenIndex].weight;
-                        }
+                            while (pick > cumulativeWeight && chosenIndex < itemPoolData.itemPool.Count - 1)
+                            {
+                                chosenIndex++;
+                                cumulativeWeight += itemPoolData.itemPool[chosenIndex].weight;
+                            }
 
-                        if (itemPoolData.itemPool[chosenIndex].gameObject != null)
-                        {
-                            itemFound = true;
-                            RoomController.instance.spawnItem(
-                                itemPoolData.itemPool[chosenIndex].gameObject,
-                                new Vector3(transform.position.x, transform.position.y + 0.5f, 0)
-                            );
-                        }
-                        else
-                        {
-                            return;
+                            if (itemPoolData.itemPool[chosenIndex].gameObject != null)
+                            {
+                                itemFound = true;
+                                RoomController.instance.spawnItem(
+                                    itemPoolData.itemPool[chosenIndex].gameObject,
+                                    new Vector3(transform.position.x, transform.position.y + 0.5f, 0)
+                                );
+                            }
+                            else
+                            {
+                                return;
+                            }
                         }
                     }
+
+
                 }
-
-
             }
         }
     }

@@ -295,6 +295,7 @@ public class RoomController : MonoBehaviour
             if (loadedRooms.Count == 0)
             {
                 CameraController.instance.currentRoom = room;
+                MiniMapScript.instance.currentRoom = room;
             }
 
             loadedRooms.Add(room);
@@ -344,7 +345,9 @@ public class RoomController : MonoBehaviour
     public void OnPlayerEnterRoom(Room room)
     {
         CameraController.instance.currentRoom = room;
+        MiniMapScript.instance.currentRoom = room;
         currentRoom = room;
+        room.gameObject.GetComponent<Room>().DeleteCover();
 
         StartCoroutine(RoomCoroutine());
     }
@@ -388,6 +391,13 @@ public class RoomController : MonoBehaviour
                     door.UpdateDoorData();
                 }
             }
+
+
+
+            // if (room == currentRoom && room.gameObject.Find("Cover"))
+            // {
+            //     destroy(room.Find("Cover"));
+            // }
         }
     }
 

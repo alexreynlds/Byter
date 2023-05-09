@@ -80,6 +80,11 @@ public class Room : MonoBehaviour
         }
     }
 
+    public void DeleteCover()
+    {
+        transform.Find("Cover").gameObject.SetActive(false);
+    }
+
     public void RemoveUnusedDoors()
     {
         // Remove unused doors

@@ -206,11 +206,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b4eb73021f982c547811d2ca491dc93d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  itemPoolData: {fileID: 11400000, guid: 57dc56c7252b50e498cf75bcf949b0aa, type: 2}
+  itemPoolData: {fileID: 0}
   enemyType: 1
   currentState: 0
   range: 10
   health: 3
+  maxHealth: 0
   damage: 1
   speed: 1
   canMove: 1
@@ -222,19 +223,18 @@ MonoBehaviour:
   Mask:
     serializedVersion: 2
     m_Bits: 0
+  timeBetweenShots: 0
   bodyPart: {fileID: 0}
   endPortal: {fileID: 0}
   bodyLength: 5
   wormBossMovementSpeed: 0.01
   notInRoom: 0
-  itemPool:
-  - gameObject: {fileID: 0}
-    weight: 0.5
-  - gameObject: {fileID: 3495446618145352073, guid: f835214684d7243b7948bc70b225164f, type: 3}
-    weight: 0.2
-  - gameObject: {fileID: 3495446618145352073, guid: 4203c8a1d98e8a34aa47c36c2a8c0a97, type: 3}
-    weight: 0.1
   takeDamageSound: {fileID: 8300000, guid: ff6a460dd45a6473d848185966a1407c, type: 3}
+  healthBarPrefab: {fileID: 0}
+  trojanEnemyPrefab: {fileID: 0}
+  trojanSpawnEnemyInterval: 5
+  trojanShootInterval: 1
+  bulletDelay: 0.4
 --- !u!58 &3507873784510734014
 CircleCollider2D:
   m_ObjectHideFlags: 0
