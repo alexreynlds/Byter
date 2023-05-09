@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 4041461938482607937}
   - component: {fileID: 3999459243727116335}
   - component: {fileID: 6987910052165040590}
+  - component: {fileID: -7847166792585622458}
   m_Layer: 0
   m_Name: WormBody
   m_TagString: Boss
@@ -112,6 +113,18 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.80103487, y: 0.8009758}
   m_EdgeRadius: 0
+--- !u!114 &-7847166792585622458
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5179162077349591640}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 88d28ba606028ca4d80998d1a5f8297f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &8033691169383649451
 GameObject:
   m_ObjectHideFlags: 0

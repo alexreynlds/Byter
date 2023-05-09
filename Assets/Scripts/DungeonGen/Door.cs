@@ -211,24 +211,4 @@ public class Door : MonoBehaviour
             KeycardClose();
         }
     }
-
-    // private IEnumerator MovePlayer(Vector2 destination, float speed)
-    // {
-    //     Debug.Log("Moving player to " + destination);
-    //     float startTime = Time.time;
-    //     float journeyLength = Vector2.Distance(player.transform.position, destination);
-    //     float totalTime = journeyLength / speed;
-
-    //     while (Time.time < startTime + totalTime)
-    //     {
-    //         float distCovered = (Time.time - startTime) * speed;
-    //         float fracJourney = distCovered / journeyLength;
-    //         player.transform.position = Vector2.Lerp(player.transform.position, destination, fracJourney);
-
-    //         yield return null;
-    //     }
-
-    //     // Ensure the player reaches the destination exactly
-    //     player.transform.position = destination;
-    // }
 }

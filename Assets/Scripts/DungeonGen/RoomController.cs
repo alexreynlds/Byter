@@ -35,6 +35,7 @@ public class RoomController : MonoBehaviour
     };
     private bool updatedRooms = false;
     public GameObject bossHealthbar;
+    public bool isFloor2 = false;
 
     public DungeonGenerationData dungeonData;
 
@@ -98,8 +99,17 @@ public class RoomController : MonoBehaviour
     IEnumerator SpawnBossRoom()
     {
         spawnedBossRoom = true;
+        string bossRoom = null;
         yield return new WaitForSeconds(0.5f);
-        string bossRoom = "End" + Random.Range(1, 2).ToString();
+        if (!isFloor2)
+        {
+            bossRoom = "End1";
+        }
+        else
+        {
+            bossRoom = "End0";
+        }
+
         SpawnSpecialRoom(bossRoom);
     }
 
@@ -407,8 +417,16 @@ public class RoomController : MonoBehaviour
         spawnedItemRoom = false;
         updatedRooms = false;
 
-        currentLevelName = "Floor2";
+        transform.GetComponent<DDASystem>().minDifficulty = 0.75f;
+        if (transform.GetComponent<DDASystem>().currentDifficulty < 0.75f)
+        {
+            transform.GetComponent<DDASystem>().currentDifficulty = 0.75f;
+        }
+
+        currentLevelName = "Floor1";
+        isFloor2 = true;
         GameObject.Find("Player").transform.position = new Vector3(-0.5f, -0.5f, 0);
+        GameObject.Find("Player").GetComponent<PlayerStats>().bossKeycard = false;
         Destroy(transform.GetComponent<DungeonGenerator>());
         DungeonGenerator dungeonGenerator = transform.gameObject.AddComponent<DungeonGenerator>();
     }

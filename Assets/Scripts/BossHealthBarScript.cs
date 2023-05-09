@@ -10,7 +10,6 @@ public class BossHealthBarScript : MonoBehaviour
     [SerializeField] private GameObject currentBoss;
     public Image healthBar;
     private bool bossDead = false;
-    private float healthAmount = 100f;
 
     public void SetBoss(GameObject boss)
     {
@@ -24,7 +23,7 @@ public class BossHealthBarScript : MonoBehaviour
     {
         if (!bossDead)
         {
-            healthBar.fillAmount = currentBoss.GetComponent<EnemyController>().health / 100.0f;
+            healthBar.fillAmount = Mathf.Clamp(currentBoss.GetComponent<EnemyController>().health / currentBoss.GetComponent<EnemyController>().maxHealth, 0, 1);
             if (healthBar.fillAmount <= 0)
             {
                 bossDead = true;

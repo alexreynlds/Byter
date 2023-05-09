@@ -35,8 +35,20 @@ public class EnemyController : MonoBehaviour
     [SerializeField]
     public float health;
 
+    public float maxHealth;
+
     [SerializeField]
     private int damage;
+
+    private float originalHealth;
+
+    private float originalProjectileSpeed;
+
+    private float originalSpeed;
+
+    private float originalAttackSpeed;
+
+    private float originalAttackRange;
 
     [Header("Basic Enemy Stats")]
     [SerializeField]
@@ -104,16 +116,26 @@ public class EnemyController : MonoBehaviour
 
     private bool spawnedHealthBar = false;
 
+    private float lastDifficulty;
+
+    private bool hasBeenDamaged = false;
+
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
         totalWeight = 0;
         Physics2D.queriesStartInColliders = false;
         audioSource = GetComponent<AudioSource>();
-        // foreach (Spawnable spawnable in itemPool)
-        // {
-        //     totalWeight += spawnable.weight;
-        // }
+
+        maxHealth = health;
+
+        originalHealth = health;
+        originalProjectileSpeed = projectileSpeed;
+        originalSpeed = speed;
+        originalAttackSpeed = startTimeBetweenShots;
+        originalAttackRange = range;
+
+
         if (itemPoolData != null)
         {
             foreach (Spawnable spawnable in itemPoolData.itemPool)
@@ -128,6 +150,7 @@ public class EnemyController : MonoBehaviour
     {
         player = GameObject.Find("Player");
         notInRoom = true;
+        lastDifficulty = DDASystem.instance.currentDifficulty;
 
         // Set up enemy stats for ranged
         if (enemyType == EnemyType.Ranged)
@@ -152,6 +175,28 @@ public class EnemyController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        // Update the enemies states based on the current state
+        if (DDASystem.instance)
+        {
+            if (DDASystem.instance.currentDifficulty != lastDifficulty)
+            {
+                lastDifficulty = DDASystem.instance.currentDifficulty;
+                if (!hasBeenDamaged)
+                    health = originalHealth * DDASystem.instance.currentDifficulty;
+                if (enemyType == EnemyType.Ranged)
+                {
+                    startTimeBetweenShots = originalAttackSpeed / DDASystem.instance.currentDifficulty;
+                    projectileSpeed = originalProjectileSpeed * DDASystem.instance.currentDifficulty;
+                    projectileRange = originalAttackRange * DDASystem.instance.currentDifficulty;
+                }
+                else if (enemyType == EnemyType.Basic)
+                {
+                    speed = originalSpeed * DDASystem.instance.currentDifficulty;
+                }
+            }
+        }
+
+
         if (enemyType == EnemyType.Basic)
         {
             switch (currentState)
@@ -221,6 +266,10 @@ public class EnemyController : MonoBehaviour
                 canMove = false;
                 TakeKnockback();
             }
+            else if (enemyType == EnemyType.WormBoss)
+            {
+                other.gameObject.GetComponent<PlayerStats>().TakeDamage(damage);
+            }
         }
     }
 
@@ -241,6 +290,7 @@ public class EnemyController : MonoBehaviour
 
     public void TakeDamage(float damage)
     {
+        hasBeenDamaged = true;
         audioSource.PlayOneShot(takeDamageSound);
         health -= damage;
         GetComponent<SpriteRenderer>().color = Color.red;
@@ -504,6 +554,7 @@ public class EnemyController : MonoBehaviour
 
         if (itemPoolData.itemPool[chosenIndex].gameObject != null)
         {
+            Debug.Log("Dropped item");
             RoomController.instance.spawnItem(
                 itemPoolData.itemPool[chosenIndex].gameObject,
                 transform.position
@@ -512,6 +563,45 @@ public class EnemyController : MonoBehaviour
         else
         {
             return;
+        }
+
+        if (DDASystem.instance)
+        {
+            if (DDASystem.instance.currentDifficulty < 1)
+            {
+                int extraDrops = Random.Range(0, 2);
+                if (extraDrops == 1)
+                {
+                    bool itemFound = false;
+                    while (!itemFound)
+                    {
+                        pick = Random.Range(0, totalWeight);
+                        chosenIndex = 0;
+                        cumulativeWeight = itemPoolData.itemPool[0].weight;
+
+                        while (pick > cumulativeWeight && chosenIndex < itemPoolData.itemPool.Count - 1)
+                        {
+                            chosenIndex++;
+                            cumulativeWeight += itemPoolData.itemPool[chosenIndex].weight;
+                        }
+
+                        if (itemPoolData.itemPool[chosenIndex].gameObject != null)
+                        {
+                            itemFound = true;
+                            RoomController.instance.spawnItem(
+                                itemPoolData.itemPool[chosenIndex].gameObject,
+                                new Vector3(transform.position.x, transform.position.y + 0.5f, 0)
+                            );
+                        }
+                        else
+                        {
+                            return;
+                        }
+                    }
+                }
+
+
+            }
         }
     }
 }
