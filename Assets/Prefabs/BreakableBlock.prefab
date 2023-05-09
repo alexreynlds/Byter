@@ -124,7 +124,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4cf8e0b0341d79846b2a753f8c659a49, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 4
+  health: 3
   purpleSprites:
   - {fileID: 848422966, guid: 102440dd1c1824290b59658aefb395fa, type: 3}
   - {fileID: -1309853747, guid: 102440dd1c1824290b59658aefb395fa, type: 3}
