@@ -31,7 +31,7 @@ public class StatsScreenScript : MonoBehaviour
         maxHealthText.GetComponent<Text>().text = player.GetComponent<PlayerStats>().maxHealth.ToString();
         attackDamageText.GetComponent<Text>().text = player.GetComponent<PlayerStats>().attackDamage.ToString();
         attackRangeText.GetComponent<Text>().text = player.GetComponent<PlayerStats>().attackRange.ToString();
-        attackSpeedText.GetComponent<Text>().text = player.GetComponent<PlayerStats>().attackSpeed.ToString();
+        attackSpeedText.GetComponent<Text>().text = (1 + (1 - player.GetComponent<PlayerStats>().attackSpeed)).ToString();
         // attackKnockbackText.GetComponent<Text>().text =  player.GetComponent<PlayerStats>().attackKnockback.ToString();
         projectileSpeedText.GetComponent<Text>().text = (player.GetComponent<PlayerStats>().projectileSpeed - 2).ToString();
         moveSpeedText.GetComponent<Text>().text = (player.GetComponent<PlayerStats>().moveSpeed - 1).ToString();

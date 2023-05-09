@@ -47,6 +47,7 @@ public class PlayerMovement : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
+        moveSpeed = GetComponent<PlayerStats>().moveSpeed;
         if (movementInput != Vector2.zero)
         {
             rb.MovePosition(rb.position + movementInput * moveSpeed * Time.deltaTime);

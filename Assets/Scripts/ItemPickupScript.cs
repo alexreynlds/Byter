@@ -105,6 +105,36 @@ public class ItemPickupScript : MonoBehaviour
                 else
                     return;
             }
+            else if (tempName.Contains("RangeUp"))
+            {
+                other.GetComponent<PlayerStats>().attackRange += 0.3f;
+                FindObjectOfType<PopupWindowScript>()
+                        .AddToQueue(itemName, itemDescription);
+            }
+            else if (tempName.Contains("DamageUp"))
+            {
+                other.GetComponent<PlayerStats>().attackDamage += 0.25f;
+                FindObjectOfType<PopupWindowScript>()
+                        .AddToQueue(itemName, itemDescription);
+            }
+            else if (tempName.Contains("AtkSpeedUp"))
+            {
+                other.GetComponent<PlayerStats>().attackSpeed -= 0.2f;
+                FindObjectOfType<PopupWindowScript>()
+                        .AddToQueue(itemName, itemDescription);
+            }
+            else if (tempName.Contains("ProjSpeedUp"))
+            {
+                other.GetComponent<PlayerStats>().projectileSpeed += 1f;
+                FindObjectOfType<PopupWindowScript>()
+                        .AddToQueue(itemName, itemDescription);
+            }
+            else if (tempName.Contains("MoveSpeedUp"))
+            {
+                other.GetComponent<PlayerStats>().moveSpeed += 0.5f;
+                FindObjectOfType<PopupWindowScript>()
+                        .AddToQueue(itemName, itemDescription);
+            }
         }
         other.GetComponent<PlayerAudioManager>().ItemPickupSound();
         Destroy(gameObject);
