@@ -17,6 +17,7 @@ public class UIScript : MonoBehaviour
     private GameObject pauseMenu;
 
     private bool isPaused = true;
+
     // private bool isPaused = false;
 
     [SerializeField]
@@ -56,6 +57,8 @@ public class UIScript : MonoBehaviour
 
     public AudioClip finalMusic;
 
+    public Toggle extraLivesToggle;
+
     void Awake()
     {
         player = GameObject.Find("Player");
@@ -63,7 +66,6 @@ public class UIScript : MonoBehaviour
         musicSource.clip = exploringMusic;
         musicSource.Play();
         Time.timeScale = 0;
-
     }
 
     // Start is called before the first frame update
@@ -170,7 +172,6 @@ public class UIScript : MonoBehaviour
         musicSource.clip = finalMusic;
         musicSource.Play();
         Time.timeScale = 0;
-
     }
 
     public void GameOver()
@@ -181,7 +182,6 @@ public class UIScript : MonoBehaviour
         musicSource.clip = finalMusic;
         musicSource.Play();
         Time.timeScale = 0;
-
     }
 
     private void UpdateElements()
@@ -309,11 +309,23 @@ public class UIScript : MonoBehaviour
     public void chosenFixedDiff()
     {
         GameObject.Find("RoomController").GetComponent<DDASystem>().enabled = false;
+        if (extraLivesToggle.isOn)
+        {
+            GameObject.Find("Player").GetComponent<PlayerStats>().maxHealth = 10;
+            GameObject.Find("Player").GetComponent<PlayerStats>().currentHealth = 10;
+            GameObject.Find("Player").GetComponent<PlayerStats>().attackDamage = 1.5f;
+        }
         OnPause();
     }
 
     public void chosenDynamicDiff()
     {
+        if (extraLivesToggle.isOn)
+        {
+            GameObject.Find("Player").GetComponent<PlayerStats>().maxHealth = 10;
+            GameObject.Find("Player").GetComponent<PlayerStats>().currentHealth = 10;
+            GameObject.Find("Player").GetComponent<PlayerStats>().attackDamage = 1.5f;
+        }
         OnPause();
     }
 }

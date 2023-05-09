@@ -325,7 +325,6 @@ public class RoomController : MonoBehaviour
             {
                 "Empty",
                 "Basic1",
-                "RangeCross1",
                 "RangeCross2",
                 "RangeCross3",
                 "Arena1",
@@ -406,7 +405,6 @@ public class RoomController : MonoBehaviour
         }
         else
         {
-
             int numLoadedScene = SceneManager.sceneCount;
 
             for (int i = 0; i < numLoadedScene; i++)
@@ -441,9 +439,9 @@ public class RoomController : MonoBehaviour
             GameObject.Find("Player").transform.position = new Vector3(-0.5f, -0.5f, 0);
             GameObject.Find("Player").GetComponent<PlayerStats>().bossKeycard = false;
             Destroy(transform.GetComponent<DungeonGenerator>());
-            DungeonGenerator dungeonGenerator = transform.gameObject.AddComponent<DungeonGenerator>();
+            DungeonGenerator dungeonGenerator =
+                transform.gameObject.AddComponent<DungeonGenerator>();
             GameObject.Find("IntroCard").GetComponent<fadeInScript>().refresh();
         }
-
     }
 }

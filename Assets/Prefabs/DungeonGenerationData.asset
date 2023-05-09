@@ -14,4 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   numOfCrawlers: 2
   iterationMax: 15
-  iterationMin: 8
+  iterationMin: 10
