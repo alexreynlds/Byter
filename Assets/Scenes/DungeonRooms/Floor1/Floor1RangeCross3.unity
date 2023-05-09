@@ -1701,6 +1701,7 @@ Transform:
   - {fileID: 1459459161}
   - {fileID: 247192784}
   - {fileID: 1887436698}
+  - {fileID: 1516655663}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -4444,6 +4445,68 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 3876005864570392798, guid: 71fd4094984f9ad42b1edfda607b13b4, type: 3}
   m_PrefabInstance: {fileID: 736360187}
   m_PrefabAsset: {fileID: 0}
+--- !u!1001 &1516655662
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 546838474}
+    m_Modifications:
+    - target: {fileID: 2487795656875682458, guid: 72083360bbe8af6428abb397be473572, type: 3}
+      propertyPath: m_RootOrder
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 2487795656875682458, guid: 72083360bbe8af6428abb397be473572, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2487795656875682458, guid: 72083360bbe8af6428abb397be473572, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2487795656875682458, guid: 72083360bbe8af6428abb397be473572, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2487795656875682458, guid: 72083360bbe8af6428abb397be473572, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2487795656875682458, guid: 72083360bbe8af6428abb397be473572, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2487795656875682458, guid: 72083360bbe8af6428abb397be473572, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2487795656875682458, guid: 72083360bbe8af6428abb397be473572, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2487795656875682458, guid: 72083360bbe8af6428abb397be473572, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2487795656875682458, guid: 72083360bbe8af6428abb397be473572, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2487795656875682458, guid: 72083360bbe8af6428abb397be473572, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3495446618145352073, guid: 72083360bbe8af6428abb397be473572, type: 3}
+      propertyPath: m_Name
+      value: HealthUp
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 72083360bbe8af6428abb397be473572, type: 3}
+--- !u!4 &1516655663 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 2487795656875682458, guid: 72083360bbe8af6428abb397be473572, type: 3}
+  m_PrefabInstance: {fileID: 1516655662}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1583624110
 GameObject:
   m_ObjectHideFlags: 0
@@ -5202,6 +5265,7 @@ MonoBehaviour:
   coins: 0
   keycards: 0
   bossKeycard: 0
+  isSuper: 0
 --- !u!61 &2032698933
 BoxCollider2D:
   m_ObjectHideFlags: 0

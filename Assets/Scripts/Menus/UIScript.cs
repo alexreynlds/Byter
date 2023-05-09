@@ -16,8 +16,8 @@ public class UIScript : MonoBehaviour
     [SerializeField]
     private GameObject pauseMenu;
 
-    // private bool isPaused = true;
-    private bool isPaused = false;
+    private bool isPaused = true;
+    // private bool isPaused = false;
 
     [SerializeField]
     private AudioSource clickSound;
@@ -44,11 +44,26 @@ public class UIScript : MonoBehaviour
     private Resolution[] resolutions;
     private int currentResolutionIndex = 0;
 
+    public GameObject deathScreen;
+
+    public GameObject winScreen;
+
+    public GameObject introCard;
+
+    public AudioSource musicSource;
+
+    public AudioClip exploringMusic;
+
+    public AudioClip finalMusic;
+
     void Awake()
     {
         player = GameObject.Find("Player");
         Application.targetFrameRate = -1;
-        // Time.timeScale = 0;
+        musicSource.clip = exploringMusic;
+        musicSource.Play();
+        Time.timeScale = 0;
+
     }
 
     // Start is called before the first frame update
@@ -147,6 +162,28 @@ public class UIScript : MonoBehaviour
         UpdateElements();
     }
 
+    public void Win()
+    {
+        winScreen.SetActive(true);
+        inGameUI.SetActive(false);
+
+        musicSource.clip = finalMusic;
+        musicSource.Play();
+        Time.timeScale = 0;
+
+    }
+
+    public void GameOver()
+    {
+        deathScreen.SetActive(true);
+        inGameUI.SetActive(false);
+
+        musicSource.clip = finalMusic;
+        musicSource.Play();
+        Time.timeScale = 0;
+
+    }
+
     private void UpdateElements()
     {
         // Inventory Screen
@@ -197,6 +234,12 @@ public class UIScript : MonoBehaviour
             Time.timeScale = 1;
             isPaused = false;
         }
+    }
+
+    public void OnRestart()
+    {
+        Time.timeScale = 1;
+        SceneManager.LoadScene(1);
     }
 
     public void OnQuit()

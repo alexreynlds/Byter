@@ -27,11 +27,14 @@ public class ShopItemScript : MonoBehaviour
     private GameObject storedItem;
     private GameObject player;
     private bool bought = false;
+    private int chosenIndex = 0;
+    private float previousDifficulty;
 
     void Awake()
     {
         player = GameObject.FindGameObjectWithTag("Player");
         totalWeight = 0;
+        previousDifficulty = DDASystem.instance.currentDifficulty;
         foreach (ShopItem shopItem in shopItems)
         {
             totalWeight += shopItem.weight;
@@ -42,7 +45,6 @@ public class ShopItemScript : MonoBehaviour
     void Start()
     {
         float pick = Random.Range(0, totalWeight);
-        int chosenIndex = 0;
         float cumulativeWeight = shopItems[0].weight;
 
         while (pick > cumulativeWeight && chosenIndex < shopItems.Count - 1)
@@ -63,6 +65,19 @@ public class ShopItemScript : MonoBehaviour
         priceText.GetComponent<TextMeshPro>().text = shopItems[chosenIndex].price.ToString();
     }
 
+    void Update()
+    {
+        if (DDASystem.instance)
+        {
+            if (previousDifficulty != DDASystem.instance.currentDifficulty)
+            {
+                previousDifficulty = DDASystem.instance.currentDifficulty;
+                priceText.GetComponent<TextMeshPro>().text = Mathf.Ceil(shopItems[chosenIndex].price * DDASystem.instance.currentDifficulty).ToString();
+            }
+        }
+
+    }
+
     private void OnTriggerEnter2D(Collider2D other)
     {
         Debug.Log("Triggered");
@@ -71,7 +86,7 @@ public class ShopItemScript : MonoBehaviour
             if (other.GetComponent<PlayerStats>().coins >= chosenItem.price)
             {
                 Debug.Log("Bought");
-                other.GetComponent<PlayerStats>().coins -= chosenItem.price;
+                other.GetComponent<PlayerStats>().coins -= (int)Mathf.Ceil(chosenItem.price * DDASystem.instance.currentDifficulty);
                 storedItem.GetComponent<ItemPickupScript>().ItemPickup(player);
                 priceText.SetActive(false);
             }

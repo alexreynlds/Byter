@@ -35,6 +35,8 @@ public class PlayerStats : MonoBehaviour
     private float normalDamage;
     private float normalAttackRange;
 
+    private bool hasEnded = false;
+
     // Start is called before the first frame update
     void Awake()
     {
@@ -62,6 +64,16 @@ public class PlayerStats : MonoBehaviour
         else if (currentEnergy < 0)
         {
             currentEnergy = 0;
+        }
+
+        if (currentHealth == 0)
+        {
+            if (!hasEnded)
+            {
+                hasEnded = true;
+                GameObject.Find("UICanvas").GetComponent<UIScript>().GameOver();
+            }
+
         }
     }
 
@@ -120,7 +132,7 @@ public class PlayerStats : MonoBehaviour
     IEnumerator InvincibilityFrames()
     {
         canTakeDamage = false;
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(0.5f);
         canTakeDamage = true;
     }
 

@@ -92,7 +92,10 @@ public class RoomController : MonoBehaviour
         {
             room.RemoveUnusedDoors();
         }
-        GameObject.Find("Player").GetComponent<PlayerStats>().wipeInventory();
+        if (!isFloor2)
+        {
+            GameObject.Find("Player").GetComponent<PlayerStats>().wipeInventory();
+        }
         GameObject.Find("Player").GetComponent<PlayerInput>().enabled = true;
     }
 
@@ -124,6 +127,7 @@ public class RoomController : MonoBehaviour
     {
         spawnedItemRoom = true;
         yield return new WaitForSeconds(0.6f);
+        SpawnSpecialRoom("ItemRoom");
         SpawnSpecialRoom("ItemRoom");
     }
 
@@ -324,8 +328,9 @@ public class RoomController : MonoBehaviour
                 "RangeCross1",
                 "RangeCross2",
                 "RangeCross3",
-                "RangeCross4",
                 "Arena1",
+                "Arena2",
+                "Empty1",
                 "Empty2",
                 "Empty3"
             };
@@ -394,40 +399,51 @@ public class RoomController : MonoBehaviour
 
     public void LoadNextLevel()
     {
-        int numLoadedScene = SceneManager.sceneCount;
-
-        for (int i = 0; i < numLoadedScene; i++)
+        if (isFloor2)
         {
-            Scene loadedScene = SceneManager.GetSceneAt(i);
-            if (loadedScene.name != "MainScene")
+            GameObject.Find("UICanvas").GetComponent<UIScript>().Win();
+            // GameObject.Find("IntroCard").GetComponent<fadeInScript>().delete();
+        }
+        else
+        {
+
+            int numLoadedScene = SceneManager.sceneCount;
+
+            for (int i = 0; i < numLoadedScene; i++)
             {
-                SceneManager.UnloadSceneAsync(loadedScene);
+                Scene loadedScene = SceneManager.GetSceneAt(i);
+                if (loadedScene.name != "MainScene")
+                {
+                    SceneManager.UnloadSceneAsync(loadedScene);
+                }
             }
+
+            foreach (Room room in loadedRooms)
+            {
+                Destroy(room.gameObject);
+            }
+
+            loadRoomQueue.Clear();
+            loadedRooms.Clear();
+            spawnedBossRoom = false;
+            spawnedShopRoom = false;
+            spawnedItemRoom = false;
+            updatedRooms = false;
+
+            transform.GetComponent<DDASystem>().minDifficulty = 0.75f;
+            if (transform.GetComponent<DDASystem>().currentDifficulty < 0.75f)
+            {
+                transform.GetComponent<DDASystem>().currentDifficulty = 0.75f;
+            }
+
+            currentLevelName = "Floor1";
+            isFloor2 = true;
+            GameObject.Find("Player").transform.position = new Vector3(-0.5f, -0.5f, 0);
+            GameObject.Find("Player").GetComponent<PlayerStats>().bossKeycard = false;
+            Destroy(transform.GetComponent<DungeonGenerator>());
+            DungeonGenerator dungeonGenerator = transform.gameObject.AddComponent<DungeonGenerator>();
+            GameObject.Find("IntroCard").GetComponent<fadeInScript>().refresh();
         }
 
-        foreach (Room room in loadedRooms)
-        {
-            Destroy(room.gameObject);
-        }
-
-        loadRoomQueue.Clear();
-        loadedRooms.Clear();
-        spawnedBossRoom = false;
-        spawnedShopRoom = false;
-        spawnedItemRoom = false;
-        updatedRooms = false;
-
-        transform.GetComponent<DDASystem>().minDifficulty = 0.75f;
-        if (transform.GetComponent<DDASystem>().currentDifficulty < 0.75f)
-        {
-            transform.GetComponent<DDASystem>().currentDifficulty = 0.75f;
-        }
-
-        currentLevelName = "Floor1";
-        isFloor2 = true;
-        GameObject.Find("Player").transform.position = new Vector3(-0.5f, -0.5f, 0);
-        GameObject.Find("Player").GetComponent<PlayerStats>().bossKeycard = false;
-        Destroy(transform.GetComponent<DungeonGenerator>());
-        DungeonGenerator dungeonGenerator = transform.gameObject.AddComponent<DungeonGenerator>();
     }
 }

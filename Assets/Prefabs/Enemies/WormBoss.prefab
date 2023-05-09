@@ -227,13 +227,18 @@ MonoBehaviour:
   Mask:
     serializedVersion: 2
     m_Bits: 0
+  timeBetweenShots: 0
   bodyPart: {fileID: 5179162077349591640, guid: 3a7ca0a2a7f55464992691a17e0907d9, type: 3}
   endPortal: {fileID: 9129162683690285045, guid: 98a0c6a88996c4de8be74b44379d65a1, type: 3}
-  bodyLength: 5
+  bodyLength: 8
   wormBossMovementSpeed: 0.05
   notInRoom: 1
   takeDamageSound: {fileID: 8300000, guid: ff6a460dd45a6473d848185966a1407c, type: 3}
   healthBarPrefab: {fileID: 1447872027337413131, guid: 637c04c04b740474e8f8c5a43b371c21, type: 3}
+  trojanEnemyPrefab: {fileID: 0}
+  trojanSpawnEnemyInterval: 5
+  trojanShootInterval: 1
+  bulletDelay: 0.4
 --- !u!82 &293722287892171971
 AudioSource:
   m_ObjectHideFlags: 0

@@ -17,7 +17,8 @@ public enum EnemyType
     Ranged,
     Tank,
     Small,
-    WormBoss
+    WormBoss,
+    TrojanBoss
 }
 
 public class EnemyController : MonoBehaviour
@@ -75,7 +76,7 @@ public class EnemyController : MonoBehaviour
 
     [SerializeField]
     private LayerMask Mask;
-    private float timeBetweenShots;
+    public float timeBetweenShots;
 
     [Header("Worm Boss Stats")]
     public GameObject bodyPart;
@@ -120,6 +121,13 @@ public class EnemyController : MonoBehaviour
 
     private bool hasBeenDamaged = false;
 
+    [Header("Trojan Boss")]
+    public GameObject trojanEnemyPrefab;
+    public float trojanSpawnEnemyInterval = 10f;
+    private float trojanSpawnEnemyTimer = 0f;
+    public float trojanShootInterval = 1f;
+    public float bulletDelay = 0.4f;
+
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -150,10 +158,14 @@ public class EnemyController : MonoBehaviour
     {
         player = GameObject.Find("Player");
         notInRoom = true;
-        lastDifficulty = DDASystem.instance.currentDifficulty;
+
+        if (DDASystem.instance)
+        {
+            lastDifficulty = DDASystem.instance.currentDifficulty;
+        }
 
         // Set up enemy stats for ranged
-        if (enemyType == EnemyType.Ranged)
+        if (enemyType == EnemyType.Ranged || enemyType == EnemyType.TrojanBoss)
         {
             timeBetweenShots = startTimeBetweenShots;
         }
@@ -181,17 +193,39 @@ public class EnemyController : MonoBehaviour
             if (DDASystem.instance.currentDifficulty != lastDifficulty)
             {
                 lastDifficulty = DDASystem.instance.currentDifficulty;
-                if (!hasBeenDamaged)
+                if (!hasBeenDamaged && enemyType != EnemyType.WormBoss && enemyType != EnemyType.TrojanBoss)
                     health = originalHealth * DDASystem.instance.currentDifficulty;
                 if (enemyType == EnemyType.Ranged)
                 {
                     startTimeBetweenShots = originalAttackSpeed / DDASystem.instance.currentDifficulty;
                     projectileSpeed = originalProjectileSpeed * DDASystem.instance.currentDifficulty;
                     projectileRange = originalAttackRange * DDASystem.instance.currentDifficulty;
+                    if (DDASystem.instance.currentDifficulty >= 1.5)
+                    {
+                        damage = 2;
+                    }
+                    else
+                    {
+                        damage = 1;
+                    }
                 }
                 else if (enemyType == EnemyType.Basic)
                 {
                     speed = originalSpeed * DDASystem.instance.currentDifficulty;
+                    if (DDASystem.instance.currentDifficulty >= 1.5)
+                    {
+                        damage = 2;
+                    }
+                    else
+                    {
+                        damage = 1;
+                    }
+                }
+                else if (enemyType == EnemyType.TrojanBoss)
+                {
+                    startTimeBetweenShots = originalAttackSpeed / DDASystem.instance.currentDifficulty;
+                    // projectileSpeed = originalProjectileSpeed * DDASystem.instance.currentDifficulty;
+                    // projectileRange = originalAttackRange * DDASystem.instance.currentDifficulty;
                 }
             }
         }
@@ -248,6 +282,23 @@ public class EnemyController : MonoBehaviour
                     break;
             }
         }
+        else if (enemyType == EnemyType.TrojanBoss)
+        {
+            switch (currentState)
+            {
+                case EnemyState.Idle:
+                    // Do nothing
+                    break;
+
+                case EnemyState.Active:
+                    TrojanBossActive();
+                    break;
+
+                case EnemyState.Die:
+                    Die();
+                    break;
+            }
+        }
 
         if (!notInRoom)
         {
@@ -267,6 +318,10 @@ public class EnemyController : MonoBehaviour
                 TakeKnockback();
             }
             else if (enemyType == EnemyType.WormBoss)
+            {
+                other.gameObject.GetComponent<PlayerStats>().TakeDamage(damage);
+            }
+            else if (enemyType == EnemyType.TrojanBoss)
             {
                 other.gameObject.GetComponent<PlayerStats>().TakeDamage(damage);
             }
@@ -292,7 +347,6 @@ public class EnemyController : MonoBehaviour
     {
         hasBeenDamaged = true;
         audioSource.PlayOneShot(takeDamageSound);
-        health -= damage;
         GetComponent<SpriteRenderer>().color = Color.red;
 
         if (enemyType.Equals(EnemyType.WormBoss))
@@ -305,6 +359,29 @@ public class EnemyController : MonoBehaviour
         else
         {
             transform.GetComponent<SpriteRenderer>().color = Color.red;
+        }
+
+        if (enemyType.Equals(EnemyType.WormBoss) || enemyType.Equals(EnemyType.TrojanBoss))
+        {
+            if (DDASystem.instance)
+            {
+                if (DDASystem.instance.currentDifficulty < 1)
+                {
+                    health -= damage * 2;
+                }
+                else
+                {
+                    health -= damage;
+                }
+            }
+            else
+            {
+                health -= damage;
+            }
+        }
+        else
+        {
+            health -= damage;
         }
 
         Invoke("ResetColor", 0.1f);
@@ -405,6 +482,76 @@ public class EnemyController : MonoBehaviour
         return false;
     }
 
+    private void TrojanBossActive()
+    {
+        if (!spawnedHealthBar)
+        {
+            spawnedHealthBar = true;
+
+            healthBar = Instantiate(
+                healthBarPrefab,
+                new Vector3(0, -30.0f, 0),
+                Quaternion.identity
+            );
+            healthBar.transform.SetParent(GameObject.Find("InGameUI").transform, false);
+            healthBar.GetComponent<BossHealthBarScript>().SetBoss(this.gameObject);
+        }
+
+        trojanSpawnEnemyTimer += Time.deltaTime;
+
+        if (trojanSpawnEnemyTimer >= trojanSpawnEnemyInterval)
+        {
+            trojanSpawnEnemyTimer = 0.0f;
+            SpawnTrojanEnemy();
+        }
+
+        playerPos = new Vector3(player.transform.position.x, player.transform.position.y, 0);
+        LookAtPlayer();
+
+        if (timeBetweenShots <= 0)
+        {
+            Invoke("ShootBullet", 0f);
+            Invoke("ShootBullet", 0.4f);
+            Invoke("ShootBullet", 0.8f);
+            timeBetweenShots = startTimeBetweenShots;
+        }
+        else
+        {
+            timeBetweenShots -= Time.deltaTime;
+        }
+    }
+
+    private void ShootBullet()
+    {
+        Debug.Log("ShootBullet");
+        GameObject bullet = Instantiate(
+                projectile,
+                transform.position,
+                Quaternion.identity
+            );
+        bullet.GetComponent<EnemyBulletController>().parent = this.gameObject;
+        bullet.GetComponent<EnemyBulletController>().damage = damage;
+        bullet.GetComponent<EnemyBulletController>().range = projectileRange;
+        bullet.transform.localScale = new Vector2(0.5f, 0.5f);
+        bullet.AddComponent<Rigidbody2D>().gravityScale = 0;
+        bullet.GetComponent<Rigidbody2D>().velocity =
+            (playerPos - transform.position).normalized * projectileSpeed;
+    }
+
+    private void SpawnTrojanEnemy()
+    {
+        Instantiate(
+            trojanEnemyPrefab,
+            new Vector3(transform.position.x + 1.5f, transform.position.y, 0),
+            Quaternion.identity
+        );
+
+        Instantiate(
+           trojanEnemyPrefab,
+           new Vector3(transform.position.x - 1.5f, transform.position.y, 0),
+           Quaternion.identity
+       );
+    }
     private void WormBossActive()
     {
         if (!spawnedHealthBar)
@@ -514,12 +661,21 @@ public class EnemyController : MonoBehaviour
             Destroy(healthBar);
             Instantiate(endPortal, transform.position, Quaternion.identity);
         }
+        else if (enemyType == EnemyType.TrojanBoss)
+        {
+            Destroy(healthBar);
+            Instantiate(endPortal, transform.position, Quaternion.identity);
+        }
         else
         {
             DropItem();
         }
 
-        GameObject.Find("RoomController").GetComponent<DDASystem>().enemiesKilled++;
+        if (DDASystem.instance)
+        {
+            GameObject.Find("RoomController").GetComponent<DDASystem>().enemiesKilled++;
+        }
+
 
         player.GetComponent<PlayerAudioManager>().DeathSound();
         RoomController.instance.StartCoroutine(RoomController.instance.RoomCoroutine());
@@ -554,7 +710,6 @@ public class EnemyController : MonoBehaviour
 
         if (itemPoolData.itemPool[chosenIndex].gameObject != null)
         {
-            Debug.Log("Dropped item");
             RoomController.instance.spawnItem(
                 itemPoolData.itemPool[chosenIndex].gameObject,
                 transform.position

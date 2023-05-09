@@ -23,7 +23,7 @@ public class DDASystem : MonoBehaviour
     private float lastAverageRoomClearTime = 0f;
 
     [Header("Difficulty Settings")]
-    public float maxDifficulty = 2.0f;
+    public float maxDifficulty = 1.5f;
     public float minDifficulty = 0.5f;
     public float difficultyIncreaseRate = 0.1f;
     public float difficultyDecreaseRate = 0.05f;

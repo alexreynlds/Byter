@@ -5068,6 +5068,7 @@ MonoBehaviour:
   coins: 0
   keycards: 0
   bossKeycard: 0
+  isSuper: 0
 --- !u!61 &2032698933
 BoxCollider2D:
   m_ObjectHideFlags: 0

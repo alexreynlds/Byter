@@ -10,6 +10,7 @@ TagManager:
   - Bullet
   - WormBoss
   - Boss
+  - TrojanBoss
   layers:
   - Default
   - TransparentFX
@@ -23,7 +24,7 @@ TagManager:
   - Player
   - Below
   - Enemy
-  - 
+  - TrojanBoss
   - 
   - 
   - 

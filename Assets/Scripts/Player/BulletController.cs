@@ -41,12 +41,17 @@ public class BulletController : MonoBehaviour
             {
                 other.gameObject.GetComponent<EnemyController>().TakeDamage(damage);
             }
-            else
-            {
-                other.transform.parent.gameObject
-                    .GetComponent<EnemyController>()
-                    .TakeDamage(damage);
-            }
+            // else
+            // {
+            //     other.transform.parent.gameObject
+            //         .GetComponent<EnemyController>()
+            //         .TakeDamage(damage);
+            // }
+            Destroy(gameObject);
+        }
+        if (other.gameObject.tag == "TrojanBoss")
+        {
+            other.gameObject.GetComponent<EnemyController>().TakeDamage(damage);
             Destroy(gameObject);
         }
         else

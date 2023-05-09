@@ -275,10 +275,31 @@ MonoBehaviour:
   shopItems:
   - gameObject: {fileID: 3495446618145352073, guid: 72083360bbe8af6428abb397be473572, type: 3}
     weight: 0.3
-    price: 15
+    price: 5
   - gameObject: {fileID: 3495446618145352073, guid: 4203c8a1d98e8a34aa47c36c2a8c0a97, type: 3}
     weight: 0.3
-    price: 20
+    price: 5
+  - gameObject: {fileID: 3495446618145352073, guid: 14c9895a6a76e1a4d847213d1854fdce, type: 3}
+    weight: 0.3
+    price: 10
+  - gameObject: {fileID: 3495446618145352073, guid: 73e095d2bcff90e478733a3953f157e0, type: 3}
+    weight: 0.3
+    price: 10
+  - gameObject: {fileID: 3495446618145352073, guid: cabf1e2e0a381db44bf49bad220d66c8, type: 3}
+    weight: 0.3
+    price: 10
+  - gameObject: {fileID: 3495446618145352073, guid: 8a2b9aea23c57224e8927b1b3f9bb982, type: 3}
+    weight: 0.3
+    price: 10
+  - gameObject: {fileID: 3495446618145352073, guid: 1ce61633f60f9c4439809ab89442b3a4, type: 3}
+    weight: 0.3
+    price: 10
+  - gameObject: {fileID: 3495446618145352073, guid: f4d5d2832d959d740bc6a4fd3d308ed5, type: 3}
+    weight: 0.3
+    price: 10
+  - gameObject: {fileID: 3495446618145352073, guid: f4d5d2832d959d740bc6a4fd3d308ed5, type: 3}
+    weight: 0.3
+    price: 10
   priceText: {fileID: 1866445794310276716}
 --- !u!61 &1866445795565183203
 BoxCollider2D:
