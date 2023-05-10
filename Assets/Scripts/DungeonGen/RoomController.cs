@@ -408,6 +408,7 @@ public class RoomController : MonoBehaviour
 
     public void LoadNextLevel()
     {
+        Random.InitState(System.DateTime.Now.Millisecond);
         if (isFloor2)
         {
             GameObject.Find("UICanvas").GetComponent<UIScript>().Win();

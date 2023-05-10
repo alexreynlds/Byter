@@ -9,6 +9,7 @@ public class EndPortalScript : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             RoomController.instance.LoadNextLevel();
+            Destroy( transform.gameObject);
         }
     }
 }
